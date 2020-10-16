@@ -23,13 +23,13 @@ app.use(bodyParser.json());
 
 
 //cors middleware
-//app.use(cors());
+app.use(cors());
 
 //handling requests middleware
 app.use('/',Router);
 
 
-app.use(cors());
+
 //error middleware
 app.use((err,req,res,next)=>{
     //console.log(err.message);

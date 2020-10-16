@@ -22,14 +22,14 @@ Router.use((req,res,next)=>{
 
 
 //get request handler
-Router.get('/profiles',(req,res,next)=>{
-    console.log('get req was made')
-    ProfileModel.find({})
-    .then((profiles)=>{
-       return res.send(profiles)
-    })
-    .catch(next);
-});
+// Router.get('/profiles',(req,res,next)=>{
+   
+//     ProfileModel.find({})
+//     .then((profiles)=>{
+//        return res.send(profiles)
+//     })
+//     .catch(next);
+// });
 
 //register request handler
 Router.post('/register/profile',(req,res,next)=>{
@@ -46,7 +46,7 @@ Router.post('/register/profile',(req,res,next)=>{
             firstname:req.body.firstname,
             lastname:req.body.lastname,
             email:req.body.email,
-            password:req.body.password,
+            password:req.body.password
             
         })
 
@@ -95,8 +95,8 @@ Router.get('/verifytoken',(req,res)=>{
     });
 })
 //login req handler
-Router.post('/login/profile',(req,res)=>{
-
+Router.post('/login/profile',(req,res,next)=>{
+    console.log('login req was made');
     const email = req.body.email;
     const password = req.body.password;
     ProfileModel.findOne({email})
@@ -114,19 +114,20 @@ Router.post('/login/profile',(req,res)=>{
                return res.status(400).json({incorrectpassword:'please enter the correct password'})
             }
             
-            const token = jwt.sign({id:user._id},secrete,{
+                const token = jwt.sign({id:user._id},secrete,{
                 expiresIn:86400 //24 hrs
 
             });
-            res.send({auth:true,token});
+           return res.send({auth:true,token});
         })
         .catch((err)=>console.log(err));
     })
     .catch((err)=>console.log(err));
+    
 });
 
 //logout request handler
-Router.get('/profile/logout',(req,res)=>{
-    res.send().json({isLoggedOut : true});
-})
+// Router.get('/profile/logout',(req,res)=>{
+//    return res.send().json({isLoggedOut : true});
+// })
 module.exports = Router;

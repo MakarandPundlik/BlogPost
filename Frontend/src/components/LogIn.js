@@ -3,15 +3,15 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import {ThemeProvider, Typography} from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
+import { Typography} from "@material-ui/core";
+
 import axios from 'axios';
 const API_URL = "http://localhost:2000/"
 
 const styles = {
 	button: {
 		margin: 15,
-		color: '#67B92A',
+		color: '#AC3B61',
 		background: '#ffffff',
 		fontWeight: 'bold',
     },
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 		width: theme.spacing(50),
 		height: theme.spacing(50),
 		marginTop: theme.spacing(5),
-        background: '#67B92A',
+		background: '#AC3B61',
 		color: '#ffffff	',
 		height: 300,
 		borderRadius:"8%"
@@ -73,8 +73,9 @@ const LogIn = (props) => {
 		profile.email = state.email;
 		profile.password = state.password;
 		
-		axios.post(`http://localhost:2000/login/profile`,profile,{
+		axios.post(`${API_URL}login/profile`,profile,{
 			headers:{
+				Accept:'application/json',
 				'Content-Type':'application/json'
 			}
 			
@@ -85,24 +86,32 @@ const LogIn = (props) => {
 			props.history.push('/dashboard')
 		})
 		.catch(err=>console.log(err));
+
+		// axios.get('profiles',{
+		// 	headers:{
+		// 		Accept:'application/json',
+		//  		'Content-Type':'application/json'
+		// 	}
+		// }).then((res)=>console.log(res))
+		// .catch(err=>console.log(err));
 	}
 		
 		
     return ( 
         <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
-	  <FormControl onSubmit={handleSubmit}>
+	  <form onSubmit={handleSubmit} autoComplete="off">
       <Paper variant="outlined" className={classes.control}  elevation={15}>
       <Typography variant="h4" gutterBottom>
 		  Log-In
 	  </Typography>
       
-       <TextField id="email" label="Email" variant="outlined" type="email"
+       <TextField id="email" label="Email" variant="standard" type="email"
 		   onChange={handleChange}
 		   required={true}
 	   />
 		<br/><br/>
-        <TextField id="password" label="Password" variant="outlined" type="password"
+        <TextField id="password" label="Password" variant="standard" type="password"
 			 onChange={handleChange}
 			 required={true}
 		/>
@@ -112,7 +121,7 @@ const LogIn = (props) => {
 		onClick={handleSubmit}
 		style={styles.button}>Submit</Button>
       </Paper>
-	  </FormControl>
+	  </form>
      </MuiThemeProvider>
       
     </div>

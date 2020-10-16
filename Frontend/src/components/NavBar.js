@@ -11,7 +11,7 @@ import { Link } from '@material-ui/core';
 const styles = {
 	button: {
 		margin: 15,
-		color: '#39710F',
+		color: '#AC3B61',
 		background: '#ffffff',
     fontWeight: 'bold',
     
@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     marginLeft:"20%",
-    color: '#39710F'
+    color: '#AC3B61'
   },
   appbar:{
-    background:'#DDF5D9'
+    background:'#EDC7C7'
   },
   underline: {
     "&&&:before": {
