@@ -1,12 +1,12 @@
  const RegisterValidator = (profile) =>{
     const {firstname,lastname,email,password,con_password} = profile;
-    if(!firstname || !lastname || !email || !password || !con_password)
-    {
-        return {
-            msg:'all fields are mandatory',
-            isValid:false
-        }
-    }
+    // if(!firstname || !lastname || !email || !password || !con_password)
+    // {
+    //     return {
+    //         msg:'all fields are mandatory',
+    //         isValid:false
+    //     }
+    // }
     if(password!==con_password)
     {
         return{

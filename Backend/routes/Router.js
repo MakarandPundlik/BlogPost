@@ -9,15 +9,17 @@ const secrete = require('../config/Keys').secrete;
 
 //handling cors errors
 Router.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin","*");
-    res.header(
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader(
         "Access-Control-Allow-Headers",
         "Origin,X-Requested-With,Content-Tpe,Accept,Authorization"
     );
-    if(req.method === 'OPTIONS'){
-        res.header('Access-Control-Allow-Methods','GET,POST');
-        return res.status(200).json({mesg:"preflight request was made"});
-    }
+   res.setHeader('Access-Control-Allow-Methods','GET,POST');
+        //res.status(200).json({msg:"preflight request was made"});
+    
+        if (req.method === 'OPTIONS') {
+            return res.sendStatus(200); // to deal with chrome sending an extra options request
+          }
     next();
 })
 
@@ -31,7 +33,7 @@ Router.post('/register/profile',(req,res,next)=>{
     const {msg,isValid} = RegisterValidator(req.body);
     if(!isValid)
     {
-        return res.status(401).json({msg});
+        return res.status(401).json({msg:msg});
     }
     ProfileModel.findOne({email:req.body.email})
     .then((profile)=>{
@@ -51,10 +53,10 @@ Router.post('/register/profile',(req,res,next)=>{
          //hash the passwords before saving to database
          bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(newProfile.password,salt,(err,hash)=>{
-                // if(err)
-                // {
-                //     throw err;
-                // }
+                if(err)
+                {
+                    throw err;
+                }
                newProfile.password = hash;
                newProfile.save()
                .then((user)=>{
@@ -83,7 +85,7 @@ Router.post('/login/profile',(req,res,next)=>{
 
     if(!isValid)
     {
-        return res.status(401).json({msg});
+        return res.status(401).json({msg:msg});
     }
     const email = req.body.email;
     const password = req.body.password;

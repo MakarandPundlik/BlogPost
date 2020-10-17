@@ -77,10 +77,10 @@ const SignUp = (props) => {
 		
 		axios.post(`${API_URL}register/profile`,profile,{
 			headers:{
-				headers:{
+				
 					Accept:'application/json',
 					'Content-Type':'application/json'
-				}
+				
 			}
 		})
 		.then((res)=>console.log(res))
