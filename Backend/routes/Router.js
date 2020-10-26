@@ -131,9 +131,9 @@ Router.get('/verifytoken',(req,res)=>{
 
        ProfileModel.findById(decoded.id,{password:0})  //projection
        .then((user)=>{
-           if(!user) return res.status(401).send("'no user found");
+           if(!user) return res.status(401).send({msg:'user not found'});
            
-           return res.status(201).send(user);
+           return res.status(200).send({msg:'token verified',auth:'verified'});
        })
     });
 })

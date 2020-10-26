@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
+import { Redirect } from 'react-router';
 
 
 const styles = {
@@ -56,8 +57,14 @@ const DashBoard = (props) =>{
     const handleLogout = () =>{
 		localStorage.removeItem('token');
         props.history.push('/login');
-    }
+	}
+	
+	if(!localStorage.getItem('token'))
+	return(
+		<Redirect to="/login"/>
+	)
     return(
+		
         <div className={classes.root}>
         <MuiThemeProvider theme={theme}>
         <FormControl onSubmit={handleLogout}>

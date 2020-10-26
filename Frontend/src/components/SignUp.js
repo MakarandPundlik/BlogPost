@@ -3,7 +3,7 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-
+import { Redirect } from 'react-router';
 
 import axios from 'axios';
 const API_URL = "http://localhost:2000/"
@@ -87,15 +87,18 @@ const SignUp = (props) => {
 			//console.log(res)
 			if(!res.data.token)
 			{
-				alert(res.data.msg);
+				alert( res.data.msg);
 			}
 			else{
 				localStorage.setItem('token',res.data.token);
+				
 				props.history.push('/dashboard');
 			}
 		})
 		.catch((err)=>console.log(err));
 	}
+	if(localStorage.getItem('token'))
+	return (<Redirect to='/dashboard'/>)
     return ( 
         <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
