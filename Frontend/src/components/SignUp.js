@@ -3,7 +3,7 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import { Typography} from "@material-ui/core";
+
 
 import axios from 'axios';
 const API_URL = "http://localhost:2000/"
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(5),
         background: '#AC3B61',
 		color: '#ffffff	',
-		height: 500,
+		height: 400,
 		borderRadius:"8%"
 	},
 }));
@@ -75,15 +75,25 @@ const SignUp = (props) => {
 		profile.password = state.password;
 		profile.con_password = state.con_password;
 		
-		axios.post(`${API_URL}register/profile`,profile,{
+		axios.post(`${API_URL}register/profile`,JSON.stringify(profile),{
 			headers:{
 				
-					Accept:'application/json',
-					'Content-Type':'application/json'
+					Accept:"application/json",
+					"Content-Type":"application/json"
 				
 			}
 		})
-		.then((res)=>console.log(res))
+		.then((res)=>{
+			//console.log(res)
+			if(!res.data.token)
+			{
+				alert(res.data.msg);
+			}
+			else{
+				localStorage.setItem('token',res.data.token);
+				props.history.push('/dashboard');
+			}
+		})
 		.catch((err)=>console.log(err));
 	}
     return ( 
@@ -91,10 +101,10 @@ const SignUp = (props) => {
       <MuiThemeProvider theme={theme}>
 	  <form onSubmit={handleSubmit} autoComplete="off">
       <Paper variant="standard" className={classes.control}  elevation={15}>
-	 
+{/* 	 
       <Typography variant="h4" gutterBottom>
 		  Sign-Up
-	  </Typography>
+	  </Typography> */}
       <TextField id="firstname" label="First Name" variant="standard" onChange={handleChange} required={true}/>
         <br/><br/>
         <TextField id="lastname" label="Last Name" variant="standard" onChange={handleChange} required={true}/>

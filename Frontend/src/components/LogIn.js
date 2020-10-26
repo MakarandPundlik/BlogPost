@@ -3,7 +3,7 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import { Typography} from "@material-ui/core";
+
 
 import axios from 'axios';
 const API_URL = "http://localhost:2000/"
@@ -46,22 +46,28 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(5),
 		background: '#AC3B61',
 		color: '#ffffff	',
-		height: 300,
+		height: 200,
 		borderRadius:"8%"
+	},
+	errors:{
+		color:'#ffffff'
 	},
 }));
 
 const LogIn = (props) => {
 
 
-    const classes = useStyles();
+	const classes = useStyles();
+	
 	const [state, setState] = useState({
 		email:" ",
 		password:" "
 	});
 	
-
+	
 	const handleChange = (e) =>{
+		
+		
 		setState({
 			...state,[e.target.id]:e.target.value
 		});
@@ -73,27 +79,28 @@ const LogIn = (props) => {
 		profile.email = state.email;
 		profile.password = state.password;
 		
-		axios.post(`${API_URL}login/profile`,profile,{
+		
+		axios.post(`${API_URL}login/profile`,JSON.stringify(profile),{
 			headers:{
-				Accept:'application/json',
-				'Content-Type':'application/json'
+				Accept:"application/json",
+					"Content-Type":"application/json"
 			}
 			
 		})
 		.then((res)=>{
-			console.log(res)
-			
-			props.history.push('/dashboard')
+			console.log(res);
+			if(! res.data.token)
+			{
+				alert(res.data.msg)
+			}
+			else
+			{
+				props.history.push('/dashboard');
+			}
 		})
 		.catch(err=>console.log(err));
 
-		// axios.get('profiles',{
-		// 	headers:{
-		// 		Accept:'application/json',
-		//  		'Content-Type':'application/json'
-		// 	}
-		// }).then((res)=>console.log(res))
-		// .catch(err=>console.log(err));
+		
 	}
 		
 		
@@ -102,14 +109,15 @@ const LogIn = (props) => {
       <MuiThemeProvider theme={theme}>
 	  <form onSubmit={handleSubmit} autoComplete="off">
       <Paper variant="outlined" className={classes.control}  elevation={15}>
-      <Typography variant="h4" gutterBottom>
+      {/* <Typography variant="h4" gutterBottom>
 		  Log-In
-	  </Typography>
+	  </Typography> */}
       
        <TextField id="email" label="Email" variant="standard" type="email"
 		   onChange={handleChange}
 		   required={true}
 	   />
+	   {/* <div className={classes.errors}>{error}</div> */}
 		<br/><br/>
         <TextField id="password" label="Password" variant="standard" type="password"
 			 onChange={handleChange}

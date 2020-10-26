@@ -17,9 +17,9 @@ Router.use((req,res,next)=>{
    res.setHeader('Access-Control-Allow-Methods','GET,POST');
         //res.status(200).json({msg:"preflight request was made"});
     
-        if (req.method === 'OPTIONS') {
-            return res.sendStatus(200); // to deal with chrome sending an extra options request
-          }
+        // if (req.method === 'OPTIONS') {
+        //     return res.sendStatus(200); // to deal with chrome sending an extra options request
+        //   }
     next();
 })
 
@@ -33,13 +33,13 @@ Router.post('/register/profile',(req,res,next)=>{
     const {msg,isValid} = RegisterValidator(req.body);
     if(!isValid)
     {
-        return res.status(401).json({msg:msg});
+        return res.status(200).json({msg:msg});
     }
     ProfileModel.findOne({email:req.body.email})
     .then((profile)=>{
         if(profile)
         {
-           return  res.status(400).json({msg:'user already exist'});
+           return  res.status(200).json({msg:'user already exist'});
         }
        
         const newProfile = new ProfileModel({
@@ -85,7 +85,7 @@ Router.post('/login/profile',(req,res,next)=>{
 
     if(!isValid)
     {
-        return res.status(401).json({msg:msg});
+        return res.status(200).json({msg});
     }
     const email = req.body.email;
     const password = req.body.password;
@@ -93,7 +93,7 @@ Router.post('/login/profile',(req,res,next)=>{
     .then((user)=>{
         if(!user)
         {
-          return   res.status(400).json({emailnotfound:'user doe not exist'})
+          return   res.status(200).json({msg:'user doe not exist'})
         }
         
         //compare passwords
@@ -101,14 +101,14 @@ Router.post('/login/profile',(req,res,next)=>{
         .then((isMatch)=>{
             if(!isMatch)
             {
-               return res.status(400).json({incorrectpassword:'please enter the correct password'})
+               return res.status(200).json({msg:'please enter the correct password'})
             }
             
                 const token = jwt.sign({id:user._id},secrete,{
                 expiresIn:86400 //24 hrs
 
             });
-           return res.send({auth:true,token});
+           return res.status(200).send({auth:true,token});
         })
         .catch((err)=>console.log(err));
     })
@@ -122,7 +122,7 @@ Router.post('/login/profile',(req,res,next)=>{
 Router.get('/verifytoken',(req,res)=>{
     const token = req.headers['token'];
     //console.log(req.headers);
-    if(!token) return res.status(402).send({auth:false,token:'no token'});
+    if(!token) return res.status(401).send({auth:false,token:'no token'});
     
     jwt.verify(token,secrete,(err,decoded)=>{
         if(err) return res.status(500).send({auth:false,token:'failed to authenticate'});
@@ -131,7 +131,7 @@ Router.get('/verifytoken',(req,res)=>{
 
        ProfileModel.findById(decoded.id,{password:0})  //projection
        .then((user)=>{
-           if(!user) return res.status(400).send("'no user found");
+           if(!user) return res.status(401).send("'no user found");
            
            return res.status(201).send(user);
        })
