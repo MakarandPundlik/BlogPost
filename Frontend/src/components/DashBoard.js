@@ -1,12 +1,13 @@
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Redirect } from 'react-router';
-
+import axios from 'axios';
+const API_URL = "http://localhost:2000/"
 
 const styles = {
 	button: {
@@ -53,35 +54,57 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
+	
     const classes = useStyles();
     const handleLogout = () =>{
 		localStorage.removeItem('token');
         props.history.push('/login');
 	}
 	
-	if(!localStorage.getItem('token'))
-	return(
-		<Redirect to="/login"/>
-	)
+	const [currentUser,setCurrentuser]=useState(null);
+	useEffect(()=>{
+		
+		axios.get(`${API_URL}verifytoken`,{
+			headers:{
+				Accept:"application/json",
+				"Content-Type":"application/json",
+				"token":localStorage.getItem('token')
+			}
+		})
+		.then((res)=>{
+			if(!res.data.user)
+			{
+				alert(res.data.msg);
+				return(<Redirect to="/login"/>)
+			}
+			else
+			setCurrentuser(res.data.user);
+		})
+		.catch(err=>console.log(err));
+	})
+	if(!currentUser)
+	{
+		return <Redirect to="/login"/>
+	}
     return(
 		
-        <div className={classes.root}>
-        <MuiThemeProvider theme={theme}>
-        <FormControl onSubmit={handleLogout}>
-        <Paper variant="outlined" className={classes.control}  elevation={15}>
-        <Typography variant="h4" gutterBottom>
-           Welcome !
-        </Typography>
-        
-    		<Button 
-          onClick={handleLogout}
-          style={styles.button}>Logout</Button>
-        </Paper>
-        </FormControl>
+		<div className={classes.root}>
+		<MuiThemeProvider theme={theme}>
+		<FormControl onSubmit={handleLogout}>
+		<Paper variant="outlined" className={classes.control}  elevation={15}>
+		<Typography variant="h4" gutterBottom>
+		   Welcome 
+		</Typography>
+		
+			<Button 
+		  onClick={handleLogout}
+		  style={styles.button}>Logout</Button>
+		</Paper>
+		</FormControl>
 	
-       </MuiThemeProvider>
-         
-      </div>
-    )
+	   </MuiThemeProvider>
+		 
+	  </div>
+	)
 }
 export default DashBoard;

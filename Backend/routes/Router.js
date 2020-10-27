@@ -122,10 +122,10 @@ Router.post('/login/profile',(req,res,next)=>{
 Router.get('/verifytoken',(req,res)=>{
     const token = req.headers['token'];
     //console.log(req.headers);
-    if(!token) return res.status(401).send({auth:false,token:'no token'});
+    if(!token) return res.status(401).send({auth:false,msg:'no token'});
     
     jwt.verify(token,secrete,(err,decoded)=>{
-        if(err) return res.status(500).send({auth:false,token:'failed to authenticate'});
+        if(err) return res.status(500).send({auth:false,msg:'failed to authenticate'});
 
        // res.status(200).send(decoded);
 
@@ -133,7 +133,7 @@ Router.get('/verifytoken',(req,res)=>{
        .then((user)=>{
            if(!user) return res.status(401).send({msg:'user not found'});
            
-           return res.status(200).send({msg:'token verified',auth:'verified'});
+           return res.status(200).send({msg:'token verified',user});
        })
     });
 })
