@@ -64,6 +64,9 @@ const LogIn = (props) => {
 		password:" "
 	});
 	
+	const [errors,setErrors]=useState({
+
+	});
 	
 	const handleChange = (e) =>{
 		

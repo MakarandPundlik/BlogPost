@@ -61,10 +61,10 @@ const DashBoard = (props) =>{
         props.history.push('/login');
 	}
 	
-	const [currentUser,setCurrentuser]=useState(null);
-	useEffect(()=>{
+	
+	useEffect(async()=>{
 		
-		axios.get(`${API_URL}verifytoken`,{
+		const user = await axios.get(`${API_URL}verifytoken`,{
 			headers:{
 				Accept:"application/json",
 				"Content-Type":"application/json",
@@ -77,15 +77,11 @@ const DashBoard = (props) =>{
 				alert(res.data.msg);
 				return(<Redirect to="/login"/>)
 			}
-			else
-			setCurrentuser(res.data.user);
+			
 		})
 		.catch(err=>console.log(err));
-	})
-	if(!currentUser)
-	{
-		return <Redirect to="/login"/>
-	}
+	},[])
+	
     return(
 		
 		<div className={classes.root}>
