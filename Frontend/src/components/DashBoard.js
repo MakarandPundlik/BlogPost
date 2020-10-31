@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Redirect } from 'react-router';
 import axios from 'axios';
-const API_URL = "http://localhost:2000/"
+import {handleAuth} from '../services/userservice';
 
 const styles = {
 	button: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
-	
+	const [isAuth,setAuth] = useState(false);
     const classes = useStyles();
     const handleLogout = () =>{
 		localStorage.removeItem('token');
@@ -62,26 +62,13 @@ const DashBoard = (props) =>{
 	}
 	
 	
-	useEffect(async()=>{
-		
-		const user = await axios.get(`${API_URL}verifytoken`,{
-			headers:{
-				Accept:"application/json",
-				"Content-Type":"application/json",
-				"token":localStorage.getItem('token')
-			}
-		})
-		.then((res)=>{
-			if(!res.data.user)
-			{
-				alert(res.data.msg);
-				return(<Redirect to="/login"/>)
-			}
-			
-		})
-		.catch(err=>console.log(err));
+	useEffect(()=>{
+		setAuth(handleAuth());
 	},[])
 	
+	if(!isAuth)
+	props.history.push('/login');
+
     return(
 		
 		<div className={classes.root}>

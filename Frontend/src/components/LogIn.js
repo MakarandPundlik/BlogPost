@@ -4,9 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
-
+import {handleLogin} from '../services/userservice';
 import axios from 'axios';
-const API_URL = "http://localhost:2000/"
+
 
 const styles = {
 	button: {
@@ -64,9 +64,7 @@ const LogIn = (props) => {
 		password:" "
 	});
 	
-	const [errors,setErrors]=useState({
-
-	});
+	const [errors,setErrors]=useState();
 	
 	const handleChange = (e) =>{
 		
@@ -83,27 +81,7 @@ const LogIn = (props) => {
 		profile.password = state.password;
 		
 		
-		axios.post(`${API_URL}login/profile`,JSON.stringify(profile),{
-			headers:{
-				Accept:"application/json",
-					"Content-Type":"application/json"
-			}
-			
-		})
-		.then((res)=>{
-			//console.log(res);
-			if(! res.data.token)
-			{
-				alert(res.data.msg)
-			}
-			else
-			{
-				localStorage.setItem('token',res.data.token);
-				props.history.push('/dashboard');
-			}
-		})
-		.catch(err=>console.log(err));
-
+		handleLogin(profile);
 		
 	}
 		
