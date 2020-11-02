@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,7 +7,9 @@ import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Redirect } from 'react-router';
 import axios from 'axios';
+
 import {handleAuth} from '../services/userservice';
+const API_URL = "http://localhost:2000/";
 
 const styles = {
 	button: {
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
-	const [isAuth,setAuth] = useState(false);
+	
     const classes = useStyles();
     const handleLogout = () =>{
 		localStorage.removeItem('token');
@@ -63,12 +65,27 @@ const DashBoard = (props) =>{
 	
 	
 	useEffect(()=>{
-		setAuth(handleAuth());
+		axios.get(`${API_URL}verifytoken`,{
+			headers:{
+				Accept:"application/json",
+				"Content-Type":"application/json",
+				"Authorization":`Bearer ${localStorage.getItem('token')}`
+			}
+		})
+		.then((res)=>{
+			if(!res.data.user)
+			{
+				alert(res.data.msg);
+				
+			}
+			
+		})
+		.catch(err=>console.log(err));
 	},[])
 	
-	if(!isAuth)
-	props.history.push('/login');
-
+	
+	
+	
     return(
 		
 		<div className={classes.root}>
@@ -88,6 +105,9 @@ const DashBoard = (props) =>{
 	   </MuiThemeProvider>
 		 
 	  </div>
+		
 	)
+	
 }
+
 export default DashBoard;

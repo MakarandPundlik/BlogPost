@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
 import {handleSignup} from '../services/userservice';
 import axios from 'axios';
-
+const API_URL = "http://localhost:2000/";
 
 const styles = {
 	button: {
@@ -75,10 +75,30 @@ const SignUp = (props) => {
 		profile.password = state.password;
 		profile.con_password = state.con_password;
 		
-		handleSignup(profile);
+		axios.post(`${API_URL}register/profile`,JSON.stringify(profile),{
+			headers:{
+				
+					Accept:"application/json",
+					"Content-Type":"application/json"
+				
+			}
+		})
+		.then((res)=>{
+			//console.log(res)
+			if(!res.data.token)
+			{
+				alert( res.data.msg);
+			}
+			else{
+				localStorage.setItem('token',res.data.token);
+				
+			   props.history.push('/dashboard');
+			}
+		})
+		.catch((err)=>console.log(err));
+		//handleSignup(profile);
 	}
-	if(localStorage.getItem('token'))
-	return (<Redirect to='/dashboard'/>)
+	
     return ( 
         <div className={classes.root}>
       <MuiThemeProvider theme={theme}>

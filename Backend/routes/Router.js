@@ -120,7 +120,7 @@ Router.post('/login/profile',(req,res,next)=>{
 
 //sending the token to client
 Router.get('/verifytoken',(req,res)=>{
-    const token = req.headers['token'];
+    const token = req.headers['Authorization'];
     //console.log(req.headers);
     if(!token) return res.status(401).send({auth:false,msg:'no token'});
     
@@ -133,7 +133,7 @@ Router.get('/verifytoken',(req,res)=>{
        .then((user)=>{
            if(!user) return res.status(401).send({msg:'user not found'});
            
-           return res.status(200).send({msg:'token verified',user});
+           return res.status(200).send({msg:'token verified',isAuth:true});
        })
     });
 })
