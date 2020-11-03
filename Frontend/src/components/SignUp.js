@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
-import {handleSignup} from '../services/userservice';
+
 import axios from 'axios';
 const API_URL = "http://localhost:2000/";
 
@@ -68,6 +68,7 @@ const SignUp = (props) => {
 		
 	}
 	const handleSubmit=(e)=>{
+		e.preventDefault();
 		const profile={}
 		profile.firstname = state.firstname;
 		profile.lastname = state.lastname;
@@ -75,7 +76,7 @@ const SignUp = (props) => {
 		profile.password = state.password;
 		profile.con_password = state.con_password;
 		
-		axios.post(`${API_URL}register/profile`,JSON.stringify(profile),{
+		axios.post(`${API_URL}register/profile`,profile,{
 			headers:{
 				
 					Accept:"application/json",
@@ -96,7 +97,6 @@ const SignUp = (props) => {
 			}
 		})
 		.catch((err)=>console.log(err));
-		//handleSignup(profile);
 	}
 	
     return ( 

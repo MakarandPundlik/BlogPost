@@ -33,13 +33,13 @@ Router.post('/register/profile',(req,res,next)=>{
     const {msg,isValid} = RegisterValidator(req.body);
     if(!isValid)
     {
-        return res.status(200).json({msg:msg});
+        return res.status(401).json({msg:msg});
     }
     ProfileModel.findOne({email:req.body.email})
     .then((profile)=>{
         if(profile)
         {
-           return  res.status(200).json({msg:'user already exist'});
+           return  res.status(406).json({msg:'user already exist'});
         }
        
         const newProfile = new ProfileModel({
@@ -85,7 +85,7 @@ Router.post('/login/profile',(req,res,next)=>{
 
     if(!isValid)
     {
-        return res.status(200).json({msg});
+        return res.status(404).json({msg});
     }
     const email = req.body.email;
     const password = req.body.password;
@@ -93,7 +93,7 @@ Router.post('/login/profile',(req,res,next)=>{
     .then((user)=>{
         if(!user)
         {
-          return   res.status(200).json({msg:'user doe not exist'})
+          return   res.status(404).json({msg:'user doe not exist'})
         }
         
         //compare passwords
@@ -101,7 +101,7 @@ Router.post('/login/profile',(req,res,next)=>{
         .then((isMatch)=>{
             if(!isMatch)
             {
-               return res.status(200).json({msg:'please enter the correct password'})
+               return res.status(401).json({msg:'please enter the correct password'})
             }
             
                 const token = jwt.sign({id:user._id},secrete,{
@@ -120,12 +120,12 @@ Router.post('/login/profile',(req,res,next)=>{
 
 //sending the token to client
 Router.get('/verifytoken',(req,res)=>{
-    const token = req.headers['Authorization'];
-    //console.log(req.headers);
-    if(!token) return res.status(401).send({auth:false,msg:'no token'});
+    const token = req.headers["token"];
+    console.log(req.headers.token);
+    if(!token) return res.status(401).send({msg:'no token'});
     
     jwt.verify(token,secrete,(err,decoded)=>{
-        if(err) return res.status(500).send({auth:false,msg:'failed to authenticate'});
+        if(err) return res.status(500).send({msg:'failed to authenticate'});
 
        // res.status(200).send(decoded);
 
@@ -133,7 +133,7 @@ Router.get('/verifytoken',(req,res)=>{
        .then((user)=>{
            if(!user) return res.status(401).send({msg:'user not found'});
            
-           return res.status(200).send({msg:'token verified',isAuth:true});
+           return res.status(200).send({msg:'token verified',user});
        })
     });
 })

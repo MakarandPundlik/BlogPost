@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
-import {handleLogin} from '../services/userservice';
+
 import axios from 'axios';
 const API_URL = "http://localhost:2000/";
 
@@ -80,7 +80,7 @@ const LogIn = (props) => {
 		profile.email = state.email;
 		profile.password = state.password;
 
-		axios.post(`${API_URL}login/profile`,JSON.stringify(profile),{
+		axios.post(`${API_URL}login/profile`,profile,{
 			headers:{
 				Accept:"application/json",
 					"Content-Type":"application/json"
