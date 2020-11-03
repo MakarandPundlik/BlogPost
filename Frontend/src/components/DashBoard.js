@@ -57,17 +57,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
-	const [isAuth,setAuth]=useState(false);
+	const [auth,setAuth] = useState(false);
     const classes = useStyles();
     const handleLogout = () =>{
 		localStorage.removeItem('token');
         props.history.push('/login');
 	}
 	
-	
-	useEffect(()=>{
-		
-		 axios.get(`${API_URL}verifytoken`,{
+	const getAuth = async()=>{
+		const isAuthentication = await  axios.get(`${API_URL}verifytoken`,{
 			headers:{
 				Accept:"application/json",
 				"Content-Type":"application/json",
@@ -75,23 +73,21 @@ const DashBoard = (props) =>{
 			}
 		})
 		.then((res)=>{
-			if(res.status!==200)
-				alert(res.data.msg);
-				
-			else
+			alert(res.data.msg);
+			if(res.data.user)
 			setAuth(true);
-			
 		})
-		.catch(err=>{
-			localStorage.removeItem("token");
-			console.log(err);
-		});
+		.catch((err)=>console.log(err));
+	}
+	useEffect(()=>{
+		getAuth();
+		
 	},[ ])
 	
 	
 	
-	if(!isAuth)
-	return(<Redirect to="/login"/>)
+	if(!localStorage.getItem("token") || !auth)
+	return (<Redirect to="/login"/>)
     return(
 		
 		<div className={classes.root}>

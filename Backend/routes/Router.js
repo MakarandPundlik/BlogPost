@@ -14,12 +14,8 @@ Router.use((req,res,next)=>{
         "Access-Control-Allow-Headers",
         "Origin,X-Requested-With,Content-Tpe,Accept,Authorization"
     );
-   res.setHeader('Access-Control-Allow-Methods','GET,POST');
-        //res.status(200).json({msg:"preflight request was made"});
-    
-        // if (req.method === 'OPTIONS') {
-        //     return res.sendStatus(200); // to deal with chrome sending an extra options request
-        //   }
+   res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');
+       
     next();
 })
 
@@ -108,7 +104,7 @@ Router.post('/login/profile',(req,res,next)=>{
                 expiresIn:86400 //24 hrs
 
             });
-           return res.status(200).send({auth:true,token});
+           return res.status(200).send({token});
         })
         .catch((err)=>console.log(err));
     })
@@ -121,6 +117,7 @@ Router.post('/login/profile',(req,res,next)=>{
 //sending the token to client
 Router.get('/verifytoken',(req,res)=>{
     const token = req.headers["token"];
+    console.log('verification request was made');
     console.log(req.headers.token);
     if(!token) return res.status(401).send({msg:'no token'});
     

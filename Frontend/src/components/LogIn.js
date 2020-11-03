@@ -109,7 +109,7 @@ const LogIn = (props) => {
     return ( 
         <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
-	  <form onSubmit={handleSubmit} autoComplete="off">
+	  <form onSubmit={(e)=>{handleSubmit(e)}} autoComplete="off">
       <Paper variant="outlined" className={classes.control}  elevation={15}>
       {/* <Typography variant="h4" gutterBottom>
 		  Log-In
