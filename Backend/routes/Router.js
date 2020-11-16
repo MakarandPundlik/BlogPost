@@ -117,8 +117,8 @@ Router.post('/login/profile',(req,res,next)=>{
 //sending the token to client
 Router.get('/verifytoken',(req,res)=>{
     const token = req.headers["token"];
-    console.log('verification request was made');
-    console.log(req.headers.token);
+   // console.log('verification request was made');
+    //console.log(req.headers.token);
     if(!token) return res.status(401).send({msg:'no token'});
     
     jwt.verify(token,secrete,(err,decoded)=>{

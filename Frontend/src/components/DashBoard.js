@@ -75,10 +75,12 @@ const DashBoard = (props) =>{
 		.then((res)=>{
 			alert(res.data.msg);
 			if(res.data.user)
+			console.log(res);
 			setAuth(true);
 		})
 		.catch((err)=>console.log(err));
 	}
+
 	useEffect(()=>{
 		getAuth();
 		

@@ -89,7 +89,7 @@ const LogIn = (props) => {
 		})
 		.then((res)=>{
 			//console.log(res);
-			if(! res.data.token)
+			if(!res.data.token)
 			{
 				alert(res.data.msg)
 			}
@@ -99,7 +99,9 @@ const LogIn = (props) => {
 				props.history.push('/dashboard');
 			}
 		})
-		.catch(err=>console.log(err));
+		.catch(err=>{
+			alert(err.status);
+		});
 		
 		//handleLogin(profile);
 		
