@@ -4,19 +4,16 @@ const Router = express.Router();
 
 Router.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Headers", 
-    "Origin,X-Requested-With,Content-Tpe,Accept,Authorization");
-    next();
-});
-Router.get('/',(req,res)=>res.send('<h1>Welcome</h1>'));
-Router.post('/api/signup',(req,res)=>{
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+    );
+   res.header("Access-Control-Allow-Methods","GET,POST"); 
    
-    console.log('post req was made');
-     res.send(req.body)
-});
-Router.post('/api/login',(req,res)=>{
-    const {email,password} = req.body;
-    console.log(email,password);
-     res.send(email,password);
-});
+    next();
+})
+
+//Router.get('/',(req,res)=>res.send('<h1>Welcome</h1>'));
+Router.post("/api/signup",signup_post);
+Router.post("/api/login",login_post);
 module.exports = Router;
