@@ -1,6 +1,7 @@
 const userSchema = require('../models/user');
 const bcrypt = require('bcrypt');
 
+
 //signup handler
 module.exports.signup_post =(req,res)=>{
     const {firstname,lastname,email,password} = req.body;
@@ -47,7 +48,7 @@ module.exports.signup_post =(req,res)=>{
                     else{
                         newUser.password = hash;
                         newUser.save();
-
+                        res.cookie("isAuthenticated",true);
                          res.status(200).json({newUser});
                     }
                 })
@@ -87,6 +88,7 @@ module.exports.login_post = (req,res)=>{
                 }
                 else
                 {
+                    res.cookie("isAuthenticated",true);
                     res.status(201).json(user);
                 }
             })
