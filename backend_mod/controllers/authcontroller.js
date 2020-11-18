@@ -1,12 +1,14 @@
 const userSchema = require('../models/user');
+const bcrypt = require('bcrypt');
 
-
+//signup handler
 module.exports.signup_post =(req,res)=>{
     const {firstname,lastname,email,password} = req.body;
     console.log(email);
+    //common error object
     let errors = {email:'',password:''};
     //check for the existing user
-    userSchema.findOne({email:email})
+    userSchema.findOne({email})
     .then((user)=>{
         if(user)
         {
@@ -24,14 +26,42 @@ module.exports.signup_post =(req,res)=>{
             email,
             password
         });
-        newUser.save()
-        res.status(200).json({newUser});
+
+         //hash passwords before saving to the database
+         bcrypt.genSalt(10,(err,salt)=>{
+            if(err)
+            {
+                errors.password = "Something went wrong while hashing";
+                res.statusCode = 500;
+                res.json(errors);
+            } 
+            else
+            {
+                bcrypt.hash(newUser.password,salt,(err,hash)=>{
+                    if(err)
+                    {
+                         errors.password = "Something went wrong while hashing";
+                         res.statusCode = 500;
+                         res.json(errors);
+                    }
+                    else{
+                        newUser.password = hash;
+                        newUser.save();
+
+                         res.status(200).json({newUser});
+                    }
+                })
+            }
+         })
+
+        
         }
 })
  .catch((err)=>console.log(err));
    
 }
 
+//login handler
 module.exports.login_post = (req,res)=>{
     const {email,password} = req.body;
     let errors = {email:'',password:''};
@@ -47,16 +77,19 @@ module.exports.login_post = (req,res)=>{
         }
         else
         {
-            if(user.password !== password)
-            {
-                res.statusCode = 403;
-                errors.password = "Incorrect password";
-                res.json(errors);
-            }
-            else
-            {
-                res.status(201).json({user});
-            }
+            //check the hasged passwords
+            bcrypt.compare(password,user.password,(err,isMatch)=>{
+                if(err || !isMatch)
+                {
+                    errors.password = "Please Enter the valid password";
+                    res.statusCode = 401;
+                    res.json(errors);
+                }
+                else
+                {
+                    res.status(201).json(user);
+                }
+            })
         }
     })
     .catch((err)=>console.log(err));
