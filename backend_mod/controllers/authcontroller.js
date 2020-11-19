@@ -1,5 +1,8 @@
 const userSchema = require('../models/user');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const createAccessToken = require('../middlewares/tokenMiddlewares');
 
 
 //signup handler
@@ -48,8 +51,14 @@ module.exports.signup_post =(req,res)=>{
                     else{
                         newUser.password = hash;
                         newUser.save();
-                        res.cookie("isAuthenticated",true);
-                         res.status(200).json({newUser});
+                        //create accesstoken  for user
+                        const accesstoken = createAccessToken(newUser);
+                        res.cookie("accesstoken",accesstoken,{
+                            httpOnly:true
+                           
+                        });
+                        
+                         res.status(200).json({msg:"user registered successfully"});
                     }
                 })
             }
@@ -89,7 +98,13 @@ module.exports.login_post = (req,res)=>{
                 else
                 {
                     res.cookie("isAuthenticated",true);
-                    res.status(201).json(user);
+                    //create accesstoken  for user
+                    const accesstoken = createAccessToken(user);
+                    res.cookie("accesstoken",accesstoken,{
+                        httpOnly:true
+                        
+                    });
+                    res.status(201).json({msg:"user logged in successfully"});
                 }
             })
         }
@@ -97,3 +112,4 @@ module.exports.login_post = (req,res)=>{
     .catch((err)=>console.log(err));
    
 }
+
