@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
 
 import axios from 'axios';
-const API_URL = "http://localhost:2000/";
+const API_URL = "http://localhost:2020/";
 
 const styles = {
 	button: {
@@ -80,7 +80,7 @@ const LogIn = (props) => {
 		profile.email = state.email;
 		profile.password = state.password;
 
-		axios.post(`${API_URL}login/profile`,profile,{
+		axios.post(`${API_URL}api/login`,profile,{
 			headers:{
 				Accept:"application/json",
 					"Content-Type":"application/json"
@@ -89,18 +89,17 @@ const LogIn = (props) => {
 		})
 		.then((res)=>{
 			//console.log(res);
-			if(!res.data.token)
+			if(res.statusCode !== 201)
 			{
-				alert(res.data.msg)
+				alert(res.errors);
 			}
 			else
 			{
-				localStorage.setItem('token',res.data.token);
-				props.history.push('/dashboard');
+				alert(res.errors);
 			}
 		})
 		.catch(err=>{
-			alert(err.status);
+			alert(err);
 		});
 		
 		//handleLogin(profile);
