@@ -1,5 +1,7 @@
 const express = require('express');
 const {signup_post,login_post} = require('../controllers/authcontroller');
+const logout_get = require('../middlewares/logout');
+const isAuthenticated =require('../middlewares/auth');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -14,12 +16,22 @@ Router.use((req,res,next)=>{
 })
 
 Router.get('/',(req,res)=>{
-    res.cookie("data","this cookie is working",{
-        httpOnly:true,
-        maxAge:60*1000
-    });
+   
     res.send('<h1>Welcome</h1>')
 });
+//register req hanlder
 Router.post("/api/signup",signup_post);
+
+//login req handler
 Router.post("/api/login",login_post);
+
+//user auth req handler
+Router.get("/api/authenticate",isAuthenticated,(req,res)=>{
+    res.status(201).json({msg:"user has been authenticated"});
+});
+
+//logout request
+Router.get("/api/logout",logout_get,(req,res)=>{
+    res.status(201).json({msg:"user logged out successfully"})
+});
 module.exports = Router;
