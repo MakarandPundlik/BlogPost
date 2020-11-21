@@ -11,7 +11,7 @@ Router.use((req,res,next)=>{
         "Origin,X-Requested-With,Content-Type,Accept,Authorization"
     );
    res.header("Access-Control-Allow-Methods","GET,POST"); 
-   
+   res.header("Content-Type","application/json")
     next();
 })
 

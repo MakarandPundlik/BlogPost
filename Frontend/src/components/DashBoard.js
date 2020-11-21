@@ -64,32 +64,32 @@ const DashBoard = (props) =>{
         props.history.push('/login');
 	}
 	
-	const getAuth = async()=>{
-		const isAuthentication = await  axios.get(`${API_URL}verifytoken`,{
-			headers:{
-				Accept:"application/json",
-				"Content-Type":"application/json",
-				"token":localStorage.getItem("token")
-			}
-		})
-		.then((res)=>{
-			alert(res.data.msg);
-			if(res.data.user)
-			console.log(res);
-			setAuth(true);
-		})
-		.catch((err)=>console.log(err));
-	}
+	// const getAuth = async()=>{
+	// 	const isAuthentication = await  axios.get(`${API_URL}verifytoken`,{
+	// 		headers:{
+	// 			Accept:"application/json",
+	// 			"Content-Type":"application/json",
+	// 			"token":localStorage.getItem("token")
+	// 		}
+	// 	})
+	// 	.then((res)=>{
+	// 		alert(res.data.msg);
+	// 		if(res.data.user)
+	// 		console.log(res);
+	// 		setAuth(true);
+	// 	})
+	// 	.catch((err)=>console.log(err));
+	// }
 
-	useEffect(()=>{
-		getAuth();
+	// useEffect(()=>{
+	// 	getAuth();
 		
-	},[ ])
+	// },[ ])
 	
 	
 	
-	if(!localStorage.getItem("token") || !auth)
-	return (<Redirect to="/login"/>)
+	// if(!localStorage.getItem("token") || !auth)
+	// return (<Redirect to="/login"/>)
     return(
 		
 		<div className={classes.root}>

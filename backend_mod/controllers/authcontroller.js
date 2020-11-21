@@ -19,7 +19,7 @@ module.exports.signup_post =(req,res)=>{
             
            errors.email = "User already exists";
            res.statusCode = 406;
-           res.json({errors});
+           res.json({errors:errors});
        }
         
         else
@@ -37,7 +37,7 @@ module.exports.signup_post =(req,res)=>{
             {
                 errors.password = "Something went wrong while hashing";
                 res.statusCode = 500;
-                res.json({errors});
+                res.json({errors:errors});
             } 
             else
             {
@@ -46,7 +46,7 @@ module.exports.signup_post =(req,res)=>{
                     {
                          errors.password = "Something went wrong while hashing";
                          res.statusCode = 500;
-                         res.json(errors);
+                         res.json({errors:errors});
                     }
                     else{
                         newUser.password = hash;
@@ -83,7 +83,7 @@ module.exports.login_post = (req,res)=>{
         {
             errors.email="User does not exists";
             res.statusCode = 403;
-            res.json({errors});
+            res.json({errors:errors});
         }
         else
         {
@@ -93,7 +93,7 @@ module.exports.login_post = (req,res)=>{
                 {
                     errors.password = "Please Enter the valid password";
                     res.statusCode = 401;
-                    res.json({errors});
+                    res.json({errors:errors});
                 }
                 else
                 {
