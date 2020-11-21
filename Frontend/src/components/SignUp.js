@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
+import {RegisterValidator} from '../services/userservice';
 
 import axios from 'axios';
 const API_URL = "http://localhost:2020/";
@@ -76,6 +77,11 @@ const SignUp = (props) => {
 		profile.password = state.password;
 		profile.con_password = state.con_password;
 		
+		const errors = RegisterValidator(profile);
+		if(!errors.isValid)
+		alert(errors.msg);
+
+		else{
 		axios.post(`${API_URL}api/signup`,profile,{
 			headers:{
 				
@@ -97,6 +103,7 @@ const SignUp = (props) => {
 		.catch(err=>{
 			alert("Something went wrong");
 		});
+		}
 	}
 	
     return ( 

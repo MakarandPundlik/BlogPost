@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import { Redirect } from 'react-router';
+import {LoginValidator} from '../services/userservice';
 
 import axios from 'axios';
 const API_URL = "http://localhost:2020/";
@@ -80,6 +81,11 @@ const LogIn = (props) => {
 		profile.email = state.email;
 		profile.password = state.password;
 
+		//validate the data
+		const errors = LoginValidator(profile);
+		if(!errors.isValid)
+		alert(errors.msg);
+		else{
 		axios.post(`${API_URL}api/login`,profile,{
 			headers:{
 				Accept:"application/json",
@@ -91,17 +97,21 @@ const LogIn = (props) => {
 			//console.log(res);
 			if(res.statusCode !== 201)
 			{
-				alert(res.errors);
+				const errors = res.data.errors;
+				if(errors.email)
+				alert(errors.email);
+				if(errors.password)
+				alert(errors.password);
 			}
 			else
 			{
-				alert(res.errors);
+				alert(res.data.errors.email);
 			}
 		})
 		.catch(err=>{
 			alert(err);
 		});
-		
+		}
 		//handleLogin(profile);
 		
 	}

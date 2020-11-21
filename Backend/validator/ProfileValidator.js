@@ -1,4 +1,4 @@
- const RegisterValidator = (profile) =>{
+ export const  RegisterValidator = (profile) =>{
     const {firstname,lastname,email,password,con_password} = profile;
     if(!firstname || !lastname || !email || !password || !con_password)
     {
@@ -37,7 +37,7 @@
         }
     }
 }
-const LoginValidator = (profile) =>{
+export const  LoginValidator = (profile) =>{
     const {email,password} = profile;
     if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email))
     {
@@ -54,7 +54,3 @@ const LoginValidator = (profile) =>{
     }
 }
 
-module.exports={
-    RegisterValidator,
-    LoginValidator
-}
