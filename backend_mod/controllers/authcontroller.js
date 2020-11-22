@@ -58,7 +58,7 @@ module.exports.signup_post =(req,res)=>{
                            
                         });
                         
-                         res.status(200).json({msg:"user registered successfully"});
+                         res.status(200).json({msg:"user registered successfully",username:newUser.firstname});
                     }
                 })
             }
@@ -104,7 +104,7 @@ module.exports.login_post = (req,res)=>{
                         httpOnly:true
                         
                     });
-                    res.status(201).json({msg:"user logged in successfully"});
+                    res.status(201).json({msg:"user logged in successfully",username:user.firstname});
                 }
             })
         }
