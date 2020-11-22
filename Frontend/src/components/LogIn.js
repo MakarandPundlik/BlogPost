@@ -95,7 +95,7 @@ const LogIn = (props) => {
 		})
 		.then((res)=>{
 			//console.log(res);
-			if(res.statusCode !== 201)
+			if(res.status !== 201)
 			{
 				const errors = res.data.errors;
 				if(errors.email)
@@ -105,7 +105,9 @@ const LogIn = (props) => {
 			}
 			else
 			{
-				alert(res.data.errors.email);
+				localStorage.setItem("username",res.data.username);
+				alert(res.data.msg);
+				props.history.push("/dashboard");
 			}
 		})
 		.catch(err=>{

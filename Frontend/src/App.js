@@ -29,14 +29,12 @@ function App() {
         <Route exact path="/signup" component={SignUp}/>
         
         <Route  path='/dashboard' component={DashBoard} />
-        
         <Route path="*">
           <h1 style={styles.error}>Error 404 Not found</h1>
         </Route>
       </Switch>
     </BrowserRouter>
-    {/* <Button onClick={login}>Login</Button>
-    <Button onClick={logout}>Logout</Button> */}
+
     </div>
   );
 }

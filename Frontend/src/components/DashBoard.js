@@ -1,5 +1,5 @@
 
-import React, { useEffect,  useState } from 'react';
+import React, { useEffect,  useRef,  useState } from 'react';
 import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Route,Redirect } from 'react-router';
 import axios from 'axios';
+import authService from '../services/authService';
 
 
-const API_URL = "http://localhost:2020/";
 
 const styles = {
 	button: {
@@ -57,39 +57,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
-	const [auth,setAuth] = useState(false);
-    const classes = useStyles();
+	
+	
+	
+	
+	const classes = useStyles();
+	
     const handleLogout = () =>{
-		localStorage.removeItem('token');
+		localStorage.removeItem("username");
         props.history.push('/login');
 	}
 	
-	// const getAuth = async()=>{
-	// 	const isAuthentication = await  axios.get(`${API_URL}verifytoken`,{
-	// 		headers:{
-	// 			Accept:"application/json",
-	// 			"Content-Type":"application/json",
-	// 			"token":localStorage.getItem("token")
-	// 		}
-	// 	})
-	// 	.then((res)=>{
-	// 		alert(res.data.msg);
-	// 		if(res.data.user)
-	// 		console.log(res);
-	// 		setAuth(true);
-	// 	})
-	// 	.catch((err)=>console.log(err));
-	// }
-
-	// useEffect(()=>{
-	// 	getAuth();
-		
-	// },[ ])
-	
-	
-	
-	// if(!localStorage.getItem("token") || !auth)
-	// return (<Redirect to="/login"/>)
     return(
 		
 		<div className={classes.root}>
@@ -97,7 +75,7 @@ const DashBoard = (props) =>{
 		<FormControl onSubmit={handleLogout}>
 		<Paper variant="outlined" className={classes.control}  elevation={15}>
 		<Typography variant="h4" gutterBottom>
-		   Welcome 
+		   Welcome {localStorage.getItem("username")}
 		</Typography>
 		
 			<Button 

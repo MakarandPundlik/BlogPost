@@ -93,12 +93,18 @@ const SignUp = (props) => {
 		.then((res)=>{
 			if(res.status !== 200)
 			{
-
-			console.log(res.status)
-			alert(res.data.msg)
+				const errors = res.data.errors;
+				if(errors.email)
+				alert(errors.email);
+				if(errors.password)
+				alert(errors.password);
 			}
 			else
-			alert(res.data.msg);
+			{
+				localStorage.setItem("username",res.data.username);
+				alert(res.data.msg);
+				props.history.push("/dashboard");
+			}
 		})
 		.catch(err=>{
 			alert("Something went wrong");
