@@ -58,7 +58,9 @@ const useStyles = makeStyles((theme) => ({
 
 const DashBoard = (props) =>{
 	
-	
+	const auth = useRef({
+		authService
+	})
 	
 	
 	const classes = useStyles();
@@ -67,6 +69,8 @@ const DashBoard = (props) =>{
 		localStorage.removeItem("username");
         props.history.push('/login');
 	}
+	if(!auth.isAuth)
+	return(<Redirect to="/login"/>)
 	
     return(
 		
