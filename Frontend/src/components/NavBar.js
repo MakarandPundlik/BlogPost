@@ -61,7 +61,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h4" className={classes.title}>
-           User Registraion
+           User Authentication System
           </Typography>
        <Link href="/login" > <Button style={styles.button}> Log In</Button></Link>
        <Link href="/signup" > <Button style={styles.button}> Sign Up</Button></Link>

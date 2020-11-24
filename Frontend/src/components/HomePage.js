@@ -1,7 +1,14 @@
 import React from 'react';
 import Button from '@material-ui/core/Button'
 import axios from 'axios';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+
+
+
 const API_URL = "http://localhost:2020/";
+
+
 const styles = {
 	button: {
 		margin: 15,
@@ -15,6 +22,7 @@ const styles = {
 };
 
 const HomePage = () =>{
+    let totalUsers = [];
 
     const handleClick=(e)=>{
         e.preventDefault();
@@ -26,18 +34,37 @@ const HomePage = () =>{
             }
         })
         .then((res)=>{
-            console.log(res.data.users);
+            
+            totalUsers=res.data.users.map(user=>{
+                return (user.firstname)
+            })
+            console.log(totalUsers)
         })
         .catch(err=>{
             console.log(err);
         })
     }
+
+    
     return(
         <div>
         <Button 
 		onClick={handleClick}
 		style={styles.button}>Report</Button>
-        </div>
+        <br/>
+        <br/>
+        
+      
+        <Chip
+        icon={<FaceIcon />}
+        label={"Hello"}
+       // onDelete={handleDelete}
+      
+        color="secondary"
+        variant="outlined"
+      ></Chip>
+        
+      </div>
     )
 }
 

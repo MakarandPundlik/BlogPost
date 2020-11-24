@@ -3,7 +3,7 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import { Redirect } from 'react-router';
+
 import {LoginValidator} from '../services/userservice';
 
 import axios from 'axios';
@@ -65,7 +65,7 @@ const LogIn = (props) => {
 		password:" "
 	});
 	
-	const [errors,setErrors]=useState();
+
 	
 	const handleChange = (e) =>{
 		

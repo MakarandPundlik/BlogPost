@@ -3,7 +3,7 @@ import { makeStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/s
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import { Redirect } from 'react-router';
+
 import {RegisterValidator} from '../services/userservice';
 
 import axios from 'axios';
