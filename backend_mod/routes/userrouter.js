@@ -2,6 +2,7 @@ const express = require('express');
 const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
+const userSchema = require('../models/user');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -10,14 +11,21 @@ Router.use((req,res,next)=>{
         "Access-Control-Allow-Headers",
         "Origin,X-Requested-With,Content-Type,Accept,Authorization"
     );
-   res.header("Access-Control-Allow-Methods","GET,POST"); 
+   res.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE"); 
    res.header("Content-Type","application/json")
     next();
 })
 
 Router.get('/',(req,res)=>{
-   
-    res.send('<h1>Welcome</h1>')
+  userSchema.find()
+   .then((users)=>{
+       if(users)
+       {users.map(user=>{user._id="",user.password=""});
+       res.status(200).json({users});}
+   })
+   .catch((err)=>{
+       console.log(err);
+   })
 });
 //register req hanlder
 Router.post("/api/signup",signup_post);

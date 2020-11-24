@@ -1,5 +1,5 @@
 const express = require('express');
-    cors = require('cors');
+  const  cors = require('cors');
  const bodyParser = require('body-parser');
    const mongoose = require('mongoose');
 require('dotenv').config();
@@ -13,7 +13,8 @@ mongoose.connect(process.env.mongoURI,{useNewUrlParser:true, useUnifiedTopology:
 .then(()=>console.log('connected to the database successfully'))
 .catch((err)=>console.log(err));
 
-
+//cors middleware
+app.use(cors());
 //cookieparser middleware
 app.use(cookieParser());
 //bodyparser middleware
