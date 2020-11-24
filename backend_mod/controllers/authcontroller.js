@@ -54,8 +54,7 @@ module.exports.signup_post =(req,res)=>{
                         //create accesstoken  for user
                         const accesstoken = createAccessToken(newUser);
                         res.cookie("accesstoken",accesstoken,{
-                            httpOnly:true,
-                           secure:true
+                            httpOnly:true
                         });
                         
                          res.status(200).json({msg:"user registered successfully",username:newUser.firstname});
@@ -101,8 +100,7 @@ module.exports.login_post = (req,res)=>{
                     //create accesstoken  for user
                     const accesstoken = createAccessToken(user);
                     res.cookie("accesstoken",accesstoken,{
-                        httpOnly:true,
-                        secure:true
+                        httpOnly:true
                         
                     });
                     res.status(201).json({msg:"user logged in successfully",username:user.firstname});
