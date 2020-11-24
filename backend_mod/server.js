@@ -14,7 +14,10 @@ mongoose.connect(process.env.mongoURI,{useNewUrlParser:true, useUnifiedTopology:
 .catch((err)=>console.log(err));
 
 //cors middleware
-app.use(cors());
+app.use(cors({
+  origin:"*",
+  optionsSuccessStatus:200
+}));
 //cookieparser middleware
 app.use(cookieParser());
 //bodyparser middleware

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Route,Redirect } from 'react-router';
 import axios from 'axios';
-import authService from '../services/authService';
+const API_URL = "http://localhost:2020/"
 
 
 
@@ -58,20 +58,40 @@ const useStyles = makeStyles((theme) => ({
 
 const DashBoard = (props) =>{
 	
-	const auth = useRef({
-		authService
-	})
-	
+	const [err,setErr]=useState("");
+	const handleAuth = async() =>{
+		
+			 await axios.get(`${API_URL}api/authenticate`,{
+				headers:{
+					"content-type":"application/json",
+					"x-access-token":""
+				}
+			})
+			.then((res)=>{
+				return res;
+			})
+			.catch(err=>{
+				alert("Something went wrong")
+				return(err)
+			})
+		
+		
+	}
 	
 	const classes = useStyles();
 	
     const handleLogout = () =>{
 		localStorage.removeItem("username");
-        props.history.push('/login');
+        props.history.push("/login");
 	}
-	if(!auth.isAuth)
-	return(<Redirect to="/login"/>)
+	useEffect(()=>{
+		
+		setErr(handleAuth());
+		
+	},[]);
 	
+	if(err)
+	return(<Redirect to="/login"/>)
     return(
 		
 		<div className={classes.root}>
