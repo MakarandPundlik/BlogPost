@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import {Typography} from "@material-ui/core";
 import { Route,Redirect } from 'react-router';
 import axios from 'axios';
+import Loading from './loding';
 const API_URL = "http://localhost:2020/"
 
 
@@ -90,30 +91,31 @@ const DashBoard = (props) =>{
 		
 	},[]);
 	
-	if(err)
-	return(<Redirect to="/login"/>)
-    return(
+	// if(err)
+	// return(<Redirect to="/login"/>)
+    // return(
 		
-		<div className={classes.root}>
-		<MuiThemeProvider theme={theme}>
-		<FormControl onSubmit={handleLogout}>
-		<Paper variant="outlined" className={classes.control}  elevation={15}>
-		<Typography variant="h4" gutterBottom>
-		   Welcome {localStorage.getItem("username")}
-		</Typography>
+	// 	<div className={classes.root}>
+	// 	<MuiThemeProvider theme={theme}>
+	// 	<FormControl onSubmit={handleLogout}>
+	// 	<Paper variant="outlined" className={classes.control}  elevation={15}>
+	// 	<Typography variant="h4" gutterBottom>
+	// 	   Welcome {localStorage.getItem("username")}
+	// 	</Typography>
 		
-			<Button 
-		  onClick={handleLogout}
-		  style={styles.button}>Logout</Button>
-		</Paper>
-		</FormControl>
+	// 		<Button 
+	// 	  onClick={handleLogout}
+	// 	  style={styles.button}>Logout</Button>
+	// 	</Paper>
+	// 	</FormControl>
 	
-	   </MuiThemeProvider>
+	//    </MuiThemeProvider>
 		 
-	  </div>
+	//   </div>
 		
-	)
+	// )
 	
+	return <Loading/>
 }
 
 export default DashBoard;
