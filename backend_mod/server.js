@@ -15,15 +15,22 @@ mongoose.connect(process.env.mongoURI,{useNewUrlParser:true, useUnifiedTopology:
 
 //cors middleware
 app.use(cors({
-  origin:"*",
-  optionsSuccessStatus:200
+  origin:["http://localhost:3000","http://192.168.0.86:3000"],
+  optionsSuccessStatus:200,
+  credentials:true,
+  allowHeaders:["sessionId","Content-Type"],
+  exposedHeaders:["sessionId"]
 }));
+
 //cookieparser middleware
 app.use(cookieParser());
+
 //bodyparser middleware
 app.use(bodyParser.json());
+
 //Router middleware
 app.use('/',Router);
+
 const port = 2020 || proccess.env.port;
 
 app.listen(port,()=>console.log(`connected to the port ${port} successfully`));
