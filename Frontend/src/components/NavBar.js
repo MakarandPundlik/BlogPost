@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -50,8 +50,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 export default function NavBar() {
+
   const classes = useStyles();
+  
+
 
   return (
     <div className={classes.root}>
@@ -66,8 +71,10 @@ export default function NavBar() {
        <Link href="/login" > <Button style={styles.button}> Log In</Button></Link>
        <Link href="/signup" > <Button style={styles.button}> Sign Up</Button></Link>
        <Link href="/dashboard"> <Button style={styles.button}> DashBoard</Button></Link>
+  
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+//

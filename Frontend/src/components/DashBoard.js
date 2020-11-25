@@ -8,6 +8,8 @@ import {Typography} from "@material-ui/core";
 import { Route,Redirect } from 'react-router';
 import axios from 'axios';
 import Loading from './loding';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 const API_URL = "http://localhost:2020/"
 
 
@@ -58,8 +60,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const DashBoard = (props) =>{
-	
+	const classes = useStyles();
 	const [err,setErr]=useState("");
+	const[loading,setLoading]=useState(true);
 	const handleAuth = async() =>{
 		
 			 await axios.get(`${API_URL}api/authenticate`,{
@@ -69,21 +72,35 @@ const DashBoard = (props) =>{
 				}
 			})
 			.then((res)=>{
-				return res;
+				if(res)
+				setLoading(false);
+				localStorage.setItem("isLoggedIn",true);
 			})
 			.catch(err=>{
-				alert("Something went wrong")
-				return(err)
+				alert(err);
+				localStorage.setItem("isLoggedIn",true);
+				props.history.push("/");
 			})
 		
 		
 	}
 	
-	const classes = useStyles();
+	let totalUsers=[];
 	
     const handleLogout = () =>{
 		localStorage.removeItem("username");
-        props.history.push("/login");
+		axios.get(`${API_URL}api/logout`,{
+			headers:{
+				Accpet:"application/json",
+				"Content-Type":"application/json"
+			}
+		})
+		.then((res)=>{
+			props.history.push("/login");
+		})
+        .catch(err=>{
+			console.log(err);
+		})
 	}
 	useEffect(()=>{
 		
@@ -91,31 +108,71 @@ const DashBoard = (props) =>{
 		
 	},[]);
 	
-	// if(err)
-	// return(<Redirect to="/login"/>)
-    // return(
-		
-	// 	<div className={classes.root}>
-	// 	<MuiThemeProvider theme={theme}>
-	// 	<FormControl onSubmit={handleLogout}>
-	// 	<Paper variant="outlined" className={classes.control}  elevation={15}>
-	// 	<Typography variant="h4" gutterBottom>
-	// 	   Welcome {localStorage.getItem("username")}
-	// 	</Typography>
-		
-	// 		<Button 
-	// 	  onClick={handleLogout}
-	// 	  style={styles.button}>Logout</Button>
-	// 	</Paper>
-	// 	</FormControl>
 	
-	//    </MuiThemeProvider>
-		 
-	//   </div>
+	const handleClick=(e)=>{
+        e.preventDefault();
+        axios.get(`${API_URL}`,{
+            headers:{
+                Accept:"application/json",
+                "Content-Type":"application/json",
+
+            }
+        })
+        .then((res)=>{
+            
+            totalUsers=res.data.users.map(user=>{
+                return (user.firstname)
+            })
+            console.log(totalUsers)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
+    
+    return(
 		
-	// )
+		<>
+		{loading===false?(<div className={classes.root}>
+		<MuiThemeProvider theme={theme}>
+		<FormControl onSubmit={handleLogout}>
+		<Paper variant="outlined" className={classes.control}  elevation={15}>
+		<Typography variant="h4" gutterBottom>
+		   Welcome {localStorage.getItem("username")}
+		</Typography>
+		
+			<Button 
+		  onClick={handleLogout}
+		  style={styles.button}>Logout</Button>
+		</Paper>
+		</FormControl>
 	
-	return <Loading/>
+	   </MuiThemeProvider>
+		 <br/>
+		 <br/>
+		 <Button 
+		onClick={handleClick}
+		style={styles.button}>Report</Button>
+        <br/>
+        <br/>
+        
+      
+        <Chip
+        icon={<FaceIcon />}
+        label={"Hello"}
+       // onDelete={handleDelete}
+      
+        color="secondary"
+        variant="outlined"
+      ></Chip>
+        
+	  </div>
+		
+	):(<Loading/>)
+	}
+	</>
+	)
 }
 
 export default DashBoard;
