@@ -8,8 +8,7 @@ import {Typography} from "@material-ui/core";
 import { Route,Redirect } from 'react-router';
 import axios from 'axios';
 import Loading from './loding';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
+
 const API_URL = "http://localhost:2020/"
 
 
@@ -109,26 +108,7 @@ const DashBoard = (props) =>{
 	},[]);
 	
 	
-	const handleClick=(e)=>{
-        e.preventDefault();
-        axios.get(`${API_URL}`,{
-            headers:{
-                Accept:"application/json",
-                "Content-Type":"application/json",
-
-            }
-        })
-        .then((res)=>{
-            
-            totalUsers=res.data.users.map(user=>{
-                return (user.firstname)
-            })
-            console.log(totalUsers)
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    }
+	
 
     
     return(
@@ -151,21 +131,10 @@ const DashBoard = (props) =>{
 	   </MuiThemeProvider>
 		 <br/>
 		 <br/>
-		 <Button 
-		onClick={handleClick}
-		style={styles.button}>Report</Button>
-        <br/>
-        <br/>
+		
         
       
-        <Chip
-        icon={<FaceIcon />}
-        label={"Hello"}
-       // onDelete={handleDelete}
-      
-        color="secondary"
-        variant="outlined"
-      ></Chip>
+        
         
 	  </div>
 		
