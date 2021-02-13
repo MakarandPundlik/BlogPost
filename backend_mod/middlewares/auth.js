@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const isAuthenticated = (req,res,next)=>{
-    const accesstoken = req.headers["x-access-token"];
+    const accesstoken = req.cookies.accesstoken;
 
     if(!accesstoken)
    {

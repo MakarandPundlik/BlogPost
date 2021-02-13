@@ -20,7 +20,7 @@ Router.get('/',(req,res)=>{
   userSchema.find()
    .then((users)=>{
        if(users)
-       {users.map(user=>{user._id="",user.password=""});
+       {users.forEach(user=>{user._id="",user.password=""});
        res.status(200).json({users});}
    })
    .catch((err)=>{
