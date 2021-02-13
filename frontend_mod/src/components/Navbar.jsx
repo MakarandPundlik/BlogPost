@@ -6,7 +6,7 @@ const light = "navbar navbar-light navbar-expand-lg ";
 
 
 function Navbar(props) {
-    const [theme,setTheme] = useState(light);
+    const [theme,setTheme] = useState(dark);
     return (
         <nav className={theme}>
   <div className="container-fluid">
@@ -14,6 +14,7 @@ function Navbar(props) {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
+   
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
         <li className="nav-item">
@@ -26,7 +27,7 @@ function Navbar(props) {
           <NavLink className="nav-link active" aria-current="page" to="/signup">Signup</NavLink>
         </li>
        <li>
-
+       <NavLink className="nav-link active" aria-current="page" to="/dashboard">Dashboard</NavLink>
        </li>
       </ul>
       {/* <form className="d-flex">
