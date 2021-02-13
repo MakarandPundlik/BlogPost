@@ -1,3 +1,4 @@
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {NavLink,BrowserRouter,Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
