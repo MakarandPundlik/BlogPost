@@ -1,66 +1,26 @@
 import React from 'react';
 import Formrow from './Formrow';
-
+import users from './Userdata';
 function Homepage(props) {
-    const dark = "table-dark";
-    const light = "table-light";
-    const users = [
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        },
-        {
-            
-            firstname: 'testname',
-            lastname: 'testname'
-        }
-
-    ];
-    
+    // const darkTable = "table-dark ";
+    // const lightTable = "table-light ";
+    // const dark = "text-white"
+    // const light = "text-dark"
     return (
         <div>
-            <h1>Welcome to the Homepage</h1>
-            <table class="table text-center">
+            
+            <div className="container">
+            <table className="table table-stripped table-hover">
                 <caption className="text-center"><h3>List of Users</h3></caption>
-                <thead class={light}>
+                <thead >
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Id</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
+                        <th scope="col">Last Active</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
 
 
                     {
@@ -68,9 +28,10 @@ function Homepage(props) {
                             return (
                                <Formrow 
                                key={index}
-                                index={index}
+                                index={index+1}
                                 firstname={user.firstname}
                                 lastname={user.lastname}
+                                lastactive={user.lastactive}
                                />
                             )
                             index++;
@@ -80,6 +41,7 @@ function Homepage(props) {
                   
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }
