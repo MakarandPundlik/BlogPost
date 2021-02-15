@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Formrow from './Formrow';
 import users from './Userdata';
+import getUsers from '../services/Users';
 function Homepage(props) {
     // const darkTable = "table-dark ";
     // const lightTable = "table-light ";
     // const dark = "text-white"
     // const light = "text-dark"
+    useEffect(()=>{
+       getUsers();
+       
+    },[]);
     return (
         <div>
             
