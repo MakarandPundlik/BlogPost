@@ -1,4 +1,4 @@
-const Validator = (profile) => {
+export const SignupValidator = (profile) => {
     if (!profile.email || !profile.password || !profile.firstname || !profile.lastname || !profile.congpassword)
         return {
             msg: 'All fileds are mandatory',
@@ -29,4 +29,15 @@ const Validator = (profile) => {
         }
 }
 
-export default Validator;
+export const LoginValidator = (profile) =>{
+    if(!profile.email||!profile.password)
+    return {
+        msg:'All fields are mandatory',
+        status:false
+    }
+    else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(profile.email))
+        return {
+            msg: 'Please enter valid email id',
+            status: false
+        }
+} 

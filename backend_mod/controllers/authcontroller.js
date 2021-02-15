@@ -17,7 +17,7 @@ module.exports.signup_post = (req, res) => {
             if (user) {
 
                 errors.email = "User already exists";
-                res.statusCode = 406;
+
                 res.json({ errors: errors });
             }
 
@@ -33,14 +33,14 @@ module.exports.signup_post = (req, res) => {
                 bcrypt.genSalt(10, (err, salt) => {
                     if (err) {
                         errors.password = "Something went wrong while hashing";
-                        res.statusCode = 500;
+
                         res.json({ errors: errors });
                     }
                     else {
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
                             if (err) {
                                 errors.password = "Something went wrong while hashing";
-                                res.statusCode = 500;
+
                                 res.json({ errors: errors });
                             }
                             else {
@@ -79,7 +79,7 @@ module.exports.login_post = (req, res) => {
         .then((user) => {
             if (!user) {
                 errors.email = "User does not exists";
-                res.statusCode = 403;
+
                 res.json({ errors: errors });
             }
             else {
@@ -87,7 +87,7 @@ module.exports.login_post = (req, res) => {
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if (err || !isMatch) {
                         errors.password = "Please Enter the valid password";
-                        res.statusCode = 401;
+
                         res.json({ errors: errors });
                     }
                     else {

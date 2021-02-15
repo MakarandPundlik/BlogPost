@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Formrow from './Formrow';
 import users from './Userdata';
 import getUsers from '../services/Users';
@@ -7,9 +7,11 @@ function Homepage(props) {
     // const lightTable = "table-light ";
     // const dark = "text-white"
     // const light = "text-dark"
+    let [totalUsers,setUsers] = useState({});
     useEffect(()=>{
-       getUsers();
        
+      setUsers(getUsers());
+      console.log(totalUsers);
     },[]);
     return (
         <div>

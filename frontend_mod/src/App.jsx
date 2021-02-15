@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/" component={Homepage}></Route>
           <Route exact path="/login" component={Login}></Route> 
           <Route exact path="/signup" component={Signup}></Route>
+         
           <ProtectedRoute exact path="/dashboard" component={Dashboard}></ProtectedRoute> 
         </Switch>
       </BrowserRouter>

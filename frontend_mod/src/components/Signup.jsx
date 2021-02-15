@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Validator from '../services/Validator';
+import { SignupValidator } from '../services/Validator';
 function Signup(props) {
     const [state, setState] = useState({
         email: '',
@@ -22,7 +22,7 @@ function Signup(props) {
         profile.firstname = state.firstname;
         profile.lastname = state.lastname;
 
-        const auth = Validator(profile);
+        const auth = SignupValidator(profile);
         alert(auth.msg);
         setState({
             email: '',
@@ -35,7 +35,7 @@ function Signup(props) {
     return (
         <div>
             <div className="container col-md-3 col-sm-8 my-5">
-                
+
                 <h3>Sign Up</h3>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="mb-3">

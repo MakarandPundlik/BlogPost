@@ -16,7 +16,7 @@ Router.use((req,res,next)=>{
     next();
 })
 
-Router.get('/',(req,res)=>{
+Router.get("/",(req,res)=>{
   userSchema.find()
    .then((users)=>{
        if(users)
