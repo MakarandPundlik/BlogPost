@@ -1,14 +1,17 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:2020'
-const getUsers = ()=>{
-    let totalusers;
-    axios.get(`${API_URL}/`)
-    .then((accounts)=>{
-        console.log(accounts.data);
-        return accounts.data;
-    })
-    .catch(err=>console.log(err));
+const getUsers = async()=>{
+    let totalUsers;
+    try {
+       totalUsers = await axios.get(`${API_URL}/`)
+      //  console.log('success');
+        return totalUsers.data;
+    }
+   
     
+     catch (error) {
+        //console.log(error);
+    }
 
 }
 export default getUsers;
