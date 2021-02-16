@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { authLogin } from '../services/Users';
 import { LoginValidator } from '../services/Validator';
 function Login(props) {
     const [state, setState] = useState({
@@ -12,12 +13,17 @@ function Login(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        let profile = {};
+        let profile = {
+            email: '',
+            password: ''
+        };
         profile.email = state.email;
         profile.password = state.password;
 
         const auth = LoginValidator(profile);
         alert(auth.msg);
+        if (auth.status)
+            authLogin(profile);
         setState({
             email: '',
             password: '',
@@ -29,17 +35,17 @@ function Login(props) {
             <h3>Log In</h3>
             <form>
 
-                <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+                <div className="mb-3">
+                    <label className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
 
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
+                <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
                 </div>
 
-                <button type="submit" class="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
             </form>
         </div>
     );

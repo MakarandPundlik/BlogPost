@@ -14,16 +14,14 @@ mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopolo
   .catch((err) => console.log(err));
 
 //cors middleware
+
 app.use(cors({
-  origin:["*"]
+  origin:["http://localhost:3000","http://192.168.0.86:3000"],
+  optionsSuccessStatus:200,
+  credentials:true,
+  allowHeaders:["sessionId","Content-Type"],
+  exposedHeaders:["sessionId"]
 }));
-// app.use(cors({
-//   origin:["http://localhost:3000","http://192.168.0.86:3000"],
-//   optionsSuccessStatus:200,
-//   credentials:true,
-//   allowHeaders:["sessionId","Content-Type"],
-//   exposedHeaders:["sessionId"]
-// }));
 
 //cookieparser middleware
 app.use(cookieParser());

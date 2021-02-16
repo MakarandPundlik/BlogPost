@@ -50,13 +50,8 @@ module.exports.signup_post = (req, res) => {
 
                                 //create accesstoken  for user
                                 const accesstoken = createAccessToken(newUser);
-                                res.cookie("accesstoken", accesstoken, {
-                                    httpOnly: true
-                                });
-                                console.log(accesstoken);
-
-
-                                res.status(200).json({ msg: "user registered successfully", username: newUser.firstname });
+                               
+                                res.json({ msg: "user registered successfully", username: newUser.firstname ,accesstoken});
                             }
                         })
                     }
@@ -73,7 +68,7 @@ module.exports.signup_post = (req, res) => {
 module.exports.login_post = (req, res) => {
     const { email, password } = req.body;
     let errors = { email: '', password: '' };
-
+    console.log(req.body);
     //check for the existing email
     userSchema.findOne({ email })
         .then((user) => {
@@ -94,11 +89,8 @@ module.exports.login_post = (req, res) => {
 
                         //create accesstoken  for user
                         const accesstoken = createAccessToken(user);
-                        res.cookie("accesstoken", accesstoken, {
-                            httpOnly: true
-
-                        });
-                        res.status(201).json({ msg: "user logged in successfully", username: user.firstname });
+                        
+                        res.json({ msg: "user logged in successfully", username: user.firstname ,accesstoken});
                     }
                 })
             }

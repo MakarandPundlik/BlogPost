@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Formrow from './Formrow';
-import getUsers from '../services/Users';
+import {getUsers} from '../services/Users';
 function Homepage(props) {
     // const darkTable = "table-dark ";
     // const lightTable = "table-light ";
@@ -34,7 +34,7 @@ function Homepage(props) {
                     <tbody >
 
 
-                         {
+                         {/* {
                            flag &&  users.map((user, index) => {
                                 return (
                                     <Formrow
@@ -47,7 +47,7 @@ function Homepage(props) {
                                 )
                                 index++;
                             })
-                        }
+                        } */}
 
 
                     </tbody>

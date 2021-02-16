@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { authSignup } from '../services/Users';
 import { SignupValidator } from '../services/Validator';
 function Signup(props) {
     const [state, setState] = useState({
@@ -15,7 +16,13 @@ function Signup(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        let profile = {};
+        let profile = {
+            email: '',
+            password: '',
+            conpassword: '',
+            firstname: '',
+            lastname: ''
+        };
         profile.email = state.email;
         profile.password = state.password;
         profile.conpassword = state.conpassword;
@@ -24,6 +31,8 @@ function Signup(props) {
 
         const auth = SignupValidator(profile);
         alert(auth.msg);
+        if (auth.status)
+            authSignup(profile);
         setState({
             email: '',
             password: '',

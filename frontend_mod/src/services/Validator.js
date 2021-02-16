@@ -1,5 +1,5 @@
 export const SignupValidator = (profile) => {
-    if (!profile.email || !profile.password || !profile.firstname || !profile.lastname || !profile.congpassword)
+    if (!profile.email || !profile.password || !profile.firstname || !profile.lastname || !profile.conpassword)
         return {
             msg: 'All fileds are mandatory',
             status: false
@@ -17,7 +17,7 @@ export const SignupValidator = (profile) => {
             status: false
 
         }
-    else if (profile.password !== profile.congpassword)
+    else if (profile.password != profile.conpassword)
         return {
             msg: 'Please re enter your password',
             status: false
@@ -40,4 +40,9 @@ export const LoginValidator = (profile) =>{
             msg: 'Please enter valid email id',
             status: false
         }
+    else 
+    return{
+        msg: 'All fields seems to be okay',
+        status: true
+    }
 } 
