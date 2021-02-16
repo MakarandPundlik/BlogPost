@@ -4,13 +4,13 @@ const getUsers = async()=>{
     let totalUsers;
     try {
        totalUsers = await axios.get(`${API_URL}/`)
-      //  console.log('success');
-        return totalUsers.data;
+       console.log(totalUsers.data);
+       return totalUsers.data
     }
    
     
      catch (error) {
-        //console.log(error);
+        console.log(error);
     }
 
 }

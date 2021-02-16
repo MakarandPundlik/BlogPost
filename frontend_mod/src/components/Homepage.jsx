@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Formrow from './Formrow';
-import users from './Userdata';
 import getUsers from '../services/Users';
 function Homepage(props) {
     // const darkTable = "table-dark ";
     // const lightTable = "table-light ";
     // const dark = "text-white"
     // const light = "text-dark"
-    let totalUsers=useState(null);
-
+    const [users,setUsers]=useState(null);
+    const [flag,setFlag] = useState(false);
     useEffect(async() => {
-        totalUsers=await getUsers();
-        console.log(totalUsers);
+        await getUsers().then((res)=>{
+            setUsers(res);
+        });
+        if(users)
+        setFlag(true);
+        console.log(users);
     }, []);
     return (
 
@@ -31,8 +34,8 @@ function Homepage(props) {
                     <tbody >
 
 
-                        {
-                            users.map((user, index) => {
+                         {
+                           flag &&  users.map((user, index) => {
                                 return (
                                     <Formrow
                                         key={index}
@@ -55,3 +58,10 @@ function Homepage(props) {
 }
 
 export default Homepage;
+/*
+users && 
+Kaustubh Odak5:25 PM
+const getUsers = () => axios.get('...')
+useEffect(() => {
+    getUsers().then(res => setUsers(res))
+})*/ 
