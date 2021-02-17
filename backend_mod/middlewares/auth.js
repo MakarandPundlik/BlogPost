@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const isAuthenticated = (req,res,next)=>{
-    const accesstoken = req.cookies.accesstoken;
-
+    const accesstoken = req.body.accesstoken;
+    console.log(req.body);
     if(!accesstoken)
    {
     res.statusCode = 401;

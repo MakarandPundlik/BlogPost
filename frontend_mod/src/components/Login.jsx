@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { authLogin } from '../services/Users';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { LoginValidator } from '../services/Validator';
+import { Redirect } from 'react-router-dom';
+const API_URL = 'http://localhost:2020';
+
 function Login(props) {
+    useEffect(()=>{
+        if(localStorage.getItem("accesstoken"))
+            props.history.push('/dashboard');
+         
+    },[])
     const [state, setState] = useState({
         email: '',
         password: ''
@@ -23,9 +31,24 @@ function Login(props) {
         let auth = LoginValidator(profile);
         alert(auth.msg);
 
-        if (auth.status)
-           authLogin(profile);
-          
+        axios.post(`${API_URL}/api/login`,{profile},{
+            headers:{
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }  
+        })
+        .then((res)=>{
+            if(!res.data.errors)
+                {
+                    localStorage.setItem("accesstoken",res.data.accesstoken);
+                    props.history.push('/dashboard');
+                }
+                else
+                console.log(res.data);
+        })
+        .catch((err)=>console.log(err));
+
         setState({
             email: '',
             password: '',

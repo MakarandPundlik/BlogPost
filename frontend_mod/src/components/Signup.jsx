@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { authSignup } from '../services/Users';
+
 import { SignupValidator } from '../services/Validator';
+import axios from 'axios';
+const API_URL = 'http://localhost:2020'
 function Signup(props) {
     const [state, setState] = useState({
         email: '',
@@ -30,10 +32,27 @@ function Signup(props) {
         profile.lastname = state.lastname;
 
         const auth = SignupValidator(profile);
-        console.log(profile);
+       
         alert(auth.msg);
-        if (auth.status)
-            authSignup(profile);
+        
+        axios.post(`${API_URL}/api/signup`,{profile},{
+            headers:{
+                'Content-Type':'application/json',
+                'Accept':'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }  
+        })
+        .then((res)=>{
+            if(!res.data.errors)
+            {
+                localStorage.setItem("accesstoken",res.data.accesstoken);
+                props.history.push('/dashboard');
+            }
+            else
+            console.log(res.data);
+        })
+        .catch((err)=>console.log(err));
+
         setState({
             email: '',
             password: '',

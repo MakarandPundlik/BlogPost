@@ -35,11 +35,11 @@ Router.post("/api/login",login_post);
 
 //user auth req handler
 Router.get("/api/authenticate",isAuthenticated,(req,res)=>{
-    res.status(201).json({msg:"user has been authenticated"});
+    res.json({msg:"user has been authenticated"});
 });
 
 //logout request
 Router.get("/api/logout",logout_get,(req,res)=>{
-    res.status(201).json({msg:"user logged out successfully"})
+    res.json({msg:"user logged out successfully"})
 });
 module.exports = Router;
