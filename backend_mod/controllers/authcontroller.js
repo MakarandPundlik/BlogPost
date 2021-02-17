@@ -7,18 +7,19 @@ const createAccessToken = require('../middlewares/tokenMiddlewares');
 
 //signup handler
 module.exports.signup_post = (req, res) => {
-    const { firstname, lastname, email, password, remember } = req.body;
-    console.log(email, remember);
+    const { firstname, lastname, email, password } = req.body.profile;
+    console.log(req.body);
+    console.log(firstname,lastname,email,password);
     //common error object
     let errors = { email: '', password: '' };
     //check for the existing user
-    userSchema.findOne({ email })
+    userSchema.findOne({ email:email })
         .then((user) => {
             if (user) {
 
                 errors.email = "User already exists";
 
-                res.json({ errors: errors });
+               return res.json({  errors });
             }
 
             else {
@@ -34,14 +35,14 @@ module.exports.signup_post = (req, res) => {
                     if (err) {
                         errors.password = "Something went wrong while hashing";
 
-                        res.json({ errors: errors });
+                       return res.json({  errors });
                     }
                     else {
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
                             if (err) {
                                 errors.password = "Something went wrong while hashing";
 
-                                res.json({ errors: errors });
+                               return res.json({  errors });
                             }
                             else {
                                 newUser.password = hash;
@@ -51,7 +52,7 @@ module.exports.signup_post = (req, res) => {
                                 //create accesstoken  for user
                                 const accesstoken = createAccessToken(newUser);
                                
-                                res.json({ msg: "user registered successfully", username: newUser.firstname ,accesstoken});
+                                return res.json({ msg: "user registered successfully", username: newUser.firstname ,accesstoken});
                             }
                         })
                     }
@@ -66,7 +67,7 @@ module.exports.signup_post = (req, res) => {
 
 //login handler
 module.exports.login_post = (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body.profile;
     let errors = { email: '', password: '' };
     console.log(req.body);
     //check for the existing email
@@ -75,7 +76,7 @@ module.exports.login_post = (req, res) => {
             if (!user) {
                 errors.email = "User does not exists";
 
-                res.json({ errors: errors });
+                return res.json({ errors: errors });
             }
             else {
                 //check the hasged passwords
@@ -83,14 +84,14 @@ module.exports.login_post = (req, res) => {
                     if (err || !isMatch) {
                         errors.password = "Please Enter the valid password";
 
-                        res.json({ errors: errors });
+                        return res.json({ errors });
                     }
                     else {
 
                         //create accesstoken  for user
                         const accesstoken = createAccessToken(user);
                         
-                        res.json({ msg: "user logged in successfully", username: user.firstname ,accesstoken});
+                        return res.json({ msg: "user logged in successfully", username: user.firstname ,accesstoken});
                     }
                 })
             }

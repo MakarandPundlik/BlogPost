@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 const API_URL = 'http://localhost:2020'
 export const getUsers = async()=>{
     let totalUsers;
@@ -20,7 +21,12 @@ export const authSignup = async(profile) =>{
          "Access-Control-Allow-Origin": "*", 
          "Accept": "application/json" }
     })
-    .then((res)=>console.log(res))
+    .then((res)=>{
+        if(!res.data.errors)
+        localStorage.setItem("accesstoken",res.data.accesstoken);
+
+        console.log(res.data);
+    })
     .catch((err)=>console.log(err));
 }
 
@@ -30,6 +36,12 @@ export const authLogin = async(profile) =>{
          "Access-Control-Allow-Origin": "*", 
          "Accept": "application/json" }
     })
-    .then((res)=>console.log(res))
+    .then((res)=>{
+        if(!res.data.errors)
+            localStorage.setItem("accesstoken",res.data.accesstoken);
+
+            console.log(res.data);
+    })
     .catch((err)=>console.log(err));
+    
 }

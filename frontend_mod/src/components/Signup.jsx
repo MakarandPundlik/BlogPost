@@ -30,6 +30,7 @@ function Signup(props) {
         profile.lastname = state.lastname;
 
         const auth = SignupValidator(profile);
+        console.log(profile);
         alert(auth.msg);
         if (auth.status)
             authSignup(profile);

@@ -20,10 +20,12 @@ function Login(props) {
         profile.email = state.email;
         profile.password = state.password;
 
-        const auth = LoginValidator(profile);
+        let auth = LoginValidator(profile);
         alert(auth.msg);
+
         if (auth.status)
-            authLogin(profile);
+           authLogin(profile);
+          
         setState({
             email: '',
             password: '',
