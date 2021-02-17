@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
-import Homepage from './components/Homepage';
+
 import Dashboard from './components/Dashboard';
 
 function App() {
@@ -14,11 +14,10 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Switch>
-          <Route exact path="/" component={Homepage}></Route>
-          <Route exact path="/login" component={Login}></Route> 
+         <Route exact path="/login" component={Login}></Route> 
           <Route exact path="/signup" component={Signup}></Route>
          
-          <ProtectedRoute exact path="/dashboard" component={Dashboard}></ProtectedRoute> 
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} auth={true}></ProtectedRoute> 
         </Switch>
       </BrowserRouter>
     </div>

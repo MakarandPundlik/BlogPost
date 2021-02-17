@@ -38,7 +38,10 @@ export const authLogin = async(profile) =>{
     })
     .then((res)=>{
         if(!res.data.errors)
-            localStorage.setItem("accesstoken",res.data.accesstoken);
+            {
+                localStorage.setItem("accesstoken",res.data.accesstoken);
+                <Redirect to ="/dashboard"></Redirect>
+            }
 
             console.log(res.data);
     })
