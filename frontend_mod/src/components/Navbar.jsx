@@ -1,11 +1,23 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 
 const dark = "navbar navbar-dark bg-dark navbar-expand-lg ";
 const light = "navbar navbar-light navbar-expand-lg ";
 
-
+const handleClcik = (e) =>{
+  e.preventDefault();
+  localStorage.removeItem("accesstoken");
+ 
+}
 function Navbar(props) {
+  const [flag,setFlag] = useState(false);
+  useEffect(()=>{
+    if(!localStorage.getItem("accesstoken"))
+      setFlag(false);
+    else 
+      setFlag(true);
+  },[flag]);
+
     const [theme,setTheme] = useState(dark);
     return (
         <nav className={theme}>
@@ -29,6 +41,12 @@ function Navbar(props) {
        <li>
        <NavLink className="nav-link active" aria-current="page" to="/dashboard">Dashboard</NavLink>
        </li>
+       {
+         flag &&
+         <li>
+         <button type="button" className="btn btn-danger" onClick={(e)=>handleClcik(e)}>Logout</button>
+         </li>
+       }
       </ul>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

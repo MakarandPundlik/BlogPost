@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const isAuthenticated = (req,res,next)=>{
-    const accesstoken = req.body.accesstoken;
+    const accesstoken = req.body;
     console.log(req.body);
     if(!accesstoken)
    {
-    res.statusCode = 401;
+    
     res.json({msg:"No token provided"});
    }
    else
@@ -14,7 +14,7 @@ const isAuthenticated = (req,res,next)=>{
     jwt.verify(accesstoken,process.env.ACCESS_TOKEN_SECRETE,(err,decoded)=>{
         if(err)
         {
-            res.statusCode = 401;
+            
             res.json({msg:"Invalid token"});
         }
         else

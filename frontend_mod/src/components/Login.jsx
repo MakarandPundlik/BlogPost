@@ -42,9 +42,10 @@ function Login(props) {
             if(!res.data.errors)
                 {
                     localStorage.setItem("accesstoken",res.data.accesstoken);
+                    localStorage.setItem("username",res.data.username);
                     props.history.push('/dashboard');
                 }
-                else
+                
                 console.log(res.data);
         })
         .catch((err)=>console.log(err));
