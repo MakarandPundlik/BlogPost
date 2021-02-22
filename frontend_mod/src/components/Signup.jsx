@@ -42,7 +42,9 @@ function Signup(props) {
         const auth = SignupValidator(profile);
        
         alert(auth.msg);
+        if(auth.status)
         setLoading(true);
+        
         axios.post(`${API_URL}/api/signup`,{profile},{
             headers:{
                 'Content-Type':'application/json',

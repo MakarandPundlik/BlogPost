@@ -8,11 +8,11 @@ const light = "navbar navbar-light navbar-expand-lg ";
 function Navbar(props) {
   const [flag,setFlag] = useState(false);
   useEffect(()=>{
-    if(!localStorage.getItem("accesstoken"))
-      setFlag(false);
-    else 
+    if(localStorage.getItem("accesstoken"))
       setFlag(true);
-  },[flag]);
+   
+     
+  },[localStorage.getItem("accesstoken")]);
 
     const [theme,setTheme] = useState(dark);
 

@@ -34,8 +34,8 @@ Router.post("/api/signup",signup_post);
 Router.post("/api/login",login_post);
 
 //user auth req handler
-Router.get("/api/authenticate",isAuthenticated,(req,res)=>{
-    res.json({msg:"user has been authenticated"});
+Router.post("/api/authenticate",isAuthenticated,(req,res)=>{
+    res.json({msg:"user has been authenticated",isAuthenticated:true});
 });
 
 //logout request
