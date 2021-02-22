@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import { SignupValidator } from '../services/Validator';
 import axios from 'axios';
+import Loading from '../images/Loading.gif';
 const API_URL = 'http://localhost:2020'
 function Signup(props) {
+    const [loading,setLoading] = useState(false);
     const [state, setState] = useState({
         email: '',
         password: '',
         conpassword: '',
         firstname: '',
         lastname: ''
-    })
+    });
+
+    useEffect(()=>{
+        if(localStorage.getItem("accesstoken"))
+            props.history.push('/dashboard');
+         
+    },[loading])
     const handleChange = (e) => {
 
         setState({ ...state, [e.target.id]: e.target.value });
@@ -34,7 +42,7 @@ function Signup(props) {
         const auth = SignupValidator(profile);
        
         alert(auth.msg);
-        
+        setLoading(true);
         axios.post(`${API_URL}/api/signup`,{profile},{
             headers:{
                 'Content-Type':'application/json',
@@ -46,10 +54,13 @@ function Signup(props) {
             if(!res.data.errors)
             {
                 localStorage.setItem("accesstoken",res.data.accesstoken);
+                localStorage.setItem("username",res.data.username);
                 props.history.push('/dashboard');
             }
+            
             else
             console.log(res.data);
+            setLoading(false);
         })
         .catch((err)=>console.log(err));
 
@@ -61,7 +72,8 @@ function Signup(props) {
             lastname: ''
         });
     }
-    return (
+    return( 
+        loading?( <img src={Loading}/>):(
         <div>
             <div className="container col-md-3 col-sm-8 my-5">
 
@@ -94,6 +106,7 @@ function Signup(props) {
                 </form>
             </div>
         </div>
+    )
     );
 }
 

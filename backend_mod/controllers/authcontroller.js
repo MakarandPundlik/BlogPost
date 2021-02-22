@@ -69,7 +69,7 @@ module.exports.signup_post = (req, res) => {
 module.exports.login_post = (req, res) => {
     const { email, password } = req.body.profile;
     let errors = { email: '', password: '' };
-    console.log(req.body);
+    console.log(req.body.profile);
     //check for the existing email
     userSchema.findOne({ email })
         .then((user) => {

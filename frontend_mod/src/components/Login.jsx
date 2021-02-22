@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LoginValidator } from '../services/Validator';
 import { Redirect } from 'react-router-dom';
+import Loading from '../images/Loading.gif';
 const API_URL = 'http://localhost:2020';
 
 function Login(props) {
+    const [loading,setLoading] = useState(false);
     useEffect(()=>{
         if(localStorage.getItem("accesstoken"))
             props.history.push('/dashboard');
          
-    },[])
+    },[loading])
     const [state, setState] = useState({
         email: '',
         password: ''
     });
+   
     const handleChange = (e) => {
 
         setState({ ...state, [e.target.id]: e.target.value });
@@ -31,6 +34,8 @@ function Login(props) {
         let auth = LoginValidator(profile);
         alert(auth.msg);
 
+        //set loading to true
+        setLoading(true);
         axios.post(`${API_URL}/api/login`,{profile},{
             headers:{
                 'Content-Type':'application/json',
@@ -45,7 +50,7 @@ function Login(props) {
                     localStorage.setItem("username",res.data.username);
                     props.history.push('/dashboard');
                 }
-                
+                setLoading(false);
                 console.log(res.data);
         })
         .catch((err)=>console.log(err));
@@ -56,7 +61,9 @@ function Login(props) {
 
         });
     }
+    //
     return (
+    loading?( <img src={Loading}/>): (
         <div className="container col-md-3 col-sm-8 my-5">
             <h3>Log In</h3>
             <form>
@@ -74,6 +81,7 @@ function Login(props) {
                 <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
             </form>
         </div>
+    )
     );
 }
 

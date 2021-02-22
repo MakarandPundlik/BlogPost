@@ -19,8 +19,7 @@ app.use(cors({
   origin:["http://localhost:3000","http://192.168.0.86:3000"],
   optionsSuccessStatus:200,
   credentials:true,
-  allowHeaders:["sessionId","Content-Type"],
-  exposedHeaders:["sessionId"]
+  allowHeaders:["Content-Type"]
 }));
 
 //cookieparser middleware

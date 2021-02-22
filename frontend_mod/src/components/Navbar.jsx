@@ -4,11 +4,7 @@ import { NavLink } from 'react-router-dom';
 const dark = "navbar navbar-dark bg-dark navbar-expand-lg ";
 const light = "navbar navbar-light navbar-expand-lg ";
 
-const handleClcik = (e) =>{
-  e.preventDefault();
-  localStorage.removeItem("accesstoken");
- 
-}
+
 function Navbar(props) {
   const [flag,setFlag] = useState(false);
   useEffect(()=>{
@@ -19,6 +15,14 @@ function Navbar(props) {
   },[flag]);
 
     const [theme,setTheme] = useState(dark);
+
+    const handleClcik = (e) =>{
+      e.preventDefault();
+      localStorage.removeItem("accesstoken");
+      localStorage.removeItem("username");
+      
+    }
+
     return (
         <nav className={theme}>
   <div className="container-fluid">
