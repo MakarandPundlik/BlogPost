@@ -1,11 +1,17 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { SignupValidator } from '../services/Validator';
 import axios from 'axios';
 import Loading from '../images/Loading.gif';
 const API_URL = 'http://localhost:2020'
 function Signup(props) {
-    const [loading,setLoading] = useState(false);
+    const [errors, setErros] = useState({
+        title: '',
+        text: '',
+        myclass: ''
+    })
+
+    const [loading, setLoading] = useState(false);
     const [state, setState] = useState({
         email: '',
         password: '',
@@ -14,11 +20,11 @@ function Signup(props) {
         lastname: ''
     });
 
-    useEffect(()=>{
-        if(localStorage.getItem("accesstoken"))
+    useEffect(() => {
+        if (localStorage.getItem("accesstoken"))
             props.history.push('/dashboard');
-         
-    },[loading])
+
+    }, [loading, errors])
     const handleChange = (e) => {
 
         setState({ ...state, [e.target.id]: e.target.value });
@@ -40,31 +46,38 @@ function Signup(props) {
         profile.lastname = state.lastname;
 
         const auth = SignupValidator(profile);
-       
-        alert(auth.msg);
-        if(auth.status)
-        setLoading(true);
-        
-        axios.post(`${API_URL}/api/signup`,{profile},{
-            headers:{
-                'Content-Type':'application/json',
-                'Accept':'application/json',
+
+
+        if (auth.status)
+            setLoading(true);
+
+        else {
+            setErros({
+                title: auth.title,
+                text: auth.text,
+                myclass: auth.myclass
+            })
+
+        }
+        axios.post(`${API_URL}/api/signup`, { profile }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*'
-            }  
-        })
-        .then((res)=>{
-            if(!res.data.errors)
-            {
-                localStorage.setItem("accesstoken",res.data.accesstoken);
-                localStorage.setItem("username",res.data.username);
-                props.history.push('/dashboard');
             }
-            
-            else
-            console.log(res.data);
-            setLoading(false);
         })
-        .catch((err)=>console.log(err));
+            .then((res) => {
+                if (!res.data.errors) {
+                    localStorage.setItem("accesstoken", res.data.accesstoken);
+                    localStorage.setItem("username", res.data.username);
+                    props.history.push('/dashboard');
+                }
+
+                else
+                    console.log(res.data);
+                setLoading(false);
+            })
+            .catch((err) => console.log(err));
 
         setState({
             email: '',
@@ -74,41 +87,49 @@ function Signup(props) {
             lastname: ''
         });
     }
-    return( 
-        loading?( <img src={Loading}/>):(
-        <div>
-            <div className="container col-md-3 col-sm-8 my-5">
+    return (
+        loading ? (<img src={Loading} />) : (
+            <div>
+                <div className="container col-md-3 col-sm-8 my-5">
+                    {
+                        errors.title &&
+                        <div className={errors.myclass} role="alert">
+                            <strong>{errors.title}!</strong> {errors.text}.
+            <button type="button" className="close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                        </div>
 
-                <h3>Sign Up</h3>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="mb-3">
-                        <label className="form-label">First Name</label>
-                        <input type="text" className="form-control" id="firstname" value={state.firstname} onChange={(e) => handleChange(e)} />
+                    }
+                    <h3>Sign Up</h3>
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div className="mb-3">
+                            <label className="form-label">First Name</label>
+                            <input type="text" className="form-control" id="firstname" value={state.firstname} onChange={(e) => handleChange(e)} />
 
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Last Name</label>
-                        <input type="text" className="form-control" id="lastname" value={state.lastname} onChange={(e) => handleChange(e)} />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Last Name</label>
+                            <input type="text" className="form-control" id="lastname" value={state.lastname} onChange={(e) => handleChange(e)} />
 
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
 
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Confirm Password</label>
-                        <input type="password" className="form-control" id="conpassword" value={state.conpassword} onChange={(e) => handleChange(e)} />
-                    </div>
-                    <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
-                </form>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Confirm Password</label>
+                            <input type="password" className="form-control" id="conpassword" value={state.conpassword} onChange={(e) => handleChange(e)} />
+                        </div>
+                        <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                    </form>
+
+                </div>
             </div>
-        </div>
-    )
+        )
     );
 }
 

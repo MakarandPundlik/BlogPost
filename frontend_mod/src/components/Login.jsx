@@ -6,17 +6,22 @@ import Loading from '../images/Loading.gif';
 const API_URL = 'http://localhost:2020';
 
 function Login(props) {
-    const [loading,setLoading] = useState(false);
-    useEffect(()=>{
-        if(localStorage.getItem("accesstoken"))
+    const [errors, setErros] = useState({
+        title: '',
+        text: '',
+        myclass: ''
+    })
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        if (localStorage.getItem("accesstoken"))
             props.history.push('/dashboard');
-         
-    },[loading])
+
+    }, [loading, errors])
     const [state, setState] = useState({
         email: '',
         password: ''
     });
-   
+
     const handleChange = (e) => {
 
         setState({ ...state, [e.target.id]: e.target.value });
@@ -32,29 +37,37 @@ function Login(props) {
         profile.password = state.password;
 
         let auth = LoginValidator(profile);
-        alert(auth.msg);
+
 
         //set loading to true
-        if(auth.status)
-        setLoading(true);
-        axios.post(`${API_URL}/api/login`,{profile},{
-            headers:{
-                'Content-Type':'application/json',
-                'Accept':'application/json',
+        if (auth.status)
+            setLoading(true);
+
+        else {
+            setErros({
+                title: auth.title,
+                text: auth.text,
+                myclass: auth.myclass
+            })
+
+        }
+        axios.post(`${API_URL}/api/login`, { profile }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*'
-            }  
+            }
         })
-        .then((res)=>{
-            if(!res.data.errors)
-                {
-                    localStorage.setItem("accesstoken",res.data.accesstoken);
-                    localStorage.setItem("username",res.data.username);
+            .then((res) => {
+                if (!res.data.errors) {
+                    localStorage.setItem("accesstoken", res.data.accesstoken);
+                    localStorage.setItem("username", res.data.username);
                     props.history.push('/dashboard');
                 }
                 setLoading(false);
                 console.log(res.data);
-        })
-        .catch((err)=>console.log(err));
+            })
+            .catch((err) => console.log(err));
 
         setState({
             email: '',
@@ -64,25 +77,37 @@ function Login(props) {
     }
     //
     return (
-    loading?( <img src={Loading}/>): (
-        <div className="container col-md-3 col-sm-8 my-5">
-            <h3>Log In</h3>
-            <form>
+        loading ? (<div style={{ marginTop: '20%' }}>
+            <div className="spinner-border" role="status">
 
-                <div className="mb-3">
-                    <label className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+            </div>
+        </div>) : (
+                <div className="container col-md-3 col-sm-8 my-5">
+                    {
+                        errors.title &&
+                        <div className={errors.myclass} role="alert">
+                            <strong>{errors.title}!</strong> {errors.text}.
+            <button type="button" className="close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                        </div>
 
+                    }
+                    <h3>Log In</h3>
+                    <form>
+
+                        <div className="mb-3">
+                            <label className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
+                        </div>
+
+                        <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
-                </div>
-
-                <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
-            </form>
-        </div>
-    )
+            )
     );
 }
 
