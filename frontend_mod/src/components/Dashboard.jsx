@@ -8,6 +8,9 @@ function Dashboard(props) {
     let [redirect, setRedirect] = useState(false);
     let [loading, setLoading] = useState(true);
     useEffect(async () => {
+
+        
+      
         if (localStorage.getItem("accesstoken") == null)
             setRedirect(true);
 
@@ -23,7 +26,7 @@ function Dashboard(props) {
                 }
             })
             .then((res) => {
-                console.log(res.data)
+                
                 
             })
             .catch((err) => {
@@ -31,12 +34,20 @@ function Dashboard(props) {
                 console.log(err)
             });
 
-    }, [redirect,loading])
+    }, [redirect,loading]);
+
+    const handleClick = (e) =>{
+        e.preventDefault();
+        localStorage.removeItem("accesstoken");
+        localStorage.removeItem("username");
+        props.history.push("/login");
+      }
     return (
         // loading ? ( <img src={Loading}/>) : (
              redirect ? (<Redirect to="/login"></Redirect>) : (
                 <div>
-                    <h1>Welcome to userauth {localStorage.getItem("username")}</h1>
+                    
+                    <button type="button" className="btn btn-dark m-3 " onClick={(e)=>handleClick(e)}>Logout</button>
                 </div>
             )
          )

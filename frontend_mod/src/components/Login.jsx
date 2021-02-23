@@ -40,8 +40,33 @@ function Login(props) {
 
 
         //set loading to true
-        if (auth.status)
+        if (auth.status) {
             setLoading(true);
+            axios.post(`${API_URL}/api/login`, { profile }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+                .then((res) => {
+                    if (!res.data.errors) {
+                        localStorage.setItem("accesstoken", res.data.accesstoken);
+                        localStorage.setItem("username", res.data.username);
+                        props.history.push('/dashboard');
+                        setLoading(true);
+                    }
+                    else {
+                        
+                        setErros({
+                            title:'PLease check your credentials',
+                            myclass:'alert alert-danger alert-dismissible fade show'
+                        })
+                        setLoading(false);
+                    }
+                })
+                .catch((err) => console.log(err));
+        }
 
         else {
             setErros({
@@ -51,29 +76,9 @@ function Login(props) {
             })
 
         }
-        axios.post(`${API_URL}/api/login`, { profile }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
-            .then((res) => {
-                if (!res.data.errors) {
-                    localStorage.setItem("accesstoken", res.data.accesstoken);
-                    localStorage.setItem("username", res.data.username);
-                    props.history.push('/dashboard');
-                }
-                setLoading(false);
-                console.log(res.data);
-            })
-            .catch((err) => console.log(err));
 
-        setState({
-            email: '',
-            password: '',
 
-        });
+        
     }
     //
     return (
@@ -87,7 +92,6 @@ function Login(props) {
                         errors.title &&
                         <div className={errors.myclass} role="alert">
                             <strong>{errors.title}!</strong> {errors.text}.
-            <button type="button" className="close" data-bs-dismiss="alert" aria-label="Close">X</button>
                         </div>
 
                     }
