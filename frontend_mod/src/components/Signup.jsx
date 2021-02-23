@@ -62,6 +62,7 @@ function Signup(props) {
                     if (!res.data.errors) {
                         localStorage.setItem("accesstoken", res.data.accesstoken);
                         localStorage.setItem("username", res.data.username);
+                        localStorage.setItem("setuptime",new Date().getTime());
                         props.history.push('/dashboard');
                     }
     

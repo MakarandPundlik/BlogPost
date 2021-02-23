@@ -8,9 +8,9 @@ function Dashboard(props) {
     let [redirect, setRedirect] = useState(false);
     let [loading, setLoading] = useState(true);
     useEffect(async () => {
+        if(new Date().getTime()-localStorage.getItem("setuptime")>= 60*60*1000)
+           localStorage.clear();
 
-        
-      
         if (localStorage.getItem("accesstoken") == null)
             setRedirect(true);
 
@@ -26,8 +26,11 @@ function Dashboard(props) {
                 }
             })
             .then((res) => {
-                
-                
+                if(!res.data.isAuthenticated)
+                    {
+                        localStorage.removeItem("accesstoken");
+                        localStorage.removeItem("username");
+                    }
             })
             .catch((err) => {
                 localStorage.removeItem("accesstoken");

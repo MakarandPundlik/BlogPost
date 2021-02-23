@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const isAuthenticated = (req,res,next)=>{
     const accesstoken = req.body.accesstoken;
-    console.log(req.body);
+   
     if(!accesstoken)
    {
     

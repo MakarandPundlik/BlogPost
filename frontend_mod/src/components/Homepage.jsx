@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Tablerow from './Tablerow';
 const API_URL = "http://localhost:2020/"
 function Homepage(props) {
   const [flag,setFlag] = useState(false);
@@ -26,8 +27,11 @@ function Homepage(props) {
   useEffect(() => {
     
     getUsers();
-  }, [users])
- 
+  }, []);
+
+  useEffect(()=>{
+   console.log(users)
+  },[users]);
   return (
     <div>
       {
@@ -42,25 +46,12 @@ function Homepage(props) {
             </tr>
           </thead>
           <tbody>
-          
-          
-             {
-               
-                users.map((user,index)=>{
-                  return(
-                    
-                    <tr>
-                   
-                    <th scope="row">{index+1}</th>
-                    <td>{user.firstname}</td>
-                    <td>{user.lastname}</td>
-                    <td>{user.email}</td>
-                    </tr>
-                  )
-                })
-             
-             }  
-          
+          {
+            users.forEach((user)=>console.log(user))
+            // users.map((user,index)=>{
+            // return(<Tablerow user={user} index={index} key={index}/>)
+            // })
+          }
           </tbody>
         </table>
       }
