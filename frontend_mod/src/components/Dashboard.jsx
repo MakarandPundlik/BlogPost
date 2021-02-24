@@ -2,11 +2,24 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import Cardschema from './Cardschema';
+import Blogvalidator from '../services/Blogvalidator';
 const API_URL = 'http://localhost:2020';
 function Dashboard(props) {
-  let [users, setUsers] = useState(null);
-  let [redirect, setRedirect] = useState(false);
-  let [loading, setLoading] = useState(true);
+
+  //for blog
+  const [state,setState] = useState({
+    title:'',
+    data:''
+  });
+  //blog errors
+  const [errors,setErrors] = useState({
+    msg:'',
+    status:false
+  })
+  //user token authentication
+  const [redirect, setRedirect] = useState(false);
+
+  
   useEffect(async () => {
     if (new Date().getTime() - localStorage.getItem("setuptime") >= 60 * 60 * 1000) {
       localStorage.clear();
@@ -40,8 +53,43 @@ function Dashboard(props) {
         console.log(err)
       });
 
-  }, [redirect, loading]);
+  }, [redirect]);
 
+  
+
+  
+
+  //for fields handler
+  const handleChange=(e)=>{
+    e.preventDefault();
+    setState({...state,[e.target.id]:e.target.value});
+  }
+
+//blog submission handler
+const handleSubmit=(e)=>{
+  e.preventDefault();
+  let blog={};
+       blog.title = state.title;
+       blog.data = state.data;
+
+       const auth = Blogvalidator(blog);  
+
+       setErrors({
+         msg:auth.msg,
+         status:auth.status
+       })
+       if(errors.status)
+       {
+         console.log(blog);
+         setState({
+           title:'',
+           data:''
+         })
+         
+       }
+}
+
+  // logout handler
   const handleClick = (e) => {
     e.preventDefault();
     localStorage.clear();
@@ -49,70 +97,82 @@ function Dashboard(props) {
     props.history.push("/login");
   }
   return (
-    // loading ? ( <img src={Loading}/>) : (
+    
     redirect ? (<Redirect to="/login"></Redirect>) : (
       <div>
-
-        <div class="dropdown" style={{ margin: '3rem', textAlign: 'right' }}>
-          <button class="btn btn-dark dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {/* Dropdown user menu */}
+        <div className="dropdown" style={{ margin: '3rem', textAlign: 'right' }}>
+          <button className="btn btn-dark dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             {localStorage.getItem("username") &&
               localStorage.getItem("username").charAt(0).toLocaleUpperCase()}
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
             <li><div className="dropdown-item" data-bs-toggle="modal" data-bs-target="#Backdrop"> Add Blog</div></li>
           </ul>
-          <div class="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header"><h5 class="modal-title" >Add Blog</h5></div>
-                <div class="modal-body">
-                  <form >
 
-                    <div class="mb-3">
+          {/* Blog form*/}
+          <div className="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header"><h5 className="modal-title" >Add Blog</h5></div>
+                <div className="modal-body">
+                {
+                            errors.status &&
+                            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{errors.msg}</strong> .
+                        </div>
+
+
+                        }
+                             
+                  <form onSubmit={(e)=>handleSubmit(e)}>
+
+                    <div className="mb-3">
                       <label className="form-label ">Blog Title</label>
-                      <input type="text" className="form-control" id="title" />
+                      <input type="text" className="form-control" id="title" onChange={(e)=>handleChange(e)} value={state.title}/>
 
                     </div>
                     <div className="mb-3">
                       <label className="form-label">Blog</label>
-                      <input type="text" className="form-control" id="data" />
+                      <textarea type="text" rows="5" className="form-control" id="data" onChange={(e)=>handleChange(e)} value={state.data}/>
                     </div>
                   </form>
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-dark">Submit</button>
+                  <button type="button" className="btn btn-dark" onClick={(e)=>handleSubmit(e)}>Submit</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-         
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
-            <Cardschema/>
+      {/* Call for the total blogs */}
+        <div className="row  ">
 
-         
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+          <Cardschema />
+
+
         </div>
       </div>
     )
   )
-  //)
+  
 }
 
 export default Dashboard;

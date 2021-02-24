@@ -1,17 +1,17 @@
 import React from 'react';
-import Loading from '../images/Loading.gif';
+import blog from '../images/blog.jpg';
 function Cardschema(props) {
   return (
 
-    <div className="col-md-3 col-sm-6">
-      <div className="card m-3 ">
-        <img src={Loading} className="card-img-top" alt="..." />
+    <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6">
+      <div className="card m-3 shadow-lg">
+        <img src={blog} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">Card title</h5>
           <button type="button" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Read More
               </button>
-          <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
