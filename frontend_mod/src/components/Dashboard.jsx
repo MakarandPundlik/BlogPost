@@ -60,16 +60,54 @@ function Dashboard(props) {
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
-            <li><div className="dropdown-item">Add a blog</div></li>
-            <li><div className="dropdown-item">Bookmark</div></li>
+            <li><div className="dropdown-item" data-bs-toggle="modal" data-bs-target="#Backdrop"> Add Blog</div></li>
           </ul>
+          <div class="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title" >Add Blog</h5></div>
+                <div class="modal-body">
+                  <form >
+
+                    <div class="mb-3">
+                      <label className="form-label ">Blog Title</label>
+                      <input type="text" className="form-control" id="title" />
+
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Blog</label>
+                      <input type="text" className="form-control" id="data" />
+                    </div>
+                  </form>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-dark">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
+         
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+            <Cardschema/>
+
+         
         </div>
       </div>
     )
