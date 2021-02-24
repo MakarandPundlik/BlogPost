@@ -89,14 +89,17 @@ function Login(props) {
             </div>
         </div>) : (
                 <div className="container col-md-3 col-sm-8 my-5">
-                    {
-                        errors.title &&
-                        <div className={errors.myclass} role="alert">
-                            <strong>{errors.title}!</strong> {errors.text}.
+                    <div class="card shadow-lg" style={{width:'25rem'}}>
+                            <div class="card-body">
+                                 {
+                            errors.title &&
+                            <div className={errors.myclass} role="alert">
+                                <strong>{errors.title}!</strong> {errors.text}.
                         </div>
 
-                    }
-                    <h3>Log In</h3>
+
+                        }
+                                <h5 class="card-title">Log In</h5>
                     <form>
 
                         <div className="mb-3">
@@ -111,6 +114,8 @@ function Login(props) {
 
                         <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
                     </form>
+                    </div>
+                    </div>
                 </div>
             )
     );

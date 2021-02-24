@@ -48,10 +48,9 @@ function Signup(props) {
         const auth = SignupValidator(profile);
 
 
-        if (auth.status)
-        {
-             setLoading(true);
-             axios.post(`${API_URL}/api/signup`, { profile }, {
+        if (auth.status) {
+            setLoading(true);
+            axios.post(`${API_URL}/api/signup`, { profile }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -62,22 +61,21 @@ function Signup(props) {
                     if (!res.data.errors) {
                         localStorage.setItem("accesstoken", res.data.accesstoken);
                         localStorage.setItem("username", res.data.username);
-                        localStorage.setItem("setuptime",new Date().getTime());
+                        localStorage.setItem("setuptime", new Date().getTime());
 
                         props.history.push('/dashboard');
                     }
-    
-                    else
-                        {
-                            
-                            console.log(res.data);
-                            
-                            setErros({
-                                title:'User already exists',
-                                 myclass:'alert alert-danger alert-dismissible fade show'
-                            })
-                        }
-                        
+
+                    else {
+
+                        console.log(res.data);
+
+                        setErros({
+                            title: 'User already exists',
+                            myclass: 'alert alert-danger alert-dismissible fade show'
+                        })
+                    }
+
                     setLoading(false);
                 })
                 .catch((err) => console.log(err));
@@ -91,26 +89,31 @@ function Signup(props) {
             })
 
         }
-        
 
-        
+
+
     }
     return (
         loading ? (<div style={{ marginTop: '20%' }}>
-        <div className="spinner-border" role="status">
+            <div className="spinner-border" role="status">
 
-        </div>
-    </div>) : (
-            <div>
-                <div className="container col-md-3 col-sm-8 my-5">
-                    {
-                        errors.title &&
-                        <div className={errors.myclass} role="alert">
-                            <strong>{errors.title}!</strong> {errors.text}.
+            </div>
+        </div>) : (
+                <div>
+                    <div className="container col-md-3 col-sm-8 my-5">
+                       
+                        <div class="card shadow-lg" style={{width:'25rem'}}>
+                            <div class="card-body">
+                                 {
+                            errors.title &&
+                            <div className={errors.myclass} role="alert">
+                                <strong>{errors.title}!</strong> {errors.text}.
                         </div>
 
-                    }
-                    <h3>Sign Up</h3>
+
+                        }
+                                <h5 class="card-title">Sign Up</h5>
+                                
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="mb-3">
                             <label className="form-label">First Name</label>
@@ -137,10 +140,13 @@ function Signup(props) {
                         </div>
                         <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
                     </form>
+                            </div>
+                        </div>
+                       
 
+                    </div>
                 </div>
-            </div>
-        )
+            )
     );
 }
 
