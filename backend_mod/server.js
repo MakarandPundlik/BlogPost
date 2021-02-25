@@ -9,10 +9,11 @@ const Router = require('./routes/userrouter');
 const app = express();
 
 //database connectivity
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('connected to the database successfully'))
+mongoose.connect(process.env.mongoURIProfile, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('connected to the profile database successfully'))
   .catch((err) => console.log(err));
 
+ 
 //cors middleware
 
 app.use(cors({
