@@ -19,8 +19,19 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+   blogArray:[
+       {
+        title:{
+            type:String,
+             required:true
+        },
+        data:{
+            type:String,
+            required:true
+        }
     }
-    
+   ]
 });
 
 const userModel = mongoose.model('user',userSchema);

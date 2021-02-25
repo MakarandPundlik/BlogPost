@@ -3,6 +3,7 @@ const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
 const userSchema = require('../models/user');
+const { addBlog } = require('../middlewares/addBlog');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -16,17 +17,9 @@ Router.use((req,res,next)=>{
     next();
 })
 
-Router.get("/",(req,res)=>{
-  userSchema.find()
-   .then((users)=>{
-       if(users)
-       {users.forEach(user=>{user.password=""});
-       res.status(200).json({users});}
-   })
-   .catch((err)=>{
-       console.log(err);
-   })
-});
+
+//blog req handler
+Router.post("/api/addBlog",addBlog);
 //register req hanlder
 Router.post("/api/signup",signup_post);
 

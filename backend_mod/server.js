@@ -11,8 +11,7 @@ const app = express();
 //database connectivity
 mongoose.connect(process.env.mongoURIProfile, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('connected to the profile database successfully'))
-  .catch((err) => console.log(err));
-
+  .catch((err) => console.log("Database error, cannot connect to mongodB..."));
  
 //cors middleware
 
