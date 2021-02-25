@@ -11,11 +11,13 @@ module.exports.addBlog=(req,res)=>{
     userSchema.findOneAndUpdate(
         {email},
         {$push:{blogArray:newblog}},
-        {upsert:true},
-        {useFindAndModify:false}
+        {upsert:true,useFindAndModify:false}
+        
         )
         .then(res=>console.log(res))
         .catch(err=>console.log(err));
-   
+        userSchema.findOneAndUpdate({email})
+        .then(res=>console.log(res))
+        .catch((err)=>console.log(err));
     return res.json({msg:"Blog added successfully"});
 }
