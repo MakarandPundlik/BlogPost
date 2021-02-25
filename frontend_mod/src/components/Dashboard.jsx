@@ -14,7 +14,8 @@ function Dashboard(props) {
   //blog errors
   const [errors,setErrors] = useState({
     msg:'',
-    status:false
+    status:false,
+    myclass:''
   })
   //user token authentication
   const [redirect, setRedirect] = useState(false);
@@ -76,17 +77,14 @@ const handleSubmit=(e)=>{
 
        setErrors({
          msg:auth.msg,
-         status:auth.status
-       })
-       if(errors.status)
-       {
-         console.log(blog);
-         setState({
-           title:'',
-           data:''
-         })
          
-       }
+         myclass:auth.myclass
+       })
+       
+       setState({
+         title:'',
+         data:''
+       })
 }
 
   // logout handler
@@ -117,18 +115,19 @@ const handleSubmit=(e)=>{
               <div className="modal-content">
                 <div className="modal-header"><h5 className="modal-title" >Add Blog</h5></div>
                 <div className="modal-body">
-                {
-                            errors.status &&
-                            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                
+                  <form onSubmit={(e)=>handleSubmit(e)}>
+
+                    <div className="mb-3">
+                    {
+                            errors.myclass &&
+                            <div className={errors.myclass} role="alert">
                                 <strong>{errors.msg}</strong> .
                         </div>
 
 
                         }
-                             
-                  <form onSubmit={(e)=>handleSubmit(e)}>
-
-                    <div className="mb-3">
+                            
                       <label className="form-label ">Blog Title</label>
                       <input type="text" className="form-control" id="title" onChange={(e)=>handleChange(e)} value={state.title}/>
 

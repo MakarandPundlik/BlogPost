@@ -88,8 +88,8 @@ function Login(props) {
 
             </div>
         </div>) : (
-                <div className="container col-md-3 col-sm-8 my-5">
-                    <div class="card shadow-lg" style={{width:'25rem'}}>
+                <div className="container my-5">
+                     <div style={{marginLeft:'30%'}}>                    <div class="card shadow-lg" style={{width:'25rem'}}>
                             <div class="card-body">
                                  {
                             errors.title &&
@@ -117,6 +117,8 @@ function Login(props) {
                     </div>
                     </div>
                 </div>
+                </div>
+
             )
     );
 }

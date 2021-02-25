@@ -100,8 +100,8 @@ function Signup(props) {
             </div>
         </div>) : (
                 <div>
-                    <div className="container col-md-3 col-sm-8 my-5">
-                       
+                    <div className="container my-5" >
+                       <div style={{marginLeft:'30%'}}>
                         <div class="card shadow-lg" style={{width:'25rem'}}>
                             <div class="card-body">
                                  {
@@ -142,7 +142,7 @@ function Signup(props) {
                     </form>
                             </div>
                         </div>
-                       
+                        </div>
 
                     </div>
                 </div>
