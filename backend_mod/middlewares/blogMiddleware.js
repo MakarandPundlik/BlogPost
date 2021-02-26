@@ -24,14 +24,24 @@ module.exports.addBlog=(req,res)=>{
         return res.json({msg:"blog added successfully",status:true});
     
 }
-module.exports.getBlogs=(req,res)=>{
-    userSchema.find({})
-    .then((res)=>{
-        console.log(res);
+module.exports.getmyBlogs=(req,res)=>{
+    let blogArray;
+    const email = req.body.email;
+    userSchema.findOne({email})
+    .then((user)=>{
+       if(!user.blogArray)
+       {
+           return res.json({msg:"No blogs found"});
+       }
+       else 
+       {
+           const blogArray = user.blogArray;
+           return res.json({msg:"Blogs found",blogArray});
+       }
     })
     .catch((err)=>{
         console.log(err);
     })
 
-    return res.json({msg:"All blogs are sent"});
+   
 }
