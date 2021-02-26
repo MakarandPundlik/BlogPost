@@ -42,7 +42,7 @@ function Login(props) {
         //set loading to true
         if (auth.status) {
             setLoading(true);
-            axios.post(`${API_URL}/api/login`, { profile }, {
+            axios.post(`${API_URL}/api/login`, { profile },{ credentials: 'include'}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',

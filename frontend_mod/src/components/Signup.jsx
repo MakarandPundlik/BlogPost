@@ -50,7 +50,7 @@ function Signup(props) {
 
         if (auth.status) {
             setLoading(true);
-            axios.post(`${API_URL}/api/signup`, { profile }, {
+            axios.post(`${API_URL}/api/signup`, { profile }, { credentials: 'include'},{
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',

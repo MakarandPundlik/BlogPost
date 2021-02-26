@@ -2,11 +2,10 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const isAuthenticated = (req,res)=>{
-    const accesstoken = req.cookie;
    
+   const accesstoken = req.cookies.accesstoken;
     if(!accesstoken)
    {
-    
     res.json({msg:"No token provided"});
    }
    else
