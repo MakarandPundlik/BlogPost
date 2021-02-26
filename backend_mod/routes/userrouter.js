@@ -17,6 +17,7 @@ Router.use((req,res,next)=>{
     next();
 })
 
+//get my blogs
 Router.post("/api/getmyblogs",getmyBlogs);
 //blog req handler
 Router.post("/api/addBlog",addBlog);
@@ -27,9 +28,7 @@ Router.post("/api/signup",signup_post);
 Router.post("/api/login",login_post);
 
 //user auth req handler
-Router.post("/api/authenticate",isAuthenticated,(req,res)=>{
-    res.json({msg:"user has been authenticated",isAuthenticated:true});
-});
+Router.post("/api/authenticate",isAuthenticated);
 
 //logout request
 Router.get("/api/logout",logout_get,(req,res)=>{

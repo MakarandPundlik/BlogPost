@@ -53,6 +53,7 @@ function Login(props) {
                     if (!res.data.errors) {
                         localStorage.setItem("accesstoken", res.data.accesstoken);
                         localStorage.setItem("username", res.data.username);
+                        
                         localStorage.setItem("setuptime",new Date().getTime());
                         props.history.push('/dashboard');
                         setLoading(true);
@@ -89,8 +90,9 @@ function Login(props) {
             </div>
         </div>) : (
                 <div className="container my-5">
-                     <div style={{marginLeft:'30%'}}>                    <div class="card shadow-lg" style={{width:'25rem'}}>
-                            <div class="card-body">
+                     <div style={{marginLeft:'30%'}}>                   
+                      <div className="card shadow-lg" style={{width:'25rem'}}>
+                            <div className="card-body">
                                  {
                             errors.title &&
                             <div className={errors.myclass} role="alert">
@@ -99,7 +101,7 @@ function Login(props) {
 
 
                         }
-                                <h5 class="card-title">Log In</h5>
+                                <h5 className="card-title">Log In</h5>
                     <form>
 
                         <div className="mb-3">

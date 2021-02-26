@@ -102,8 +102,8 @@ function Signup(props) {
                 <div>
                     <div className="container my-5" >
                        <div style={{marginLeft:'30%'}}>
-                        <div class="card shadow-lg" style={{width:'25rem'}}>
-                            <div class="card-body">
+                        <div className="card shadow-lg" style={{width:'25rem'}}>
+                            <div className="card-body">
                                  {
                             errors.title &&
                             <div className={errors.myclass} role="alert">
@@ -112,7 +112,7 @@ function Signup(props) {
 
 
                         }
-                                <h5 class="card-title">Sign Up</h5>
+                                <h5 className="card-title">Sign Up</h5>
                                 
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="mb-3">

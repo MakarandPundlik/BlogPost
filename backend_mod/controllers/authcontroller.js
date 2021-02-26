@@ -51,7 +51,8 @@ module.exports.signup_post = (req, res) => {
                                 //create accesstoken  for user
                                 const accesstoken = createAccessToken(newUser);
 
-                                return res.json({ msg: "user registered successfully", username: newUser.firstname, accesstoken });
+                                res.cookie("accesstoken",accesstoken,{httpOnly:true,maxAge:3600000});
+                                return res.json({ msg: "user logged in successfully"});
                             }
                         })
                     }
@@ -89,8 +90,8 @@ module.exports.login_post = (req, res) => {
 
                         //create accesstoken  for user
                         const accesstoken = createAccessToken(user);
-
-                        return res.json({ msg: "user logged in successfully", username: user.firstname, accesstoken });
+                        res.cookie("accesstoken",accesstoken,{httpOnly:true,maxAge:3600000});
+                        return res.json({ msg: "user logged in successfully"});
                     }
                 })
             }

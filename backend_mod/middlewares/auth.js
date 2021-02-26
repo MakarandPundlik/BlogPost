@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const isAuthenticated = (req,res,next)=>{
-    const accesstoken = req.body.accesstoken;
+const isAuthenticated = (req,res)=>{
+    const accesstoken = req.cookie;
    
     if(!accesstoken)
    {
@@ -18,7 +18,10 @@ const isAuthenticated = (req,res,next)=>{
             res.json({msg:"Invalid token"});
         }
         else
-         next();
+        {
+            res.cookie("isAuthenticated",true,{httpOnly:true,maxAge:3600000});
+            return res.json({msg:"user has been authenticated"})
+        }
         
     });
    }

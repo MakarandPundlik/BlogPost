@@ -32,7 +32,7 @@ function Dashboard(props) {
       setRedirect(true);
     }
 
-
+    //token verification
     await axios.post(`${API_URL}/api/authenticate`, {
       accesstoken: localStorage.getItem("accesstoken")
     },
@@ -151,22 +151,7 @@ const handleSubmit=(e)=>{
         <div className="row  ">
 
           <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-          <Cardschema />
-
-
+         
         </div>
       </div>
     )
