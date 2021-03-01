@@ -22,12 +22,7 @@ function Dashboard(props) {
 
   
   useEffect(async () => {
-    if (new Date().getTime() - localStorage.getItem("setuptime") >= 60 * 60 * 1000) {
-      localStorage.clear();
-      setRedirect(true);
-    }
-
-    
+   
 
     //token verification
     await axios.post(`${API_URL}/api/authenticate`, {

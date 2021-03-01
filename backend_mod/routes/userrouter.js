@@ -8,7 +8,7 @@ const Router = express.Router();
 
 Router.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin","*");
-    res.header('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
+    res.header('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version,Set-Cookie, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
    res.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS"); 
    res.header("Content-Type","application/json");
    res.header("Access-Control-Allow-Credentials", true);

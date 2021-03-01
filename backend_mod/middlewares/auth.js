@@ -18,7 +18,7 @@ const isAuthenticated = (req,res)=>{
         }
         else
         {
-            res.cookie("isAuthenticated",true,{httpOnly:true,maxAge:3600000});
+           
             return res.json({msg:"user has been authenticated"})
         }
         
