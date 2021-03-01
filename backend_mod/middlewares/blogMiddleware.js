@@ -2,21 +2,25 @@ const userSchema = require('../models/user');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const getuserEmail=(accesstoken)=>{
+    jwt.verify(accesstoken,process.env.ACCESS_TOKEN_SECRETE,(err,decoded)=>{
+        return decoded.email;
+    })
+}
 
 module.exports.addBlog = (req, res) => {
     const { title, data } = req.body.blog;
-    const  accesstoken  = req.body.accesstoken;
+    
 
     //get the user's email from accesstoken provided
-    jwt.verify(accesstoken, process.env.ACCESS_TOKEN_SECRETE, (err, decoded) => {
+   
         
-        
-            console.log(title, data);
+            
             const newblog = {
                 title,
                 data
             }
-           const email=decoded.email;
+           const email=getuserEmail(req.body.accesstoken);
             userSchema.findOneAndUpdate(
                 { email },
                 { $push: { blogArray: newblog } },
@@ -32,13 +36,13 @@ module.exports.addBlog = (req, res) => {
 
 
         
-    })
+    
  
 
 }
 module.exports.getmyBlogs = (req, res) => {
     let blogArray;
-    const email = req.body.email;
+    const email = getuserEmail(req.body.accesstoken);
     userSchema.findOne({ email })
         .then((user) => {
             if (!user.blogArray) {
