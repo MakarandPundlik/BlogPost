@@ -22,7 +22,8 @@ function Dashboard(props) {
 
   
   useEffect(async () => {
-   
+   if(!localStorage.getItem("accesstoken"))
+    setRedirect(true);
 
     //token verification
     await axios.post(`${API_URL}/api/authenticate`, {
@@ -36,13 +37,13 @@ function Dashboard(props) {
         }
       })
       .then((res) => {
+      
         if (!res.data.isAuthenticated) {
-          localStorage.removeItem("accesstoken");
-          localStorage.removeItem("username");
+          localStorage.clear();
         }
       })
       .catch((err) => {
-        localStorage.removeItem("accesstoken");
+        localStorage.clear();
         console.log(err)
       });
 

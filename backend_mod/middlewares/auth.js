@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const isAuthenticated = (req,res)=>{
    
-   const accesstoken = req.cookies.accesstoken;
+   const accesstoken = req.body.accesstoken;
     if(!accesstoken)
    {
     res.json({msg:"No token provided"});
@@ -19,7 +19,7 @@ const isAuthenticated = (req,res)=>{
         else
         {
            
-            return res.json({msg:"user has been authenticated"})
+            return res.json({msg:"user has been authenticated",isAuthenticated:true})
         }
         
     });
