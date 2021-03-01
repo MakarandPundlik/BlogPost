@@ -42,7 +42,7 @@ function Login(props) {
         //set loading to true
         if (auth.status) {
             setLoading(true);
-            axios.post(`${API_URL}/api/login`, { profile },{ credentials: 'include'}, {
+            axios.post(`${API_URL}/api/login`, { profile }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -51,10 +51,9 @@ function Login(props) {
             })
                 .then((res) => {
                     if (!res.data.errors) {
-                        localStorage.setItem("accesstoken", res.data.accesstoken);
-                        localStorage.setItem("username", res.data.username);
+                   
                         
-                        localStorage.setItem("setuptime",new Date().getTime());
+                        
                         props.history.push('/dashboard');
                         setLoading(true);
                     }

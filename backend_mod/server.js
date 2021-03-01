@@ -16,10 +16,8 @@ mongoose.connect(process.env.mongoURIProfile, { useNewUrlParser: true, useUnifie
 //cors middleware
 
 app.use(cors({
-  origin:["http://localhost:3000","http://192.168.0.86:3000"],
-  optionsSuccessStatus:200,
-  credentials:true,
-  allowHeaders:["Content-Type"]
+ origin:true,
+  credentials:true
 }));
 
 //cookieparser middleware

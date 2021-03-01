@@ -27,10 +27,7 @@ function Dashboard(props) {
       setRedirect(true);
     }
 
-    if (localStorage.getItem("accesstoken") == null || localStorage.getItem("username") == null || localStorage.getItem("setuptime") == null) {
-      localStorage.clear();
-      setRedirect(true);
-    }
+    
 
     //token verification
     await axios.post(`${API_URL}/api/authenticate`, {
