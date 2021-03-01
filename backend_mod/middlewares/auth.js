@@ -18,7 +18,7 @@ const isAuthenticated = (req,res)=>{
         }
         else
         {
-           
+           console.log(decoded);
             return res.json({msg:"user has been authenticated",isAuthenticated:true})
         }
         

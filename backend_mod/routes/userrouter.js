@@ -18,7 +18,7 @@ Router.use((req,res,next)=>{
 //get my blogs
 Router.post("/api/getmyblogs",getmyBlogs);
 //blog req handler
-Router.post("/api/addBlog",addBlog);
+Router.post("/api/addblog",addBlog);
 //register req hanlder
 Router.post("/api/signup",signup_post);
 

@@ -7,23 +7,23 @@ const API_URL = 'http://localhost:2020';
 function Dashboard(props) {
 
   //for blog
-  const [state,setState] = useState({
-    title:'',
-    data:''
+  const [state, setState] = useState({
+    title: '',
+    data: ''
   });
   //blog errors
-  const [errors,setErrors] = useState({
-    msg:'',
-    status:false,
-    myclass:''
+  const [errors, setErrors] = useState({
+    msg: '',
+    status: false,
+    myclass: ''
   })
   //user token authentication
   const [redirect, setRedirect] = useState(false);
 
-  
+
   useEffect(async () => {
-   if(!localStorage.getItem("accesstoken"))
-    setRedirect(true);
+    if (!localStorage.getItem("accesstoken"))
+      setRedirect(true);
 
     //token verification
     await axios.post(`${API_URL}/api/authenticate`, {
@@ -37,9 +37,9 @@ function Dashboard(props) {
         }
       })
       .then((res) => {
-      
         if (!res.data.isAuthenticated) {
           localStorage.clear();
+          setRedirect(true);
         }
       })
       .catch((err) => {
@@ -49,36 +49,63 @@ function Dashboard(props) {
 
   }, [redirect]);
 
-  
 
-  
+
+
 
   //for fields handler
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     e.preventDefault();
-    setState({...state,[e.target.id]:e.target.value});
+    setState({ ...state, [e.target.id]: e.target.value });
   }
 
-//blog submission handler
-const handleSubmit=(e)=>{
-  e.preventDefault();
-  let blog={};
-       blog.title = state.title;
-       blog.data = state.data;
+  //blog submission handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let blog = {};
+    blog.title = state.title;
+    blog.data = state.data;
 
-       const auth = Blogvalidator(blog);  
+    const auth = Blogvalidator(blog);
+    
+    setErrors({
+      msg: auth.msg,
+      myclass: auth.myclass
+    })
 
-       setErrors({
-         msg:auth.msg,
-         
-         myclass:auth.myclass
-       })
-       
-       setState({
-         title:'',
-         data:''
-       })
-}
+
+    if (auth.flag) {
+      //add blog to the database
+      await axios.post(`${API_URL}/api/addblog`, {
+        accesstoken: localStorage.getItem("accesstoken"),
+        blog: {
+          title: state.title,
+          data: state.data
+        }
+      },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      }
+      //set back the original state
+      setState({
+        title: '',
+        data: ''
+      })
+    
+     
+  }
+
 
   // logout handler
   const handleClick = (e) => {
@@ -88,7 +115,7 @@ const handleSubmit=(e)=>{
     props.history.push("/login");
   }
   return (
-    
+
     redirect ? (<Redirect to="/login"></Redirect>) : (
       <div>
         {/* Dropdown user menu */}
@@ -103,53 +130,53 @@ const handleSubmit=(e)=>{
           </ul>
 
           {/* Blog form*/}
-          <div className="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true">
+          <div className="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header"><h5 className="modal-title" >Add Blog</h5></div>
                 <div className="modal-body">
-                
-                  <form onSubmit={(e)=>handleSubmit(e)}>
+
+                  <form onSubmit={(e) => handleSubmit(e)}>
 
                     <div className="mb-3">
-                    {
-                            errors.myclass &&
-                            <div className={errors.myclass} role="alert">
-                                <strong>{errors.msg}</strong> .
+                      {
+                        errors.myclass &&
+                        <div className={errors.myclass} role="alert">
+                          <strong>{errors.msg}</strong> .
                         </div>
 
 
-                        }
-                            
+                      }
+
                       <label className="form-label ">Blog Title</label>
-                      <input type="text" className="form-control" id="title" onChange={(e)=>handleChange(e)} value={state.title}/>
+                      <input type="text" className="form-control" id="title" onChange={(e) => handleChange(e)}  value={state.title}/>
 
                     </div>
                     <div className="mb-3">
                       <label className="form-label">Blog</label>
-                      <textarea type="text" rows="5" className="form-control" id="data" onChange={(e)=>handleChange(e)} value={state.data}/>
+                      <textarea type="text" rows="5" className="form-control" id="data" onChange={(e) => handleChange(e)}  value={state.data}/>
                     </div>
                   </form>
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-dark" onClick={(e)=>handleSubmit(e)}>Submit</button>
+                  <button type="button" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-      {/* Call for the total blogs */}
+        {/* Call for the total blogs */}
         <div className="row  ">
 
           <Cardschema />
-         
+
         </div>
       </div>
     )
   )
-  
+
 }
 
 export default Dashboard;
