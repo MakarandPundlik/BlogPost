@@ -127,7 +127,7 @@ function Dashboard(props) {
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
             <li><div className="dropdown-item" data-bs-toggle="modal" data-bs-target="#Backdrop"> Add Blog</div></li>
-            <li><div className="dropdown-item" onClick={()=>props.history.push("/myblogs")}> My Blogs</div></li>
+            
           </ul>
 
           {/* Blog form*/}
@@ -169,6 +169,7 @@ function Dashboard(props) {
         </div>
 
         {/* Call for the total blogs */}
+        <h3 className="text-secondary m-5">Edit your blogs here</h3>
         <div className="row  ">
 
           <Cardschema />

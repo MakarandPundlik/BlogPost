@@ -7,7 +7,7 @@ import Signup from './components/Signup';
 import Homepage from './components/Homepage';
 
 import Dashboard from './components/Dashboard';
-import Myblogs from './components/Myblogs';
+
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={Signup}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
-          <Route exact path="/myblogs" component={Myblogs}></Route>
+        
           <Redirect to="/login"></Redirect>
         </Switch>
       </BrowserRouter>

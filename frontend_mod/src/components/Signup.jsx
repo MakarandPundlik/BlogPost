@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Loading from './Loading';
 import { SignupValidator } from '../services/Validator';
 import axios from 'axios';
 
@@ -50,7 +50,7 @@ function Signup(props) {
 
         if (auth.status) {
             setLoading(true);
-            axios.post(`${API_URL}/api/signup`, { profile }, { credentials: 'include'},{
+            axios.post(`${API_URL}/api/signup`, { profile }, { credentials: 'include' }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -59,8 +59,8 @@ function Signup(props) {
             })
                 .then((res) => {
                     if (!res.data.errors) {
-                        localStorage.setItem("username",res.data.username);
-                        localStorage.setItem("accesstoken",res.data.accesstoken); 
+                        localStorage.setItem("username", res.data.username);
+                        localStorage.setItem("accesstoken", res.data.accesstoken);
                         props.history.push('/dashboard');
                     }
 
@@ -92,59 +92,55 @@ function Signup(props) {
 
     }
     return (
-        loading ? (<div style={{ marginTop: '20%' }}>
-            <div className="spinner-border" role="status">
-
-            </div>
-        </div>) : (
-                <div>
-                    <div className="container my-5" >
-                       <div style={{marginLeft:'30%'}}>
-                        <div className="card shadow-lg" style={{width:'25rem'}}>
+        loading ? (<Loading />) : (
+            <div>
+                <div className="container my-5" >
+                    <div style={{ marginLeft: '30%' }}>
+                        <div className="card shadow-lg" style={{ width: '25rem' }}>
                             <div className="card-body">
-                                 {
-                            errors.title &&
-                            <div className={errors.myclass} role="alert">
-                                <strong>{errors.title}!</strong> {errors.text}.
+                                {
+                                    errors.title &&
+                                    <div className={errors.myclass} role="alert">
+                                        <strong>{errors.title}!</strong> {errors.text}.
                         </div>
 
 
-                        }
+                                }
                                 <h5 className="card-title">Sign Up</h5>
-                                
-                    <form onSubmit={(e) => handleSubmit(e)}>
-                        <div className="mb-3">
-                            <label className="form-label">First Name</label>
-                            <input type="text" className="form-control" id="firstname" value={state.firstname} onChange={(e) => handleChange(e)} />
 
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Last Name</label>
-                            <input type="text" className="form-control" id="lastname" value={state.lastname} onChange={(e) => handleChange(e)} />
+                                <form onSubmit={(e) => handleSubmit(e)}>
+                                    <div className="mb-3">
+                                        <label className="form-label">First Name</label>
+                                        <input type="text" className="form-control" id="firstname" value={state.firstname} onChange={(e) => handleChange(e)} />
 
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Last Name</label>
+                                        <input type="text" className="form-control" id="lastname" value={state.lastname} onChange={(e) => handleChange(e)} />
 
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Confirm Password</label>
-                            <input type="password" className="form-control" id="conpassword" value={state.conpassword} onChange={(e) => handleChange(e)} />
-                        </div>
-                        <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
-                    </form>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Email address</label>
+                                        <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Password</label>
+                                        <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Confirm Password</label>
+                                        <input type="password" className="form-control" id="conpassword" value={state.conpassword} onChange={(e) => handleChange(e)} />
+                                    </div>
+                                    <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                                </form>
                             </div>
                         </div>
-                        </div>
-
                     </div>
+
                 </div>
-            )
+            </div>
+        )
     );
 }
 

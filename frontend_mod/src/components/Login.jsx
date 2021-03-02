@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LoginValidator } from '../services/Validator';
 import { Redirect } from 'react-router-dom';
-import Loading from '../images/Loading.gif';
+import Loading from './Loading';
 const API_URL = 'http://localhost:2020';
 
 function Login(props) {
@@ -51,17 +51,17 @@ function Login(props) {
             })
                 .then((res) => {
                     if (!res.data.errors) {
-                   
-                        localStorage.setItem("username",res.data.username);
-                        localStorage.setItem("accesstoken",res.data.accesstoken); 
+
+                        localStorage.setItem("username", res.data.username);
+                        localStorage.setItem("accesstoken", res.data.accesstoken);
                         props.history.push('/dashboard');
                         setLoading(true);
                     }
                     else {
-                        
+
                         setErros({
-                            title:'PLease check your credentials',
-                            myclass:'alert alert-danger alert-dismissible fade show'
+                            title: 'PLease check your credentials',
+                            myclass: 'alert alert-danger alert-dismissible fade show'
                         })
                         setLoading(false);
                     }
@@ -79,48 +79,44 @@ function Login(props) {
         }
 
 
-        
+
     }
     //
     return (
-        loading ? (<div style={{ marginTop: '20%' }}>
-            <div className="spinner-border" role="status">
+        loading ? (<Loading />) : (
+            <div className="container my-5">
+                <div style={{ marginLeft: '30%' }}>
+                    <div className="card shadow-lg" style={{ width: '25rem' }}>
+                        <div className="card-body">
+                            {
+                                errors.title &&
+                                <div className={errors.myclass} role="alert">
+                                    <strong>{errors.title}!</strong> {errors.text}.
+                        </div>
 
+
+                            }
+                            <h5 className="card-title">Log In</h5>
+                            <form>
+
+                                <div className="mb-3">
+                                    <label className="form-label">Email address</label>
+                                    <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
+
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Password</label>
+                                    <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
+                                </div>
+
+                                <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>) : (
-                <div className="container my-5">
-                     <div style={{marginLeft:'30%'}}>                   
-                      <div className="card shadow-lg" style={{width:'25rem'}}>
-                            <div className="card-body">
-                                 {
-                            errors.title &&
-                            <div className={errors.myclass} role="alert">
-                                <strong>{errors.title}!</strong> {errors.text}.
-                        </div>
 
-
-                        }
-                                <h5 className="card-title">Log In</h5>
-                    <form>
-
-                        <div className="mb-3">
-                            <label className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="email" value={state.email} onChange={(e) => handleChange(e)} />
-
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" value={state.password} onChange={(e) => handleChange(e)} />
-                        </div>
-
-                        <button type="submit" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
-                    </form>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
-            )
+        )
     );
 }
 
