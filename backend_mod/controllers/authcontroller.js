@@ -52,7 +52,7 @@ module.exports.signup_post = (req, res) => {
                                 const accesstoken = createAccessToken(newUser);
 
                                
-                                return res.json({ msg: "user signed in successfully",accesstoken:accesstoken,username:user.firstname});
+                                return res.json({ msg: "user signed in successfully",accesstoken:accesstoken,username:newUser.firstname});
                             }
                         })
                     }
