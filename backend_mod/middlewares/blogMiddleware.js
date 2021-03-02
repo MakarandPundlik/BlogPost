@@ -30,9 +30,11 @@ module.exports.addBlog = (req, res) => {
         });
 }
 
-module.exports.getBlogs=()=>{
-    userSchema.find({blogArray:{$exists:true,$ne:null}})
-    .then((res)=>console.log(res))
+module.exports.getBlogs=(req,res)=>{
+    userSchema.find({blogArray:{$ne:null}},{_id:0,blogArray:1,firstname:1,lastname:1})
+    .then((result)=>{
+        return res.json({size:result.length,result});
+    })
     .catch(err=>console.log(err));
 }
 
