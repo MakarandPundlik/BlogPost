@@ -1,11 +1,11 @@
 import React from 'react';
-import blog from '../images/blog.jpg';
+import ImageArray from './ImagesData';
 function Cardschema(props) {
   return (
 
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6">
       <div className="card m-3 shadow-lg">
-        <img src={blog} className="card-img-top" alt="..." />
+        <img src={ImageArray[Math.floor(Math.random()*10)]} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">Card title</h5>
           <button type="button" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

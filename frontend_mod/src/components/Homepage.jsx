@@ -16,8 +16,13 @@ function Homepage(props) {
     }
     })
     .then((res)=>{
-      console.log(res.data.result);
-      setBlogs(res.data.result);
+      res.data.result.forEach(element => {
+        element.blogArray.forEach((b)=>{
+         // console.log(b);
+          setBlogs(b);
+        })
+      });
+      
     })
     .catch((err)=>{
       console.log(err)
@@ -26,7 +31,7 @@ function Homepage(props) {
   }, []);
 
   useEffect(()=>{
- // console.log(blogs)
+  console.log(blogs)
   },[blogs]);
   return (
     
@@ -34,14 +39,16 @@ function Homepage(props) {
       <h3 className="text-secondary m-5">Here are some blogs from BlogPost...</h3>
       <div className="row">
       {
-        blogs.blogArray &&
-        blogs.blogArray.map((blog)=>{
+        
+        blogs &&
+        blogs.map((blog)=>{
           return (
             
-            <Cardschema/>
-            
+           <Cardschema key={Math.random()}/>
           )
+          
         })
+        
       }
       </div>
     </div>
