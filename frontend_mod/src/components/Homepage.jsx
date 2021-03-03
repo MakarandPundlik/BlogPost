@@ -35,7 +35,7 @@ function Homepage(props) {
 
   useEffect(() => {
     setLoading(false);
-    //console.log(blogs)
+    console.log(blogs)
   }, [blogs]);
   return (
     loading ? <Loading /> :
@@ -49,8 +49,10 @@ function Homepage(props) {
               blogs.map((blog) => {
                 return (
 
-                  <Cardschema key={Math.random()}
-                    blog={blog}
+                  <Cardschema key={blog._id}
+                    title={blog.title}
+                    data={blog.data}
+                    author={blog.author}
                   />
                 )
 
