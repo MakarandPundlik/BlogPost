@@ -9,11 +9,12 @@ const getuserEmail = (accesstoken) => {
 }
 
 module.exports.addBlog = (req, res) => {
-    const { title, data } = req.body.blog;
+    const { title, data,author } = req.body.blog;
     
     const newblog = {
         title,
-        data
+        data,
+        author
     }
     const email = getuserEmail(req.body.accesstoken);
     userSchema.findOneAndUpdate(
@@ -31,7 +32,7 @@ module.exports.addBlog = (req, res) => {
 }
 
 module.exports.getBlogs=(req,res)=>{
-    userSchema.find({blogArray:{$ne:null}},{_id:0,blogArray:1,firstname:1,lastname:1})
+    userSchema.find({blogArray:{$ne:null}},{_id:0,blogArray:1})
     .then((result)=>{
         return res.json({size:result.length,result});
     })

@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
         data:{
             type:String,
             required:true
+        },
+        author:{
+            type:String,
+            required:true
         }
     }
    ]

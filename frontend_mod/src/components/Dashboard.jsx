@@ -80,7 +80,8 @@ function Dashboard(props) {
         accesstoken: localStorage.getItem("accesstoken"),
         blog: {
           title: state.title,
-          data: state.data
+          data: state.data,
+          author:localStorage.getItem("username")
         }
       },
         {
@@ -169,10 +170,8 @@ function Dashboard(props) {
         </div>
 
         {/* Call for the total blogs */}
-        <h3 className="text-secondary m-5">Edit your blogs here</h3>
+        <h3 className="text-secondary m-5">Welcome to the dahboard</h3>
         <div className="row  ">
-
-          <Cardschema />
 
         </div>
       </div>
