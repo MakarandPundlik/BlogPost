@@ -7,7 +7,18 @@ const getuserEmail = (accesstoken) => {
 
     })
 }
-
+module.exports.getMyblogs=(req,res)=>{
+    const email = getuserEmail(req.body.accesstoken);
+    userSchema.findOne({email})
+    .then((user)=>{
+        console.log(user.blogArray);
+        const blogArray = user.blogArray;
+        res.json({blogArray});
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
 module.exports.addBlog = (req, res) => {
     const { title, data,author } = req.body.blog;
     

@@ -3,7 +3,7 @@ const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
 const userSchema = require('../models/user');
-const { addBlog,getBlogs } = require('../middlewares/blogMiddleware');
+const { addBlog,getBlogs,getMyblogs } = require('../middlewares/blogMiddleware');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -15,6 +15,7 @@ Router.use((req,res,next)=>{
     next();
 })
 
+Router.post("/api/getmyblogs",getMyblogs);
 Router.get("/api/getblogs",getBlogs);
 //blog req handler
 Router.post("/api/addblog",addBlog);
