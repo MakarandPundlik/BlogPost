@@ -52,7 +52,7 @@ function Login(props) {
                 .then((res) => {
                     if (!res.data.errors) {
 
-                        localStorage.setItem("username", res.data.username);
+                       
                         localStorage.setItem("accesstoken", res.data.accesstoken);
                         props.history.push('/dashboard');
                         setLoading(true);

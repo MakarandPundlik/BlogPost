@@ -25,8 +25,6 @@ Router.post("/api/signup",signup_post);
 //login req handler
 Router.post("/api/login",login_post);
 
-//user auth req handler
-Router.post("/api/authenticate",isAuthenticated);
 
 //logout request
 Router.get("/api/logout",logout_get,(req,res)=>{

@@ -12,11 +12,15 @@ const getuserEmail = (accesstoken) => {
 }
 module.exports.getMyblogs=(req,res)=>{
     const email = getuserEmail(req.body.accesstoken);
+
+    if(!email)
+    return res.json({msg:"Invalid token"});
+
     userSchema.findOne({email})
     .then((user)=>{
        // console.log(user.blogArray);
         const blogArray = user.blogArray;
-       return res.json({blogArray});
+       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname});
     })
     .catch((err)=>{
         console.log(err);
@@ -31,6 +35,10 @@ module.exports.addBlog = (req, res) => {
         author
     }
     const email = getuserEmail(req.body.accesstoken);
+
+    if(!email)
+    return res.json({msg:"Invalid token"});
+
     userSchema.findOneAndUpdate(
         { email },
         { $push: { blogArray: newblog } },
@@ -38,7 +46,7 @@ module.exports.addBlog = (req, res) => {
     )
         .then(user => {
 
-            return res.json({ msg: "blog added successfully", status: true });
+            return res.json({ msg: "blog added successfully", isAuthenticated: true });
         })
         .catch(err => {
             console.log(err);

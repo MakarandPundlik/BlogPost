@@ -12,7 +12,7 @@ const createAccessToken = (user) =>{
     //create token
     const AccessToken = jwt.sign(payload,process.env.ACCESS_TOKEN_SECRETE,{
         algorithm:"HS256",
-        expiresIn:"1h"
+        expiresIn:"24h"
     });
     return AccessToken;
 }
