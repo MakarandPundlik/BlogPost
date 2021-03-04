@@ -138,9 +138,9 @@ function Dashboard(props) {
       loading ? <Loading /> :
         <div>
           {/* Dropdown user menu */}
-          <div className="dropdown" style={{ margin: '3rem', textAlign: 'right' }}>
+          <div className="dropdown" style={{ margin: '3rem', textAlign: 'left' }}>
             <button className="btn btn-dark dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              {user.username.charAt(0).toLocaleUpperCase()}
+            <ion-icon name="person-circle-outline" size="large" ></ion-icon>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
@@ -187,14 +187,7 @@ function Dashboard(props) {
           </div>
 
           {/* Call for the total blogs */}
-          <div class="card bg-dark" style={{maxWidth:'100%',margin:'5rem'}}>
-            <div class="card-body text-white">
-              <h3 class="card-title">{user.username.toLocaleUpperCase()}</h3>
-              
-              <p class="card-text">You have written total {user.total} blogs.</p>
-              
-            </div>
-          </div>
+         
           <div className="row ">
             {
               blogs.map((blog) => {

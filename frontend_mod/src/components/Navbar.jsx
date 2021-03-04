@@ -10,9 +10,14 @@ function Navbar(props) {
   
 
     const [theme,setTheme] = useState(light);
-
+    const [flag,setFlag] = useState(false);
     
-
+    useEffect(()=>{
+      if(localStorage.getItem("accesstoken"))
+        setFlag(true);
+        else
+        setFlag(false);
+    },[flag])
     return (
         <nav className={theme}>
   <div className="container-fluid navbar-sticky">
@@ -35,8 +40,12 @@ function Navbar(props) {
        <li>
        <NavLink className="nav-link active text-secondary" aria-current="page" to="/dashboard">Dashboard</NavLink>
        </li>
-       
-      </ul>
+       {
+        flag &&
+         <li style={{marginLeft:'1rem',marginTop:'0.5rem'}}><ion-icon name="person-circle-outline" size="large"></ion-icon></li>
+      
+       }
+       </ul>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-outline-success" type="submit">Search</button>
