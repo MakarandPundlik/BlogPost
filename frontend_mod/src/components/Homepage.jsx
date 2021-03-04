@@ -35,7 +35,7 @@ function Homepage(props) {
 
   useEffect(() => {
     setLoading(false);
-    console.log(blogs)
+    //console.log(blogs)
   }, [blogs]);
   return (
     loading ? <Loading /> :

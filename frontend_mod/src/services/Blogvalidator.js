@@ -8,7 +8,7 @@ const Blogvalidator = (blog) =>{
         myclass='alert alert-danger fade show';
     }
     else {
-        msg='Hola! all fields seems to be okay.'
+        msg='Hola! Your blog has been added successfully.'
         myclass='alert alert-success fade show';
         flag=true;
     }

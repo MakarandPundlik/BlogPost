@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import Cardschema from './Cardschema';
 import Blogvalidator from '../services/Blogvalidator';
+import Loading from './Loading';
 const API_URL = 'http://localhost:2020';
 function Dashboard(props) {
 
@@ -20,6 +21,11 @@ function Dashboard(props) {
   //user token authentication
   const [redirect, setRedirect] = useState(false);
 
+  //user's blogs
+  const [blogs,setBlogs] = useState([]);
+
+  //loading spinner
+  const [loading,setLoading] = useState(true);
 
   useEffect(async () => {
     if (!localStorage.getItem("accesstoken"))
@@ -47,10 +53,31 @@ function Dashboard(props) {
         console.log(err)
       });
 
+      axios.post(`${API_URL}/api/getmyblogs`,{accesstoken:localStorage.getItem("accesstoken")},
+      {
+        
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
+      .then((res)=>{
+        
+       // console.log(res);
+       
+        setBlogs([...blogs,res.data.blogArray]);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
   }, [redirect]);
 
 
-
+  useEffect(()=>{
+    setLoading(false);
+    console.log(blogs);
+  },[blogs]);
 
 
   //for fields handler
@@ -118,6 +145,7 @@ function Dashboard(props) {
   return (
 
     redirect ? (<Redirect to="/login"></Redirect>) : (
+      loading?<Loading/>:
       <div>
         {/* Dropdown user menu */}
         <div className="dropdown" style={{ margin: '3rem', textAlign: 'right' }}>
@@ -170,9 +198,19 @@ function Dashboard(props) {
         </div>
 
         {/* Call for the total blogs */}
-        <h3 className="text-secondary m-5">Welcome to the dahboard</h3>
-        <div className="row  ">
-
+        <h3 className="text-secondary m-5">Welcome to the dahboard {localStorage.getItem("username").toLocaleUpperCase()}</h3>
+        <div className="row ">
+                      {
+                        blogs.map((blog)=>{
+                          return(
+                            <Cardschema key={blog._id}
+                            title={blog.title}
+                            data={blog.data}
+                            author={blog.author}
+                          />
+                          )
+                        })
+                      }
         </div>
       </div>
     )
