@@ -66,7 +66,9 @@ function Dashboard(props) {
         
        // console.log(res);
        
-        setBlogs([...blogs,res.data.blogArray]);
+       let Blogs=res.data.blogArray;
+       //console.log(res.data.blogArray);
+       setBlogs(Blogs);
       })
       .catch((err)=>{
         console.log(err);
@@ -76,7 +78,7 @@ function Dashboard(props) {
 
   useEffect(()=>{
     setLoading(false);
-    console.log(blogs);
+    //console.log(blogs);
   },[blogs]);
 
 

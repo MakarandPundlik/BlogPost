@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -21,7 +22,7 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={Signup}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
-          
+         
           <Redirect to="/"></Redirect>
         </Switch>
       </BrowserRouter>
