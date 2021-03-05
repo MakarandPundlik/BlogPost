@@ -98,7 +98,7 @@ function Dashboard(props) {
         blog: {
           title: state.title,
           data: state.data,
-          author: localStorage.getItem("username")
+          author: user.username
         }
       },
         {

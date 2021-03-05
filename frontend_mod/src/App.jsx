@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Homepage from './components/Homepage';
 
 import Dashboard from './components/Dashboard';
+import Fullblog from './components/Fullblog';
 
 
 
@@ -22,7 +23,7 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={Signup}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
-         
+         <Route exact path="/fullblog" component={Fullblog}></Route>
           <Redirect to="/"></Redirect>
         </Switch>
       </BrowserRouter>
