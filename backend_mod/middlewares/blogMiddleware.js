@@ -5,8 +5,9 @@ require('dotenv').config();
 const getuserEmail = (accesstoken) => {
     let email='';
     jwt.verify(accesstoken, process.env.ACCESS_TOKEN_SECRETE, (err, decoded) => {
+       if(err)
+       return err;
        email = decoded.email;
-       
     })
     return email;
 }
