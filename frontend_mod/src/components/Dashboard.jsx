@@ -30,7 +30,8 @@ function Dashboard(props) {
   //user's profile
   const [user, setUser] = useState({
     username: '',
-    total: 0
+    total: 0,
+    isAuthenticated:false
   })
   useEffect(async () => {
     if (!localStorage.getItem("accesstoken"))
@@ -52,7 +53,8 @@ function Dashboard(props) {
           let Blogs = res.data.blogArray;
           setUser({
             username: res.data.username,
-            total: res.data.blogArray.length
+            total: res.data.blogArray.length,
+            isAuthenticated:true
           })
           setBlogs(Blogs);
         }
@@ -196,6 +198,8 @@ function Dashboard(props) {
                     title={blog.title}
                     data={blog.data}
                     author={blog.author}
+                    isAuthenticated={user.isAuthenticated}
+                    id={blog._id}
                   />
                 )
               })

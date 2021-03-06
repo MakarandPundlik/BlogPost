@@ -8,7 +8,9 @@ function Cardschema(props) {
   const [state,setState] = useState({
     title:props.title,
     data:props.data,
-    author:props.author
+    author:props.author,
+    isAuthenticated:props.isAuthenticated,
+    id:props._id
   })
   const handleClick=(e)=>{
     e.preventDefault();
@@ -18,6 +20,7 @@ function Cardschema(props) {
       state
   });
   }
+  
   return (
     
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6">
