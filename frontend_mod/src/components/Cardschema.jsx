@@ -10,15 +10,13 @@ function Cardschema(props) {
     data:props.data,
     author:props.author
   })
-  const handleClick=()=>{
-    
+  const handleClick=(e)=>{
+    e.preventDefault();
     history.push({
       pathname: '/fullblog',
-    search: '?update=true',  // query string
-    state: {  // location state
-      update: true, 
-    }
-  })
+     // search: '?query=abc',
+      state
+  });
   }
   return (
     
@@ -27,7 +25,7 @@ function Cardschema(props) {
         <img src={ImageArray[Math.floor(Math.random()*ImageArray.length)]} className="card-img-top" alt="Blog image" />
         <div className="card-body">
           <h4 className="card-title text-bold ">{props.title}</h4>
-          <button className="btn btn-dark m-1" onClick={()=>handleClick()}>Read Blog</button>
+          <button className="btn btn-dark m-1" onClick={(e)=>handleClick(e)}>Read Blog</button>
           <h5 className="text-right">-{props.author}</h5>
           
         </div>
