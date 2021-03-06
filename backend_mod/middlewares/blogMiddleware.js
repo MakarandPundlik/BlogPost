@@ -1,6 +1,7 @@
 const userSchema = require('../models/user');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+
 //get the user's email from accesstoken provided
 const getuserEmail = (accesstoken) => {
     let email='';
@@ -11,6 +12,8 @@ const getuserEmail = (accesstoken) => {
     })
     return email;
 }
+
+//get users blog
 module.exports.getMyblogs=(req,res)=>{
     const email = getuserEmail(req.body.accesstoken);
 
@@ -27,6 +30,8 @@ module.exports.getMyblogs=(req,res)=>{
         console.log(err);
     })
 }
+
+//add a user's blog
 module.exports.addBlog = (req, res) => {
     const { title, data,author } = req.body.blog;
     
@@ -54,6 +59,7 @@ module.exports.addBlog = (req, res) => {
         });
 }
 
+//get all blogs
 module.exports.getBlogs=(req,res)=>{
     userSchema.find({blogArray:{$ne:null}},{_id:0,blogArray:1})
     .then((result)=>{
@@ -62,3 +68,22 @@ module.exports.getBlogs=(req,res)=>{
     .catch(err=>console.log(err));
 }
 
+//delete particular blog
+module.exports.deleteBlog=(req,res)=>{
+    const blogId = req.body.blogId;
+    const email = getuserEmail(req.body.accesstoken);
+
+    if(!email)
+    return res.json({msg:"Invalid token"});
+
+    userSchema.findOneAndDelete(
+        {email},
+        {$pull :{blogArray:{_id:blogId}}}
+    )
+    .then((user)=>{
+        return res.json({user})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}

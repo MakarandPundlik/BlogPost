@@ -3,7 +3,7 @@ const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
 const userSchema = require('../models/user');
-const { addBlog,getBlogs,getMyblogs } = require('../middlewares/blogMiddleware');
+const { addBlog,getBlogs,getMyblogs,deleteBlog } = require('../middlewares/blogMiddleware');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -15,10 +15,17 @@ Router.use((req,res,next)=>{
     next();
 })
 
-Router.post("/api/getmyblogs",getMyblogs);
 Router.get("/api/getblogs",getBlogs);
-//blog req handler
+
+//request to get users blogs
+Router.post("/api/getmyblogs",getMyblogs);
+
+//blog delete request
+Router.post("/api/deleteblog",deleteBlog);
+//addblog req handler
 Router.post("/api/addblog",addBlog);
+
+
 //register req hanlder
 Router.post("/api/signup",signup_post);
 
@@ -26,8 +33,4 @@ Router.post("/api/signup",signup_post);
 Router.post("/api/login",login_post);
 
 
-//logout request
-Router.get("/api/logout",logout_get,(req,res)=>{
-    res.json({msg:"user logged out successfully"})
-});
 module.exports = Router;
