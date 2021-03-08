@@ -70,18 +70,20 @@ module.exports.getBlogs=(req,res)=>{
 
 //delete particular blog
 module.exports.deleteBlog=(req,res)=>{
-    const blogId = req.body.blogId;
+    const blogId = req.body._id;
+    //console.log(req.body);
     const email = getuserEmail(req.body.accesstoken);
 
     if(!email)
     return res.json({msg:"Invalid token"});
 
-    userSchema.findOneAndDelete(
+    userSchema.findOneAndUpdate(
         {email},
-        {$pull :{blogArray:{_id:blogId}}}
+        {$pull :{blogArray:{_id:blogId}}},
+        { upsert: true, useFindAndModify: false,multi:true }
     )
     .then((user)=>{
-        return res.json({user})
+        return res.json({msg:'Your blog has been deleted successfully',isDFeleted:true})
     })
     .catch((err)=>{
         console.log(err);
