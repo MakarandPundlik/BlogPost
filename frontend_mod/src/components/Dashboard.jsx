@@ -192,6 +192,7 @@ function Dashboard(props) {
          
           <div className="row ">
             {
+              blogs && 
               blogs.map((blog) => {
                 return (
                   <Cardschema key={blog._id}
@@ -204,7 +205,13 @@ function Dashboard(props) {
                 )
               })
             }
+            
           </div>
+          {
+              !blogs.length && <div className="h3 text-secondary">
+                You haven't written any blogs yet!
+              </div>
+            }
         </div>
     )
   )

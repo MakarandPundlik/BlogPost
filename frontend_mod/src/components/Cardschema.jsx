@@ -4,7 +4,12 @@ import Blogvalidator from '../services/Blogvalidator';
 import Fullblog from './Fullblog';
 import ImageArray from './ImagesData';
 function Cardschema(props) {
+  //to set likes and dislikes
+  let [likes,setLikes] = useState(0);
+  let [dislikes,setDislikes] = useState(0);
+
   let history = useHistory();
+  //to send state to fullblog component
   const [state,setState] = useState({
     title:props.title,
     data:props.data,
@@ -12,6 +17,18 @@ function Cardschema(props) {
     isAuthenticated:props.isAuthenticated,
     id:props.id
   })
+
+  //handle Like and dislike function
+  const handleLike=()=>{
+    setLikes(++likes);
+    console.log(likes);
+  }
+
+  const handleDislike=()=>{
+    setDislikes(++dislikes);
+    console.log(dislikes);
+  }
+
   const handleClick=(e)=>{
     e.preventDefault();
     history.push({
@@ -30,7 +47,10 @@ function Cardschema(props) {
           <h4 className="card-title text-bold ">{props.title}</h4>
           <button className="btn btn-dark m-1" onClick={(e)=>handleClick(e)}>Read Blog</button>
           <h5 className="text-right">-{props.author}</h5>
-          
+          <div className="text-left">
+          <ion-icon name="thumbs-up-outline" size="large" onClick={()=>handleLike()}></ion-icon>
+          <ion-icon name="thumbs-down-outline"  size="large" onClick={()=>handleDislike()}></ion-icon>
+          </div>
         </div>
       </div>
     </div>

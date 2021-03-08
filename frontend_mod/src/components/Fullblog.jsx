@@ -5,6 +5,9 @@ import fullblog from '../images/fullblog.jpg';
 import axios from 'axios';
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
+
+  const [isDeleted,setIsDeleted] = useState(false);
+
   //setting up location sent from previous call
     const location = useLocation();
 
@@ -35,7 +38,7 @@ function Fullblog(props) {
       }) 
       .then((res)=>{
         console.log(res.data);
-        
+        setIsDeleted(true);
       })
       .catch((err)=>{
         console.log(err);
@@ -44,33 +47,38 @@ function Fullblog(props) {
       console.log(state.id)
     }
 
-    return (
+    return (    
+      isDeleted?
+         <div className="alert alert-danger fade show" role="alert">
+           <strong>Your blog has been deleted successfully!</strong> .
+         </div>
+  
+      : 
+      <div className="card mx-auto my-5" style={{maxWidth:'1000px'}}>
+      <img src={fullblog} className="card-img-top" alt="..."/>
+      <div className="card-body">
+       {
+         location.state.isAuthenticated &&
+           <div className="text-right">
+          <button className="btn btn-secondary mx-2" onClick={()=>handlEdit()}>Edit</button>
+          <button className="btn btn-danger" onClick={()=>handleDelete()}>Delete</button>
+          </div>
+       }
+        <h4 className="card-title">{state.title}</h4><hr/>
+        <h5 className="card-text">{state.data}</h5>
        
-    <div className="card mx-auto my-5" style={{maxWidth:'1000px'}}>
-  <img src={fullblog} className="card-img-top" alt="..."/>
-  <div className="card-body">
-   {
-     location.state.isAuthenticated &&
-       <div className="text-right">
-      <button className="btn btn-secondary mx-2" onClick={()=>handlEdit()}>Edit</button>
-      <button className="btn btn-danger" onClick={()=>handleDelete()}>Delete</button>
       </div>
-   }
-    <h4 className="card-title">{state.title}</h4><hr/>
-    <h5 className="card-text">{state.data}</h5>
-   
-  </div>
-  <div className="card-footer">
-   <h5 className='text-right'>-{state.author}</h5>
-   {/* <h5 className="text-left">Comments - <hr/>
-    Add a comment <input type="text" id="newcomment" placeholder="Comment here..."></input>
-   </h5>
-   <hr/>
-   <ul className="list-group list-group-flush">
-    <li className="list-group-item text-left">An item <p className="text-right">-username</p></li>
-  </ul> */}
-  </div>
-</div>
+      <div className="card-footer">
+       <h5 className='text-right'>-{state.author}</h5>
+       {/* <h5 className="text-left">Comments - <hr/>
+        Add a comment <input type="text" id="newcomment" placeholder="Comment here..."></input>
+       </h5>
+       <hr/>
+       <ul className="list-group list-group-flush">
+        <li className="list-group-item text-left">An item <p className="text-right">-username</p></li>
+      </ul> */}
+      </div>
+    </div>
     );
 }
 
