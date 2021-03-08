@@ -19,12 +19,14 @@ function Cardschema(props) {
   })
 
   //handle Like and dislike function
-  const handleLike=()=>{
+  const handleLike=(e)=>{
+    e.preventDefault();
     setLikes(++likes);
     console.log(likes);
   }
 
-  const handleDislike=()=>{
+  const handleDislike=(e)=>{
+    e.preventDefault();
     setDislikes(++dislikes);
     console.log(dislikes);
   }
@@ -48,8 +50,8 @@ function Cardschema(props) {
           <button className="btn btn-dark m-1" onClick={(e)=>handleClick(e)}>Read Blog</button>
           <h5 className="text-right">-{props.author}</h5>
           <div className="text-left">
-          <ion-icon name="thumbs-up-outline" size="large" onClick={()=>handleLike()}></ion-icon>
-          <ion-icon name="thumbs-down-outline"  size="large" onClick={()=>handleDislike()}></ion-icon>
+          {/* <ion-icon name="thumbs-up-outline" size="large" onClick={(e)=>handleLike(e)}></ion-icon>
+          <ion-icon name="thumbs-down-outline"  size="large" onClick={(e)=>handleDislike(e)}></ion-icon> */}
           </div>
         </div>
       </div>

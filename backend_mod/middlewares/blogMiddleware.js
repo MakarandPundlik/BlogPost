@@ -89,3 +89,16 @@ module.exports.deleteBlog=(req,res)=>{
         console.log(err);
     })
 }
+
+//add a comment to a blog
+module.exports.addComment=(req,res)=>{
+    const blogId = req.body._id;
+    userSchema.findOne({blogArray:{$elemMatch:{_id:blogId}}})
+    .then((result)=>{
+        console.log(result);
+        return res.json({result})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
