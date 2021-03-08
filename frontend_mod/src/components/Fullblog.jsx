@@ -2,26 +2,48 @@ import React, { useEffect,useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ImageArray from './ImagesData';
 import fullblog from '../images/fullblog.jpg';
+import axios from 'axios';
+const API_URL = "http://localhost:2020";
 function Fullblog(props) {
+  //setting up location sent from previous call
     const location = useLocation();
+
+    //setting state to read full blog
     const [state,setState] = useState({
       title:location.state.title,
       data:location.state.data,
       author:location.state.author,
       isAuthenticated:location.state.isAuthenticated,
-      id:props.id
+      id:location.state.id
     })
 
     //handle blog edits
     const handlEdit=()=>{
       console.log('edit blog');
-
-    }
+  }
     //handle delete
-    const handleDelete=()=>{
-      console.log('blog has been deleted');
+    const handleDelete=async()=>{
+      await axios.post(`${API_URL}/api/deleteblog`,{
+        accesstoken:localStorage.getItem("accesstoken"),
+        _id:state.id
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      }) 
+      .then((res)=>{
+        console.log(res.data);
+        
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+     
       console.log(state.id)
     }
+
     return (
        
     <div className="card mx-auto my-5" style={{maxWidth:'1000px'}}>

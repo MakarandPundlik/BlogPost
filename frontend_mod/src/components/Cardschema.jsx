@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom'
 import Blogvalidator from '../services/Blogvalidator';
 import Fullblog from './Fullblog';
@@ -10,7 +10,7 @@ function Cardschema(props) {
     data:props.data,
     author:props.author,
     isAuthenticated:props.isAuthenticated,
-    id:props._id
+    id:props.id
   })
   const handleClick=(e)=>{
     e.preventDefault();
@@ -20,7 +20,7 @@ function Cardschema(props) {
       state
   });
   }
-  
+
   return (
     
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6">
