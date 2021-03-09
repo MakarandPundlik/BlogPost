@@ -58,7 +58,8 @@ function Dashboard(props) {
           })
           setBlogs(Blogs);
         }
-        else setRedirect(true);
+        else 
+        setRedirect(true);
       })
       .catch((err) => {
         console.log(err);

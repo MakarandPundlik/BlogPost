@@ -18,7 +18,7 @@ module.exports.getMyblogs=(req,res)=>{
     const email = getuserEmail(req.body.accesstoken);
 
     if(!email)
-    return res.json({msg:"Invalid token"});
+    return res.json({msg:"Invalid token",isAuthenticated:false});
 
     userSchema.findOne({email})
     .then((user)=>{
@@ -43,7 +43,7 @@ module.exports.addBlog = (req, res) => {
     const email = getuserEmail(req.body.accesstoken);
 
     if(!email)
-    return res.json({msg:"Invalid token"});
+    return res.json({msg:"Invalid token",isAuthenticated:false});
 
     userSchema.findOneAndUpdate(
         { email },
@@ -75,7 +75,7 @@ module.exports.deleteBlog=(req,res)=>{
     const email = getuserEmail(req.body.accesstoken);
 
     if(!email)
-    return res.json({msg:"Invalid token"});
+    return res.json({msg:"Invalid token",isAuthenticated:false});
 
     userSchema.findOneAndUpdate(
         {email},
@@ -83,7 +83,7 @@ module.exports.deleteBlog=(req,res)=>{
         { upsert: true, useFindAndModify: false,multi:true }
     )
     .then((user)=>{
-        return res.json({msg:'Your blog has been deleted successfully',isDFeleted:true})
+        return res.json({msg:'Your blog has been deleted successfully',isDeleted:true})
     })
     .catch((err)=>{
         console.log(err);
