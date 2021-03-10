@@ -49,18 +49,20 @@ function Dashboard(props) {
         }
       })
       .then((res) => {
-        if (res.data.isAuthenticated) {
-          let Blogs = res.data.blogArray;
-          setUser({
-            username: res.data.username,
-            total: res.data.blogArray.length,
-            isAuthenticated:true
-          })
-          setBlogs(Blogs);
-        }
-        else 
-        setRedirect(true);
-      })
+        if (!res.data.isAuthenticated) {
+          localStorage.clear();
+          setRedirect(true);
+          }
+          else{
+            let Blogs = res.data.blogArray;
+            setUser({
+              username: res.data.username,
+              total: res.data.blogArray.length,
+              isAuthenticated:true
+            })
+            setBlogs(Blogs);
+          }
+        })
       .catch((err) => {
         console.log(err);
       })
@@ -70,7 +72,7 @@ function Dashboard(props) {
   useEffect(() => {
     setLoading(false);
 
-  }, [blogs]);
+  }, [blogs,user]);
 
 
   //for fields handler
@@ -112,7 +114,10 @@ function Dashboard(props) {
           }
         })
         .then((res) => {
-          console.log(res);
+         // console.log(res);
+         if(!res.data.isAuthenticated)
+          setRedirect(true);
+
         })
         .catch((err) => {
           console.log(err);
@@ -143,7 +148,7 @@ function Dashboard(props) {
           {/* Dropdown user menu */}
           <div className="dropdown" style={{ margin: '3rem', textAlign: 'left' }}>
             <button className="btn btn-dark dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <ion-icon name="person-circle-outline" size="large" ></ion-icon>
+            {user.username.charAt(0).toUpperCase()}
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
@@ -212,7 +217,8 @@ function Dashboard(props) {
               !blogs.length && <div className="h3 text-secondary">
                 You haven't written any blogs yet!
               </div>
-            }
+          }
+         
         </div>
     )
   )

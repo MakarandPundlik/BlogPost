@@ -23,10 +23,8 @@ function Fullblog(props) {
     id: location.state.id
   })
 
-  //handle blog edits
-  const handlEdit = () => {
-    console.log('edit blog');
-  }
+  
+ 
   //handle delete
   const handleDelete = async () => {
     await axios.post(`${API_URL}/api/deleteblog`, {
@@ -61,7 +59,7 @@ function Fullblog(props) {
           {
             location.state.isAuthenticated &&
             <div className="text-right">
-              <button className="btn btn-secondary mx-2" onClick={() => handlEdit()}>Edit</button>
+              
               <button className="btn btn-danger" onClick={() => handleDelete()}>Delete</button>
             </div>
           }

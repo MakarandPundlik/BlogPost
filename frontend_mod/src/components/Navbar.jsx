@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 
 
-const light = "navbar navbar-light navbar-expand-lg  ";
+const light = "navbar navbar-light navbar-expand-lg shadow p-3 mb-5 ";
 
 
 function Navbar(props) {
