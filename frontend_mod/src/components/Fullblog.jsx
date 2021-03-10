@@ -23,7 +23,10 @@ function Fullblog(props) {
     id: location.state.id
   })
 
-  
+  //handle edits
+  const handleEdit=()=>{
+    console.log('please enter the edited blog');
+  }
  
   //handle delete
   const handleDelete = async () => {
@@ -53,14 +56,14 @@ function Fullblog(props) {
     redirect ?
      <Redirect to="/dashboard"></Redirect>
       :
-      <div className="card mx-auto my-5" style={{ maxWidth: '1000px' }}>
+      <div className="card mx-auto my-5" style={{ maxWidth: '750px' }}>
         <img src={fullblog} className="card-img-top" alt="..." />
         <div className="card-body">
           {
             location.state.isAuthenticated &&
             <div className="text-right">
-              
-              <button className="btn btn-danger" onClick={() => handleDelete()}>Delete</button>
+              <button className="btn btn-dark m-1" onClick={() => handleEdit()}>Edit</button>
+              <button className="btn btn-dark" onClick={() => handleDelete()}>Delete</button>
             </div>
           }
           <h4 className="card-title">{state.title}</h4><hr />
