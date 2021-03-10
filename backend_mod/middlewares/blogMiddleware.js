@@ -90,5 +90,22 @@ module.exports.deleteBlog=(req,res)=>{
     })
 }
 
-//add a comment to a blog
+//modify blog - delete existing blog + insert same blog with changes
+module.exports.editBlog=(req,res)=>{
+    const email = getuserEmail(req.body.accesstoken);
 
+    if(!email)
+    return res.json({msg:"Invalid token",isAuthenticated:false});
+    const {id,title,data}  = req.body;
+    userSchema.findOneAndUpdate(
+        {email,"blogArray._id":id},
+        {$set:{"blogArray.$.title":title,"blogArray.$.data":data}},
+        {useFindAndModify:false}
+    )
+    .then((result)=>{
+        return res.json({msg:"Blog has been edited successfully",isEdited:true})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}

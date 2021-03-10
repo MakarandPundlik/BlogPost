@@ -33,14 +33,6 @@ const userSchema = new mongoose.Schema({
         author:{
             type:String,
             required:true
-        },
-        comments:{
-            comment:{
-                type:String
-            },
-            user:{
-                type:String
-            }
         }
     }
    ]

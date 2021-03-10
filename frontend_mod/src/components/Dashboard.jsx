@@ -66,13 +66,13 @@ function Dashboard(props) {
       .catch((err) => {
         console.log(err);
       })
-  }, [redirect]);
+  }, []);
 
 
   useEffect(() => {
     setLoading(false);
 
-  }, [blogs,user]);
+  }, [blogs,user,redirect]);
 
 
   //for fields handler
