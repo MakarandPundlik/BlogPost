@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const light = "navbar navbar-light bg-light navbar-expand-lg  ";
-const dark = "navbar navbar-dark bg-dark navbar-expand-lg  ";
+
 
 function Navbar(props) {
 
@@ -37,10 +37,6 @@ function Navbar(props) {
        <li>
        <NavLink className="nav-link active " aria-current="page" to="/dashboard">Dashboard</NavLink>
        </li>
-       {
-       theme=='dark'?<li><ion-icon name="sunny-sharp" size="large"></ion-icon></li>
-       :<li><ion-icon name="moon-sharp" size="large"></ion-icon></li>
-       }
        </ul>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
