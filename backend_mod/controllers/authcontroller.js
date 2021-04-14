@@ -105,8 +105,8 @@ module.exports.login_post = (req, res) => {
                 port:465,
                 secure:true,
                 auth:{
-                    user:"blogpost.example@gmail.com",
-                    pass:"PassW0rd@"
+                    user:"****",
+                    pass:"***"
                 }
             });
 
