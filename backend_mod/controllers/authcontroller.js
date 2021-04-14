@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const createAccessToken = require('../middlewares/tokenMiddlewares');
-
+const nodemailer = require('nodemailer');
 
 //signup handler
 module.exports.signup_post = (req, res) => {
@@ -90,8 +90,40 @@ module.exports.login_post = (req, res) => {
 
                         //create accesstoken  for user
                         const accesstoken = createAccessToken(user);
-                        
-                        return res.json({ msg: "user logged in successfully",accesstoken:accesstoken,username:user.firstname});
+                        //send mail to user regarding login activity
+            const mail={
+                from:"blogpost.example@gmail.com",
+                to:email,
+                subject:"Login Activity",
+                html:`<h2>Dear ${email} </h2><p> <b>Your last login activity was detected at ${new Date()}</b>`
+            }
+
+            //set up nodemailer
+            const contactEmail=nodemailer.createTransport({
+                service:"gmail",
+                host:"blogpost.example.com",
+                port:465,
+                secure:true,
+                auth:{
+                    user:"blogpost.example@gmail.com",
+                    pass:"PassW0rd@"
+                }
+            });
+
+            contactEmail.verify((error)=>{
+                if(!error)
+                    console.log("ready to send...");
+                else console.log(error);
+            });
+
+            contactEmail.sendMail(mail,(err)=>{
+                if(!err)
+                    console.log(`An email has been sent successfully to ${email}`);
+                else 
+                    console.log(err);
+            })
+                      
+                       return res.json({ msg: "user logged in successfully",accesstoken:accesstoken,username:user.firstname});
                     }
                 })
             }

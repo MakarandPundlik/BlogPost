@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const nodemailer = require('nodemailer'); 
+
 
 const isAuthenticated = (req,res)=>{
    
@@ -19,6 +21,7 @@ const isAuthenticated = (req,res)=>{
         else
         {
             
+
             return res.json({msg:"user has been authenticated",isAuthenticated:true})
         }
         
