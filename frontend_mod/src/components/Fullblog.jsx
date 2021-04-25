@@ -56,31 +56,31 @@ function Fullblog(props) {
     redirect ?
      <Redirect to="/dashboard"></Redirect>
       :
-      <div className="card mx-auto my-5" style={{ maxWidth: '750px' }}>
-        <img src={fullblog} className="card-img-top" alt="..." />
-        <div className="card-body">
-          {
-            location.state.isAuthenticated &&
-            <div className="text-right">
-              <button className="btn btn-dark m-1" onClick={() => handleEdit()}>Edit</button>
-              <button className="btn btn-dark" onClick={() => handleDelete()}>Delete</button>
-            </div>
-          }
-          <h4 className="card-title">{state.title}</h4><hr />
-          <h5 className="card-text">{state.data}</h5>
+      <div className="m-5"><div className="card mx-auto m-5" style={{ maxWidth: '750px' }}>
+      <img src={fullblog} className="card-img-top" alt="..." />
+      <div className="card-body">
+        {
+          location.state.isAuthenticated &&
+          <div className="text-right">
+            <button className="btn btn-dark m-1" onClick={() => handleEdit()}>Edit</button>
+            <button className="btn btn-dark" onClick={() => handleDelete()}>Delete</button>
+          </div>
+        }
+        <h4 className="card-title">{state.title}</h4><hr />
+        <h5 className="card-text">{state.data}</h5>
 
-        </div>
-        <div className="card-footer">
-          <h5 className='text-right'>-{state.author}</h5>
-          {/* <h5 className="text-left">Comments - <hr/>
-        Add a comment <input type="text" id="newcomment" placeholder="Comment here..."></input>
-       </h5>
-       <hr/>
-       <ul className="list-group list-group-flush">
-        <li className="list-group-item text-left">An item <p className="text-right">-username</p></li>
-      </ul> */}
-        </div>
       </div>
+      <div className="card-footer">
+        <h5 className='text-right'>-{state.author}</h5>
+        {/* <h5 className="text-left">Comments - <hr/>
+      Add a comment <input type="text" id="newcomment" placeholder="Comment here..."></input>
+     </h5>
+     <hr/>
+     <ul className="list-group list-group-flush">
+      <li className="list-group-item text-left">An item <p className="text-right">-username</p></li>
+    </ul> */}
+      </div>
+    </div></div>
   );
 }
 

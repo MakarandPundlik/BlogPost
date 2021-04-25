@@ -4,6 +4,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import Cardschema from './Cardschema';
 import Blogvalidator from '../services/Blogvalidator';
 import Loading from './Loading';
+import Profile from './Profile';
 const API_URL = 'http://localhost:2020';
 function Dashboard(props) {
 
@@ -153,7 +154,7 @@ function Dashboard(props) {
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
               <li><div className="dropdown-item" data-bs-toggle="modal" data-bs-target="#Backdrop"> Add Blog</div></li>
-
+             
             </ul>
 
             {/* Blog form*/}
@@ -194,6 +195,12 @@ function Dashboard(props) {
             </div>
           </div>
 
+          {/* Display the profile card */}
+          <div className="row">
+            <div className="m-5">
+          <Profile/>
+          </div>
+          </div>
           {/* Call for the total blogs */}
          
           <div className="row ">
