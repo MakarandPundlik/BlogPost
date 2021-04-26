@@ -201,6 +201,7 @@ function Dashboard(props) {
           <Profile/>
           </div>
           </div>
+          <hr className="m-5"/>
           {/* Call for the total blogs */}
          
           <div className="row ">
