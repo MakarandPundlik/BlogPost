@@ -3,6 +3,7 @@ import axios from 'axios';
 import Tablerow from './Tablerow';
 import Cardschema from './Cardschema';
 import Loading from './Loading';
+import Carousel from './Carousel';
 const API_URL = "http://localhost:2020"
 function Homepage(props) {
   const [loading, setLoading] = useState(false);
@@ -41,10 +42,11 @@ function Homepage(props) {
     loading ? <Loading /> :
       (
         blogs.length > 0 ? <div>
+          <Carousel/>
           <h3 className="text-secondary m-5">Here are some blogs from BlogPost...</h3>
           <div className="row">
             {
-
+              
               blogs &&
               blogs.map((blog) => {
                 return (

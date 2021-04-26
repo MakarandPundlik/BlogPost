@@ -198,7 +198,9 @@ function Dashboard(props) {
           {/* Display the profile card */}
           <div className="row">
             <div className="m-5">
-          <Profile/>
+          <Profile 
+          total={blogs.length}
+          />
           </div>
           </div>
           <hr className="m-5"/>

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ImageArray from './ImagesData';
 import upload_image from '../images/upload_image.png'
-function Profile(props) {
+function Profile({
+  total
+}) {
     const [state,setState] = useState({
         profilepic:null
     })
     
-    useEffect(()=>{
-
-    },[state.profilepic])
+   
     const handleFileChange=(e)=>{
       setState({...state,profilepic:e.target.files[0]})
       console.log(state.profilepic);
@@ -28,7 +28,7 @@ function Profile(props) {
           <p className="card-text">Somwthing about you</p>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Total Blogs Written : </li>
+          <li className="list-group-item">Total Blogs Written : {total} </li>
           <li className="list-group-item">Total Views : </li>
         </ul>
        
