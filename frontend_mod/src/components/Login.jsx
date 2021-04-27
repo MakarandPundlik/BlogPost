@@ -97,7 +97,7 @@ function Login(props) {
 
                             }
                             <h5 className="card-title">Log In</h5>
-                            <form>
+                            <form onSubmit={(e) => handleSubmit(e)}>
 
                                 <div className="mb-3">
                                     <label className="form-label">Email address</label>

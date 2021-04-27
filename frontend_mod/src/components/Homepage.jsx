@@ -42,12 +42,14 @@ function Homepage(props) {
     loading ? <Loading /> :
       (
         blogs.length > 0 ? <div>
-          <Carousel/>
+          {/* <Carousel/> */}
           <h3 className="text-secondary m-5">Here are some blogs from BlogPost...</h3>
           <div className="row">
+            
             {
               
               blogs &&
+      
               blogs.map((blog) => {
                 return (
 

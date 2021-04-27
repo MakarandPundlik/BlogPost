@@ -205,8 +205,10 @@ function Dashboard(props) {
           </div>
           <hr className="m-5"/>
           {/* Call for the total blogs */}
-         
-          <div className="row ">
+          <div className="h3 text-secondary">
+                Here are your blogs
+              </div>
+          <div className="row">
             {
               blogs && 
               blogs.map((blog) => {

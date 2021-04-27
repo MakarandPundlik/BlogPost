@@ -109,3 +109,5 @@ module.exports.editBlog=(req,res)=>{
         console.log(err);
     })
 }
+
+//write a function to increase views of blogs by fetching blog using blog id

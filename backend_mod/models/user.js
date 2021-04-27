@@ -33,6 +33,9 @@ const userSchema = new mongoose.Schema({
         author:{
             type:String,
             required:true
+        },
+        views:{
+            type:Number
         }
     }
    ]
