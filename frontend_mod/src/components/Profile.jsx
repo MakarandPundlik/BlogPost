@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ImageArray from './ImagesData';
 import upload_image from '../images/upload_image.png'
 function Profile({
-  total
+  total,name
 }) {
     const [state,setState] = useState({
         profilepic:null
@@ -15,7 +15,7 @@ function Profile({
     }
     return (
         <div className="row">
-          <div className="card col-3 m-3" style={{width:"20rem"}}>
+          <div className="card m-3" style={{width:"20rem"}}>
         <div className="text-center m-3">
             {
                 state.profilepic===null?
@@ -25,21 +25,12 @@ function Profile({
            
         </div>
         <div className="card-body">
-          <h5 className="card-title">Name</h5>
+          <h5 className="card-title">{name.toLocaleUpperCase()}</h5>
           
         </div>
         
       </div>
-      <div class="card text-center col-3 m-3">
-      <div class="card-body">
-        <h5 className="card-text">Something about you</h5>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">Total Blogs Written : {total} </li>
-          <li className="list-group-item">Total Views : </li>
-        </ul>
-       
-      </div>
-    </div>
+     
         </div>
     );
 }

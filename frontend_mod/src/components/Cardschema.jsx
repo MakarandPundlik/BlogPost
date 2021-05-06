@@ -42,8 +42,8 @@ function Cardschema(props) {
 
   return (
     
-    <div className="col-md-4 col-lg-4 col-xl-4 col-sm-6">
-      <div className="card m-5 shadow-lg">
+    <div className="col-md-6 col-lg-3 col-xl-3 col-sm-6 ">
+      <div className="card m-2 shadow-lg">
         <img src={ImageArray[Math.floor(Math.random()*ImageArray.length)]} className="card-img-top" alt="Blog image" />
         <div className="card-body">
           <h4 className="card-title text-bold ">{props.title}</h4>

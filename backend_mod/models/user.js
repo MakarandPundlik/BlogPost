@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    age:{
+        type:String,
+        require:true
+    },
+    gender:{
+        type:String,
+        required:true
+    },
    blogArray:[
        {
         title:{

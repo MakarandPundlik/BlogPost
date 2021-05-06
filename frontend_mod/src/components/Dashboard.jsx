@@ -1,24 +1,23 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
-import Cardschema from './Cardschema';
-import Blogvalidator from '../services/Blogvalidator';
-import Loading from './Loading';
-import Profile from './Profile';
-const API_URL = 'http://localhost:2020';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { NavLink, Redirect } from "react-router-dom";
+import Cardschema from "./Cardschema";
+import Blogvalidator from "../services/Blogvalidator";
+import Loading from "./Loading";
+import Profile from "./Profile";
+const API_URL = "http://localhost:2020";
 function Dashboard(props) {
-
   //for blog
   const [state, setState] = useState({
-    title: '',
-    data: ''
+    title: "",
+    data: "",
   });
   //blog errors
   const [errors, setErrors] = useState({
-    msg: '',
+    msg: "",
     status: false,
-    myclass: ''
-  })
+    myclass: "",
+  });
   //user token authentication
   const [redirect, setRedirect] = useState(false);
 
@@ -30,57 +29,53 @@ function Dashboard(props) {
 
   //user's profile
   const [user, setUser] = useState({
-    username: '',
+    username: "",
     total: 0,
-    isAuthenticated:false
-  })
+    isAuthenticated: false,
+  });
   useEffect(async () => {
-    if (!localStorage.getItem("accesstoken"))
-      setRedirect(true);
+    if (!localStorage.getItem("accesstoken")) setRedirect(true);
 
-
-
-    await axios.post(`${API_URL}/api/getmyblogs`, { accesstoken: localStorage.getItem("accesstoken") },
-      {
-
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+    await axios
+      .post(
+        `${API_URL}/api/getmyblogs`,
+        { accesstoken: localStorage.getItem("accesstoken") },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
         }
-      })
+      )
       .then((res) => {
         if (!res.data.isAuthenticated) {
           localStorage.clear();
           setRedirect(true);
-          }
-          else{
-            let Blogs = res.data.blogArray;
-            setUser({
-              username: res.data.username,
-              total: res.data.blogArray.length,
-              isAuthenticated:true
-            })
-            setBlogs(Blogs);
-          }
-        })
+        } else {
+          let Blogs = res.data.blogArray;
+          setUser({
+            username: res.data.username,
+            total: res.data.blogArray.length,
+            isAuthenticated: true,
+          });
+          setBlogs(Blogs);
+        }
+      })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }, []);
-
 
   useEffect(() => {
     setLoading(false);
-
-  }, [blogs,user,redirect]);
-
+  }, [blogs, user, redirect]);
 
   //for fields handler
   const handleChange = (e) => {
     e.preventDefault();
     setState({ ...state, [e.target.id]: e.target.value });
-  }
+  };
 
   //blog submission handler
   const handleSubmit = async (e) => {
@@ -93,46 +88,44 @@ function Dashboard(props) {
 
     setErrors({
       msg: auth.msg,
-      myclass: auth.myclass
-    })
-
+      myclass: auth.myclass,
+    });
 
     if (auth.flag) {
       //add blog to the database
-      await axios.post(`${API_URL}/api/addblog`, {
-        accesstoken: localStorage.getItem("accesstoken"),
-        blog: {
-          title: state.title,
-          data: state.data,
-          author: user.username
-        }
-      },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+      await axios
+        .post(
+          `${API_URL}/api/addblog`,
+          {
+            accesstoken: localStorage.getItem("accesstoken"),
+            blog: {
+              title: state.title,
+              data: state.data,
+              author: user.username,
+            },
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
           }
-        })
+        )
         .then((res) => {
-         // console.log(res);
-         if(!res.data.isAuthenticated)
-          setRedirect(true);
-
+          // console.log(res);
+          if (!res.data.isAuthenticated) setRedirect(true);
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     }
     //set back the original state
     setState({
-      title: '',
-      data: ''
-    })
-
-
-  }
-
+      title: "",
+      data: "",
+    });
+  };
 
   // logout handler
   const handleClick = (e) => {
@@ -140,101 +133,138 @@ function Dashboard(props) {
     localStorage.clear();
 
     props.history.push("/login");
-  }
-  return (
+  };
+  return redirect ? (
+    <Redirect to="/login"></Redirect>
+  ) : loading ? (
+    <Loading />
+  ) : (
+    <div>
+      {/* Dropdown user menu */}
+      <div className="dropdown" style={{ margin: "3rem", textAlign: "left" }}>
+        <button
+          className="btn btn-dark dropdown-toggle rounded-pill"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {user.username.charAt(0).toUpperCase()}
+        </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <div className="dropdown-item" onClick={(e) => handleClick(e)}>
+              Logout
+            </div>
+          </li>
+          <li>
+            <div
+              className="dropdown-item"
+              data-bs-toggle="modal"
+              data-bs-target="#Backdrop"
+            >
+              {" "}
+              Add Blog
+            </div>
+          </li>
+        </ul>
 
-    redirect ? (<Redirect to="/login"></Redirect>) : (
-      loading ? <Loading /> :
-        <div>
-          {/* Dropdown user menu */}
-          <div className="dropdown" style={{ margin: '3rem', textAlign: 'left' }}>
-            <button className="btn btn-dark dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            {user.username.charAt(0).toUpperCase()}
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><div className="dropdown-item" onClick={(e) => handleClick(e)}>Logout</div></li>
-              <li><div className="dropdown-item" data-bs-toggle="modal" data-bs-target="#Backdrop"> Add Blog</div></li>
-             
-            </ul>
-
-            {/* Blog form*/}
-            <div className="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header"><h5 className="modal-title" >Add Blog</h5></div>
-                  <div className="modal-body">
-
-                    <form onSubmit={(e) => handleSubmit(e)}>
-
-                      <div className="mb-3">
-                        {
-                          errors.myclass &&
-                          <div className={errors.myclass} role="alert">
-                            <strong>{errors.msg}</strong> .
-                        </div>
-
-
-                        }
-
-                        <label className="form-label ">Blog Title</label>
-                        <input type="text" className="form-control" id="title" onChange={(e) => handleChange(e)} value={state.title} />
-
+        {/* Blog form*/}
+        <div
+          className="modal fade"
+          id="Backdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Add Blog</h5>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <div className="mb-3">
+                    {errors.myclass && (
+                      <div className={errors.myclass} role="alert">
+                        <strong>{errors.msg}</strong> .
                       </div>
-                      <div className="mb-3">
-                        <label className="form-label">Blog</label>
-                        <textarea type="text" rows="5" className="form-control" id="data" onChange={(e) => handleChange(e)} value={state.data} />
-                      </div>
-                    </form>
+                    )}
+
+                    <label className="form-label ">Blog Title</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="title"
+                      onChange={(e) => handleChange(e)}
+                      value={state.title}
+                    />
                   </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-dark" onClick={(e) => handleSubmit(e)}>Submit</button>
+                  <div className="mb-3">
+                    <label className="form-label">Blog</label>
+                    <textarea
+                      type="text"
+                      rows="5"
+                      className="form-control"
+                      id="data"
+                      onChange={(e) => handleChange(e)}
+                      value={state.data}
+                    />
                   </div>
-                </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  Submit
+                </button>
               </div>
             </div>
           </div>
-
-          {/* Display the profile card */}
-          <div className="row">
-            <div className="m-5">
-          <Profile 
-          total={blogs.length}
-          />
-          </div>
-          </div>
-          <hr className="m-5"/>
-          {/* Call for the total blogs */}
-          <div className="h3 text-secondary">
-                Here are your blogs
-              </div>
-          <div className="row">
-            {
-              blogs && 
-              blogs.map((blog) => {
-                return (
-                  <Cardschema key={blog._id}
-                    title={blog.title}
-                    data={blog.data}
-                    author={blog.author}
-                    isAuthenticated={user.isAuthenticated}
-                    id={blog._id}
-                  />
-                )
-              })
-            }
-            
-          </div>
-          {
-              !blogs.length && <div className="h3 text-secondary">
-                You haven't written any blogs yet!
-              </div>
-          }
-         
         </div>
-    )
-  )
+      </div>
 
+      {/* Display the profile card */}
+      <div>
+        <div className="m-5">
+          <Profile total={blogs.length} name={user.username} />
+        </div>
+      </div>
+      <hr className="m-5" />
+      {/* Call for the total blogs */}
+      <div className="h3 text-secondary">Here are your blogs</div>
+      <div className="row">
+        {blogs &&
+          blogs.map((blog) => {
+            return (
+              <Cardschema
+                key={blog._id}
+                title={blog.title}
+                data={blog.data}
+                author={blog.author}
+                isAuthenticated={user.isAuthenticated}
+                id={blog._id}
+              />
+            );
+          })}
+      </div>
+      {!blogs.length && (
+        <div className="h3 text-secondary">
+          You haven't written any blogs yet!
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Dashboard;

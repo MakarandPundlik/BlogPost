@@ -41,10 +41,10 @@ function Homepage(props) {
   return (
     loading ? <Loading /> :
       (
-        blogs.length > 0 ? <div>
+        blogs.length > 0 ? <div className="row">
           {/* <Carousel/> */}
-          <h3 className="text-secondary m-5">Here are some blogs from BlogPost...</h3>
-          <div className="row">
+          <h3 className="text-secondary my-3">Here are some blogs from BlogPost...</h3>
+          
             
             {
               
@@ -63,7 +63,7 @@ function Homepage(props) {
               })
 
             }
-          </div>
+        
         </div>
 
           : <h3 className="text-secondary m-5 text-center">Fetching Blogs <Loading/></h3>
