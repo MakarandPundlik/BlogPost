@@ -66,7 +66,7 @@ function Homepage(props) {
           </div>
         </div>
 
-          : <h3 className="text-secondary m-5 text-center">We dont have any blogs right now,want to add one?</h3>
+          : <h3 className="text-secondary m-5 text-center">Fetching Blogs <Loading/></h3>
       )
   );
 

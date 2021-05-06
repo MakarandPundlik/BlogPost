@@ -42,12 +42,8 @@ caption {
   caption-side: top;
 }
 
-.carousel .item {
-  height: 300px;
-}
-.item img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 300px;
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #000000;
+  background-color: #000000;
 }

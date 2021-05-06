@@ -1,5 +1,5 @@
 export const SignupValidator = (profile) => {
-    if (!profile.email || !profile.password || !profile.firstname || !profile.lastname || !profile.conpassword)
+    if (!profile.email || !profile.password || !profile.firstname || !profile.lastname || !profile.conpassword || !profile.about || !profile.age || !profile.gender)
         return {
             title:'Errors',
             text: 'All fileds are mandatory',

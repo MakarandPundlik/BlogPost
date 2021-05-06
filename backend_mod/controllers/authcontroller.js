@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 
 //signup handler
 module.exports.signup_post = (req, res) => {
-  const { firstname, lastname, email, password } = req.body.profile;
+  const { firstname, lastname, email, password,about } = req.body.profile;
 
   //common error object
   let errors = { email: "", password: "" };
@@ -25,6 +25,7 @@ module.exports.signup_post = (req, res) => {
           lastname,
           email,
           password,
+          about
         });
 
         //hash passwords before saving to the database
@@ -129,7 +130,7 @@ module.exports.login_post = (req, res) => {
               port: 465,
               secure: true,
               auth: {
-                user: "",
+                 user: "",
                 pass: "",
               },
             });
