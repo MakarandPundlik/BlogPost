@@ -24,7 +24,7 @@ module.exports.getMyblogs=(req,res)=>{
     .then((user)=>{
        // console.log(user.blogArray);
         const blogArray = user.blogArray;
-       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname});
+       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname,about:user.about,age:user.age,gender:user.gender});
     })
     .catch((err)=>{
         console.log(err);

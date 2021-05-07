@@ -152,6 +152,7 @@ module.exports.login_post = (req, res) => {
               msg: "user logged in successfully",
               accesstoken: accesstoken,
               username: user.firstname,
+              about:user.about
             });
           }
         });

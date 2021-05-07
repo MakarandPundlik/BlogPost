@@ -6,6 +6,29 @@ import axios from 'axios';
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
 
+//to set likes and dislikes
+let [likes,setLikes] = useState(25);
+let [dislikes,setDislikes] = useState(15);
+
+const [liked,isLiked] = useState(false);
+const [disliked,isDisliked] = useState(false);
+
+//handlelikes dislikes
+const handleLikeDislikes=()=>{
+  if(liked)
+    setLikes(++likes);
+  else if(disliked)
+    setDislikes(++dislikes);
+    else if(liked&&disliked){
+      setLikes(--likes);
+      setDislikes(--dislikes);
+    }
+}
+
+useEffect(()=>{
+  console.log(likes,dislikes);
+},[liked,disliked,likes,dislikes]);
+
 
 
   //setting up location sent from previous call
@@ -72,13 +95,17 @@ function Fullblog(props) {
       </div>
       <div className="card-footer">
         <h5 className='text-right'>-{state.author}</h5>
-        {/* <h5 className="text-left">Comments - <hr/>
-      Add a comment <input type="text" id="newcomment" placeholder="Comment here..."></input>
-     </h5>
-     <hr/>
-     <ul className="list-group list-group-flush">
-      <li className="list-group-item text-left">An item <p className="text-right">-username</p></li>
-    </ul> */}
+        <div className="text-left">
+          {
+           ! liked?<ion-icon name="caret-up-circle-outline" size="large" onClick={()=>{isLiked(true); isDisliked(false);handleLikeDislikes()}}></ion-icon> :<ion-icon name="caret-up-circle-sharp" size="large" onClick={()=>{isLiked(false); isDisliked(false);handleLikeDislikes()}}></ion-icon> 
+          }
+         {
+           ! disliked?<ion-icon name="caret-down-circle-outline" size="large" onClick={()=>{isLiked(false); isDisliked(true);handleLikeDislikes()}}></ion-icon>: <ion-icon name="caret-down-circle-sharp" size="large" onClick={()=>{isLiked(false); isDisliked(false);handleLikeDislikes()}}></ion-icon>
+         } 
+         {
+           
+         }
+          </div>
       </div>
     </div></div>
   );

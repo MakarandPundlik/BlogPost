@@ -19,7 +19,7 @@ function Signup(props) {
     firstname: "",
     lastname: "",
     about: "",
-    age: 18,
+    age: "",
     
   });
   const [gender,setGender] = useState("");

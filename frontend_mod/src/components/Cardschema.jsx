@@ -4,10 +4,7 @@ import Blogvalidator from '../services/Blogvalidator';
 import Fullblog from './Fullblog';
 import ImageArray from './ImagesData';
 function Cardschema(props) {
-  //to set likes and dislikes
-  let [likes,setLikes] = useState(0);
-  let [dislikes,setDislikes] = useState(0);
-
+  
   let history = useHistory();
   //to send state to fullblog component
   const [state,setState] = useState({
@@ -18,18 +15,9 @@ function Cardschema(props) {
     id:props.id
   })
 
+ 
   //handle Like and dislike function
-  const handleLike=(e)=>{
-    e.preventDefault();
-    setLikes(++likes);
-    console.log(likes);
-  }
-
-  const handleDislike=(e)=>{
-    e.preventDefault();
-    setDislikes(++dislikes);
-    console.log(dislikes);
-  }
+  
 
   const handleClick=(e)=>{
     e.preventDefault();
@@ -46,13 +34,14 @@ function Cardschema(props) {
       <div className="card m-2 shadow-lg">
         <img src={ImageArray[Math.floor(Math.random()*ImageArray.length)]} className="card-img-top" alt="Blog image" />
         <div className="card-body">
-          <h4 className="card-title text-bold ">{props.title}</h4>
-          <button className="btn btn-dark m-1" onClick={(e)=>handleClick(e)}>Read Blog</button>
-          <h5 className="text-right m-2">-{props.author.toLocaleUpperCase()}</h5>
+          <h4 className="card-title ">{props.title}</h4>
+         
+          
           <div className="text-left">
-          {/* <ion-icon name="thumbs-up-outline" size="large" onClick={(e)=>handleLike(e)}></ion-icon>
-          <ion-icon name="thumbs-down-outline"  size="large" onClick={(e)=>handleDislike(e)}></ion-icon> */}
+         <div className="text-secondary">100{" "}{" "}100</div>
+         
           </div>
+          <button className="btn btn-dark m-1" onClick={(e)=>handleClick(e)}>Read Blog</button>
         </div>
       </div>
     </div>

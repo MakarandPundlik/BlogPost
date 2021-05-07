@@ -31,6 +31,7 @@ function Dashboard(props) {
   const [user, setUser] = useState({
     username: "",
     total: 0,
+    about:"",
     isAuthenticated: false,
   });
   useEffect(async () => {
@@ -53,8 +54,10 @@ function Dashboard(props) {
           localStorage.clear();
           setRedirect(true);
         } else {
+          console.log(res.data);
           let Blogs = res.data.blogArray;
           setUser({
+            about:res.data.about,
             username: res.data.username,
             total: res.data.blogArray.length,
             isAuthenticated: true,
@@ -141,7 +144,7 @@ function Dashboard(props) {
   ) : (
     <div>
       {/* Dropdown user menu */}
-      <div className="dropdown" style={{ margin: "3rem", textAlign: "left" }}>
+      <div className="dropdown m-3" style={{ textAlign: "right" }}>
         <button
           className="btn btn-dark dropdown-toggle rounded-pill"
           type="button"
@@ -235,16 +238,17 @@ function Dashboard(props) {
       </div>
 
       {/* Display the profile card */}
-      <div>
-        <div className="m-5">
-          <Profile total={blogs.length} name={user.username} />
-        </div>
-      </div>
+     
+        
+          <Profile total={blogs.length} name={user.username} about={user.about}/>
+        
+     
       <hr className="m-5" />
       {/* Call for the total blogs */}
-      <div className="h3 text-secondary">Here are your blogs</div>
+      
       <div className="row">
         {blogs &&
+        <div className="h3 text-secondary">Here are your blogs</div>&&
           blogs.map((blog) => {
             return (
               <Cardschema
