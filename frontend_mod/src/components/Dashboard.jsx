@@ -4,7 +4,8 @@ import { NavLink, Redirect } from "react-router-dom";
 import Cardschema from "./Cardschema";
 import Blogvalidator from "../services/Blogvalidator";
 import Loading from "./Loading";
-import Profile from "./Profile";
+import ProfilePhoto from "./ProfilePhoto";
+import ProfileInfo from "./ProfileInfo";
 const API_URL = "http://localhost:2020";
 function Dashboard(props) {
   //for blog
@@ -31,7 +32,9 @@ function Dashboard(props) {
   const [user, setUser] = useState({
     username: "",
     total: 0,
-    about:"",
+    about: "",
+    age: 0,
+    gender: "",
     isAuthenticated: false,
   });
   useEffect(async () => {
@@ -54,14 +57,16 @@ function Dashboard(props) {
           localStorage.clear();
           setRedirect(true);
         } else {
-          console.log(res.data);
           let Blogs = res.data.blogArray;
           setUser({
-            about:res.data.about,
+            age: res.data.age,
+            gender: res.data.gender,
+            about: res.data.about,
             username: res.data.username,
             total: res.data.blogArray.length,
             isAuthenticated: true,
           });
+          console.log(user);
           setBlogs(Blogs);
         }
       })
@@ -143,6 +148,9 @@ function Dashboard(props) {
     <Loading />
   ) : (
     <div>
+      {/* Display the profile card */}
+
+      <ProfilePhoto gender={user.gender} />
       {/* Dropdown user menu */}
       <div className="dropdown m-3" style={{ textAlign: "right" }}>
         <button
@@ -236,19 +244,14 @@ function Dashboard(props) {
           </div>
         </div>
       </div>
-
-      {/* Display the profile card */}
-     
-        
-          <Profile total={blogs.length} name={user.username} about={user.about}/>
-        
-     
+      <ProfileInfo name={user.username} age={user.age} about={user.about}/>             
       <hr className="m-5" />
       {/* Call for the total blogs */}
-      
+
       <div className="row">
-        {blogs &&
-        <div className="h3 text-secondary">Here are your blogs</div>&&
+        {blogs && (
+            <div className="h3 text-secondary">Here are your blogs</div>
+          ) &&
           blogs.map((blog) => {
             return (
               <Cardschema
