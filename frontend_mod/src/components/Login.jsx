@@ -84,9 +84,9 @@ function Login(props) {
     //
     return (
         loading ? (<Loading />) : (
-            <div className="container my-5">
-                <div style={{ marginLeft: '30%' }}>
-                    <div className="card shadow-lg" style={{ width: '25rem' }}>
+            <div className="row my-5">
+                
+                    <div className="card shadow-lg my-5" style={{ width: '25rem',marginLeft:"37%" }}>
                         <div className="card-body">
                             {
                                 errors.title &&
@@ -113,7 +113,7 @@ function Login(props) {
                             </form>
                         </div>
                     </div>
-                </div>
+                
             </div>
 
         )

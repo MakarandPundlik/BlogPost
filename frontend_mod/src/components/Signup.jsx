@@ -100,7 +100,7 @@ function Signup(props) {
   return loading ? (
     <Loading />
   ) : (
-    <div>
+    <div className="my-5">
       <div className="alert">
         {errors.title && (
           <div className={errors.myclass} role="alert">

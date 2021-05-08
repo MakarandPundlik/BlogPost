@@ -36,6 +36,7 @@ function Dashboard(props) {
     age: 0,
     gender: "",
     isAuthenticated: false,
+    last_activity:0
   });
   useEffect(async () => {
     if (!localStorage.getItem("accesstoken")) setRedirect(true);
@@ -65,6 +66,7 @@ function Dashboard(props) {
             username: res.data.username,
             total: res.data.blogArray.length,
             isAuthenticated: true,
+            last_activity:res.data.last_activity
           });
           console.log(user);
           setBlogs(Blogs);
@@ -147,7 +149,7 @@ function Dashboard(props) {
   ) : loading ? (
     <Loading />
   ) : (
-    <div>
+    <div style={{marginTop:"5%"}}>
       {/* Display the profile card */}
 
       <ProfilePhoto gender={user.gender} />
@@ -244,14 +246,19 @@ function Dashboard(props) {
           </div>
         </div>
       </div>
-      <ProfileInfo name={user.username} age={user.age} about={user.about}/>             
+      <ProfileInfo name={user.username} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
       <hr className="m-5" />
       {/* Call for the total blogs */}
 
       <div className="row">
-        {blogs && (
-            <div className="h3 text-secondary">Here are your blogs</div>
-          ) &&
+        {
+          blogs.length>0? 
+          <div className="h3 text-secondary">Here are your blogs</div>
+          :null
+        }
+        {
+        blogs && 
+           
           blogs.map((blog) => {
             return (
               <Cardschema

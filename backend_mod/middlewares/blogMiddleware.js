@@ -24,7 +24,8 @@ module.exports.getMyblogs=(req,res)=>{
     .then((user)=>{
        // console.log(user.blogArray);
         const blogArray = user.blogArray;
-       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname,about:user.about,age:user.age,gender:user.gender});
+        const today = new Date();
+       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname,about:user.about,age:user.age,gender:user.gender,last_activity:`${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()} at ${today.getHours()}:${today.getMinutes()}`});
     })
     .catch((err)=>{
         console.log(err);

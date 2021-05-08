@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const light = "navbar navbar-light bg-light navbar-expand-lg  ";
+const light = "navbar navbar-light bg-light navbar-expand-lg fixed-top";
 
 function Navbar(props) {
   const [theme, setTheme] = useState(light);
 
   return (
     <nav className={theme}>
-      <div className="container-fluid navbar-sticky">
+      <div className="container-fluid">
         <NavLink className="navbar-brand " to="/">
           BlogPost
         </NavLink>
