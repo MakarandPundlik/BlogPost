@@ -8,11 +8,16 @@ import Homepage from './components/Homepage';
 
 import Dashboard from './components/Dashboard';
 import Fullblog from './components/Fullblog';
+import { useEffect, useState } from 'react';
 
 
 
 
 function App() {
+  const [darktheme,setDarktheme] = useState(localStorage.getItem("dark"));
+ useEffect(()=>{
+   document.body.style.backgroundColor = localStorage?"#000000":"#ffffff"
+ },[darktheme]);
   return (
     <div className="App">
       

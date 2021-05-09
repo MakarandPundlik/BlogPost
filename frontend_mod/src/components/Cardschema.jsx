@@ -27,7 +27,7 @@ function Cardschema(props) {
   };
 
   return (
-    <div className="col-md-6 col-lg-3 col-xl-3 col-sm-6 ">
+    <div className="col-md-6 col-lg-4 col-xl-3 col-sm-6 ">
       <div className="card m-2 shadow-lg" style={{ maxHeight: "100rem" }}>
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}

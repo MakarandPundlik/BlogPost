@@ -2,12 +2,25 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const light = "navbar navbar-light bg-light navbar-expand-lg fixed-top";
+const dark = "navbar navbar-dark bg-dark navbar-expand-lg fixed-top";
 
 function Navbar(props) {
-  const [theme, setTheme] = useState(light);
+ 
+  const getDefaultTheme=()=> {
+    const selectedTheme = JSON.parse(localStorage.getItem('dark'))
+    return selectedTheme || false
+  }
+  const [darkTheme,setDarkTheme] = useState(getDefaultTheme());
 
+  useEffect(async()=>{
+    await localStorage.setItem('dark',JSON.stringify(darkTheme));
+    document.body.style.backgroundColor = darkTheme?"#000000":"#ffffff"
+  },[darkTheme]);
+
+
+  
   return (
-    <nav className={theme}>
+    <nav className={darkTheme?dark:light}>
       <div className="container-fluid">
         <NavLink className="navbar-brand " to="/">
           BlogPost
@@ -25,7 +38,7 @@ function Navbar(props) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 d-flex">
             <li className="nav-item">
               <NavLink className="nav-link active " aria-current="page" to="/">
                 Home
@@ -57,6 +70,13 @@ function Navbar(props) {
               >
                 Dashboard
               </NavLink>
+            </li>
+            <li onClick={()=>setDarkTheme(prevTheme=>!prevTheme)} className="mx-1 ">
+             
+            {darkTheme?
+           <ion-icon name="contrast-outline"  style={{color:"#ffffff",fontSize:"28px"}}></ion-icon>
+           :<ion-icon name="contrast-outline" style={{fontSize:"28px"}}></ion-icon>}
+              
             </li>
           </ul>
           {/* <form className="d-flex">

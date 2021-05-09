@@ -72,13 +72,18 @@ function Login(props) {
       });
     }
   };
-  //
+  //classes fot theme
+  const bglight = "card shadow-lg my-5 bg-light";
+  const bgdark = "card shadow-lg my-5 bg-dark";
+
+
+  
   return loading ? (
     <Loading />
   ) : (
     <div className="row my-5">
       <div
-        className="card shadow-lg my-5"
+        className={bgdark}
         style={{ width: "25rem", marginLeft: "37%" }}
       >
         <div className="card-body">
@@ -91,10 +96,8 @@ function Login(props) {
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="mb-3">
               <label className="form-label">Email address</label>
-              <div className="input-group">
-                <span class="input-group-addon">
-                <ion-icon name="mail-outline" size="large"></ion-icon>
-                </span>
+             
+                
                 <input
                   type="email"
                   className="form-control"
@@ -102,7 +105,7 @@ function Login(props) {
                   value={state.email}
                   onChange={(e) => handleChange(e)}
                 />
-              </div>
+        
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
