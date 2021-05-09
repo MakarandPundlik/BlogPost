@@ -41,9 +41,9 @@ function Homepage(props) {
   return (
     loading ? <Loading /> :
       (
-        blogs.length > 0 ? <div className="row" style={{marginTop:"5%"}}>
+        blogs.length > 0 ? <div className="row" style={{marginTop:"7%"}}>
           {/* <Carousel/> */}
-          <h3 className="text-secondary my-3">Here are some blogs from BlogPost...</h3>
+          <h3 className="text-dark my-3">Here are some blogs from BlogPost...</h3>
           
             
             {

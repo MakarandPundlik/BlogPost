@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    last_activity:{
+        type:String,
+        required:true
+    },
    blogArray:[
        {
         title:{
@@ -43,6 +47,10 @@ const userSchema = new mongoose.Schema({
             required:true
         },
         author:{
+            type:String,
+            required:true
+        },
+        date:{
             type:String,
             required:true
         },

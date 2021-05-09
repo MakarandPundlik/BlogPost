@@ -39,7 +39,8 @@ module.exports.addBlog = (req, res) => {
     const newblog = {
         title,
         data,
-        author
+        author,
+        date:new Date().toString()
     }
     const email = getuserEmail(req.body.accesstoken);
 

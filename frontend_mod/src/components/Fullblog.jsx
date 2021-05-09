@@ -43,7 +43,8 @@ useEffect(()=>{
     data: location.state.data,
     author: location.state.author,
     isAuthenticated: location.state.isAuthenticated,
-    id: location.state.id
+    id: location.state.id,
+    date:location.state.date
   })
 
   //handle edits
@@ -79,7 +80,7 @@ useEffect(()=>{
     redirect ?
      <Redirect to="/dashboard"></Redirect>
       :
-      <div className="m-5"><div className="card mx-auto m-5" style={{ maxWidth: '750px' }}>
+      <div style={{marginTop:"10%"}}><div className="card mx-auto m-5" style={{ maxWidth: '750px' }}>
       <img src={fullblog} className="card-img-top" alt="..." />
       <div className="card-body">
         {
@@ -93,10 +94,12 @@ useEffect(()=>{
         <h5 className="card-text">{state.data}</h5>
 
       </div>
-      <div className="card-footer">
+      <div className="card-footer ">
         <h5 className='text-right'>-{state.author}</h5>
+        <h5 className='text-left'>{state.date}</h5>
+        
         <div className="text-left">
-          {
+          {/* {
            ! liked?<ion-icon name="caret-up-circle-outline" size="large" onClick={()=>{isLiked(true); isDisliked(false);handleLikeDislikes()}}></ion-icon> :<ion-icon name="caret-up-circle-sharp" size="large" onClick={()=>{isLiked(false); isDisliked(false);handleLikeDislikes()}}></ion-icon> 
           }
          {
@@ -104,7 +107,7 @@ useEffect(()=>{
          } 
          {
            
-         }
+         } */}
           </div>
       </div>
     </div></div>

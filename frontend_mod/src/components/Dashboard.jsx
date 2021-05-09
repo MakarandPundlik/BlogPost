@@ -149,7 +149,7 @@ function Dashboard(props) {
   ) : loading ? (
     <Loading />
   ) : (
-    <div style={{marginTop:"5%"}}>
+    <div style={{marginTop:"10%"}}>
       {/* Display the profile card */}
 
       <ProfilePhoto gender={user.gender} />
@@ -253,7 +253,7 @@ function Dashboard(props) {
       <div className="row">
         {
           blogs.length>0? 
-          <div className="h3 text-secondary">Here are your blogs</div>
+          <div className="h3 text-dark my-5">Here are your blogs</div>
           :null
         }
         {
@@ -266,6 +266,7 @@ function Dashboard(props) {
                 title={blog.title}
                 data={blog.data}
                 author={blog.author}
+                date={blog.date}
                 isAuthenticated={user.isAuthenticated}
                 id={blog._id}
               />
