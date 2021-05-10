@@ -86,8 +86,8 @@ useEffect(()=>{
         {
           location.state.isAuthenticated &&
           <div className="text-right">
-            <button className="btn btn-dark m-1" onClick={() => handleEdit()}>Edit</button>
-            <button className="btn btn-dark" onClick={() => handleDelete()}>Delete</button>
+            <button className="btn custom-btn m-1" onClick={() => handleEdit()}>Edit</button>
+            <button className="btn custom-btn" onClick={() => handleDelete()}>Delete</button>
           </div>
         }
         <h4 className="card-title">{state.title}</h4><hr />

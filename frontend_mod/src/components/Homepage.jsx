@@ -38,12 +38,16 @@ function Homepage(props) {
     setLoading(false);
     //console.log(blogs)
   }, [blogs]);
+
+  //classes for heading
+  
+  const dark = "dark-text my-5";
   return (
     loading ? <Loading /> :
       (
         blogs.length > 0 ? <div className="row" style={{marginTop:"7%"}}>
           {/* <Carousel/> */}
-          <h3 className="text-dark my-3">Here are some blogs from BlogPost...</h3>
+          <h3 className={dark}>Here are some blogs from BlogPost...</h3>
           
             
             {
@@ -66,7 +70,7 @@ function Homepage(props) {
         
         </div>
 
-          : <h3 className="text-secondary m-5 text-center">Fetching Blogs <Loading/></h3>
+          : <div className={dark}><Loading/></div>
       )
   );
 

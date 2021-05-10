@@ -45,7 +45,47 @@ caption {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #000000;
-  background-color: #000000;
+  border-color: #00a2e2;
+  background-color: #00a2e2;
 }
 
+.custom-navbar-light{
+  background-color: #ffffff;
+}
+.custom-navbar-light .nav-link,
+.custom-navbar-light .navbar-brand
+{
+  color: #3fbbdd;
+}
+
+.custom-navbar-dark{
+  background-color: #242424; 
+}
+.custom-navbar-dark .nav-link,
+.custom-navbar-dark .navbar-brand
+{
+  color: #00a2e2;
+}
+
+
+
+.dark-text{
+  color: #00a2e2;
+
+}
+
+.bg-custom{
+  background-color: #01709c;
+}
+
+.custom-btn,.custom-btn:hover{
+  background-color: #008ac0;
+  color:#ffffff;
+}
+
+.modal-btn,
+.modal-btn:hover{
+  color: #008ac0;
+  background-color:#ffffff;
+}
+/* #08425 */

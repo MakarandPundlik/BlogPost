@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const light = "navbar navbar-light bg-light navbar-expand-lg fixed-top";
-const dark = "navbar navbar-dark bg-dark navbar-expand-lg fixed-top";
+const light = "navbar custom-navbar-light navbar-expand-lg fixed-top";
+const dark = "navbar custom-navbar-dark  navbar-expand-lg fixed-top";
 
 function Navbar(props) {
  
@@ -26,7 +26,8 @@ function Navbar(props) {
           BlogPost
         </NavLink>
         <button
-          className="navbar-toggler"
+        style={{color:" #008ac0"}}
+          className="navbar-toggler collapsed"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -34,13 +35,13 @@ function Navbar(props) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <ion-icon name="grid-outline" size="large" ></ion-icon>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 d-flex">
             <li className="nav-item">
-              <NavLink className="nav-link active " aria-current="page" to="/">
+              <NavLink className="nav-link active" aria-current="page" to="/">
                 Home
               </NavLink>
             </li>
@@ -71,11 +72,11 @@ function Navbar(props) {
                 Dashboard
               </NavLink>
             </li>
-            <li onClick={()=>setDarkTheme(prevTheme=>!prevTheme)} className="mx-1 ">
+            <li onClick={()=>setDarkTheme(prevTheme=>!prevTheme)} className=" m-2">
              
             {darkTheme?
-           <ion-icon name="contrast-outline"  style={{color:"#ffffff",fontSize:"28px"}}></ion-icon>
-           :<ion-icon name="contrast-outline" style={{fontSize:"28px"}}></ion-icon>}
+           <ion-icon name="contrast-outline"  style={{color:"#fff",fontSize:"24px"}}></ion-icon>
+           :<ion-icon name="contrast-outline" style={{color:"#00a2e2",fontSize:"24px"}}></ion-icon>}
               
             </li>
           </ul>

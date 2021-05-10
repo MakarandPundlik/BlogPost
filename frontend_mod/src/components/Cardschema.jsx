@@ -27,22 +27,23 @@ function Cardschema(props) {
   };
 
   return (
-    <div className="col-md-6 col-lg-4 col-xl-3 col-sm-6 ">
-      <div className="card m-2 shadow-lg" style={{ maxHeight: "100rem" }}>
+    <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6 ">
+      <div className="card m-2 shadow-lg" style={{  color:"#008ac0" }}>
+       
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}
           className="card-img-top"
           alt="Blog image"
           height="200rem"
-          width="200rem"
+          width="150rem"
         />
         <div className="card-body">
           <h4 className="card-title ">{props.title}</h4>
 
-          <div className="text-left">
+          {/* <div className="text-left">
             <div className="text-secondary">100 100</div>
-          </div>
-          <button className="btn btn-dark m-1" onClick={(e) => handleClick(e)}>
+          </div> */}
+          <button className="btn custom-btn m-1" onClick={(e) => handleClick(e)}>
             Read Blog
           </button>
         </div>

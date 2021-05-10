@@ -100,7 +100,7 @@ function Signup(props) {
   return loading ? (
     <Loading />
   ) : (
-    <div className="my-5">
+    <div className="my-5" >
       <div className="alert">
         {errors.title && (
           <div className={errors.myclass} role="alert">
@@ -230,7 +230,7 @@ function Signup(props) {
 
                   <button
                     type="submit"
-                    className="btn btn-dark"
+                    className="btn custom-btn"
                     onClick={(e) => handleSubmit(e)}
                   >
                     Submit

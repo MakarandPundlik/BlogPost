@@ -72,18 +72,32 @@ function Login(props) {
       });
     }
   };
+
+
+  const getDefaultTheme=()=> {
+    const selectedTheme = JSON.parse(localStorage.getItem('dark'))
+    return selectedTheme || false
+  }
+  const [darkTheme,setDarkTheme] = useState(getDefaultTheme());
+
+  useEffect(async()=>{
+    await localStorage.setItem('dark',JSON.stringify(darkTheme));
+   // document.body.style.backgroundColor = darkTheme?"#000000":"#ffffff"
+  },[darkTheme]);
+
+
   //classes fot theme
   const bglight = "card shadow-lg my-5 bg-light";
-  const bgdark = "card shadow-lg my-5 bg-dark";
+ 
 
 
   
   return loading ? (
     <Loading />
   ) : (
-    <div className="row my-5">
+    <div className="row my-5" style={{textAlign:"center"}}>
       <div
-        className={bgdark}
+        className={bglight}
         style={{ width: "25rem", marginLeft: "37%" }}
       >
         <div className="card-body">
@@ -120,7 +134,7 @@ function Login(props) {
 
             <button
               type="submit"
-              className="btn btn-dark"
+              className="btn custom-btn"
               onClick={(e) => handleSubmit(e)}
             >
               Submit

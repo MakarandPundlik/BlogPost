@@ -154,9 +154,9 @@ function Dashboard(props) {
 
       <ProfilePhoto gender={user.gender} />
       {/* Dropdown user menu */}
-      <div className="dropdown m-3" style={{ textAlign: "right" }}>
+      <div className="dropdown m-3" style={{ textAlign: "right"}}>
         <button
-          className="btn btn-dark dropdown-toggle rounded-pill"
+          className="btn custom-btn dropdown-toggle rounded-pill"
           type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
@@ -189,11 +189,12 @@ function Dashboard(props) {
           data-bs-backdrop="static"
           data-bs-keyboard="false"
           aria-hidden="true"
+        
         >
-          <div className="modal-dialog">
-            <div className="modal-content">
+          <div className="modal-dialog text-center" >
+            <div className="modal-content"  style={{color:"#ffffff",backgroundColor:"#008ac0"}}>
               <div className="modal-header">
-                <h5 className="modal-title">Add Blog</h5>
+                <h5 className="modal-title text-center">Add Blog</h5>
               </div>
               <div className="modal-body">
                 <form onSubmit={(e) => handleSubmit(e)}>
@@ -203,7 +204,7 @@ function Dashboard(props) {
                         <strong>{errors.msg}</strong> .
                       </div>
                     )}
-
+                      
                     <label className="form-label ">Blog Title</label>
                     <input
                       type="text"
@@ -213,7 +214,7 @@ function Dashboard(props) {
                       value={state.title}
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 ">
                     <label className="form-label">Blog</label>
                     <textarea
                       type="text"
@@ -229,14 +230,14 @@ function Dashboard(props) {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-danger"
+                  className="btn modal-btn"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
                 <button
                   type="button"
-                  className="btn btn-dark"
+                  className="btn modal-btn"
                   onClick={(e) => handleSubmit(e)}
                 >
                   Submit
@@ -253,7 +254,7 @@ function Dashboard(props) {
       <div className="row">
         {
           blogs.length>0? 
-          <div className="h3 text-dark my-5">Here are your blogs</div>
+          <div className="h3 my-5">Here are your blogs</div>
           :null
         }
         {
