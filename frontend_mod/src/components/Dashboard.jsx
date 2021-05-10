@@ -248,7 +248,7 @@ function Dashboard(props) {
         </div>
       </div>
       <ProfileInfo name={user.username} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
-      <hr className="m-5" />
+      <hr className="m-5"/>
       {/* Call for the total blogs */}
 
       <div className="row">
