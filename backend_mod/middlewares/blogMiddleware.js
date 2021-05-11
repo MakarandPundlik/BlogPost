@@ -115,7 +115,7 @@ module.exports.editBlog=(req,res)=>{
 //write a function to increase views of blogs by fetching blog using blog id
 module.exports.incrementViews=async(req,res)=>{
     let {id,views} = req.body;
-    views++;
+    views = parseInt(views)+1;
    await userSchema.findOneAndUpdate(
         {blogArray:{$elemMatch:{_id:id}}},
         {$set:{"blogArray.$.views":views}},

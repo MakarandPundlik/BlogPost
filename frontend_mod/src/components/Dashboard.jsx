@@ -255,7 +255,7 @@ function Dashboard(props) {
       <div className="row">
         {
           blogs.length>0? 
-          <div className="h3 my-5">Here are your blogs</div>
+          <div className="h3 my-5">Here are your blogs.</div>
           :null
         }
         {
