@@ -46,6 +46,11 @@ function Navbar(props) {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/blogs">
+                Blogs
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink
                 className="nav-link active "
                 aria-current="page"
