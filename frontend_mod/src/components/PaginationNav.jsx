@@ -9,15 +9,7 @@ function PaginationNav(props) {
   return (
     <nav>
       <ul className="pagination">
-        <li className="page-item ">
-          <a
-            className="page-link bg-custom"
-            style={{ color: "#fff", textDecoration: "none" }}
-            onClick={() => paginate(-1)}
-          >
-            Previous
-          </a>
-        </li>
+       
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <a
@@ -29,15 +21,7 @@ function PaginationNav(props) {
             </a>
           </li>
         ))}
-        <li className="page-item">
-          <a
-            className="page-link bg-custom"
-            style={{ color: "#fff", textDecoration: "none" }}
-            onClick={() => paginate(0)}
-          >
-            next
-          </a>
-        </li>
+        
       </ul>
     </nav>
   );

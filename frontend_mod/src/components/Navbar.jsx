@@ -75,8 +75,8 @@ function Navbar(props) {
             <li onClick={()=>setDarkTheme(prevTheme=>!prevTheme)} className=" m-2">
              
             {darkTheme?
-           <ion-icon name="contrast-outline"  style={{color:"#fff",fontSize:"24px"}}></ion-icon>
-           :<ion-icon name="contrast-outline" style={{color:"#00a2e2",fontSize:"24px"}}></ion-icon>}
+           <ion-icon name="aperture-sharp"  style={{color:"#00a2e2",fontSize:"24px"}}></ion-icon>
+           :<ion-icon name="moon-sharp" style={{color:"##008ac0",fontSize:"24px"}}></ion-icon>}
               
             </li>
           </ul>

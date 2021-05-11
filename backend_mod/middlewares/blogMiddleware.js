@@ -113,3 +113,17 @@ module.exports.editBlog=(req,res)=>{
 }
 
 //write a function to increase views of blogs by fetching blog using blog id
+module.exports.incrementViews=(req,res)=>{
+    const {id,views} = req.body;
+    userSchema.findOneAndUpdate(
+        {blogArray:{$elemMatch:{_id:id}}},
+        {$set:{"blogArray.$.views":views+1}}
+    )
+    .then((result)=>{
+        return res.json({msg:"Views has been successfully updated",result})
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
+// db.users.find({awards: {$elemMatch: {award:'National Medal', year:1975}}})

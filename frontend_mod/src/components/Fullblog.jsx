@@ -25,27 +25,29 @@ const handleLikeDislikes=()=>{
     }
 }
 
+//setting up location sent from previous call
+const location = useLocation();
+
+//redirect after blog has been deleted
+const [redirect,setRedirect] = useState(false);
+
+//setting state to read full blog
+const [state, setState] = useState({
+  title: location.state.title,
+  data: location.state.data,
+  author: location.state.author,
+  isAuthenticated: location.state.isAuthenticated,
+  id: location.state.id,
+  date:location.state.date
+})
+
 useEffect(()=>{
-  console.log(likes,dislikes);
+  //console.log(state);
 },[liked,disliked,likes,dislikes]);
 
 
 
-  //setting up location sent from previous call
-  const location = useLocation();
-
-  //redirect after blog has been deleted
-  const [redirect,setRedirect] = useState(false);
-
-  //setting state to read full blog
-  const [state, setState] = useState({
-    title: location.state.title,
-    data: location.state.data,
-    author: location.state.author,
-    isAuthenticated: location.state.isAuthenticated,
-    id: location.state.id,
-    date:location.state.date
-  })
+  
 
   //handle edits
   const handleEdit=()=>{

@@ -1,7 +1,7 @@
 import React from "react";
 import Cardschema from "./Cardschema";
 function Pagination(props) {
-  const { blogs } = props;
+  const  blogs  = props.blogs;
   const dark = "dark-text my-5";
   return (
     <div className="row" style={{ marginTop: "7%" }}>
@@ -13,9 +13,11 @@ function Pagination(props) {
           return (
             <Cardschema
               key={blog._id}
+              id={blog._id}
               title={blog.title}
               data={blog.data}
               author={blog.author}
+             
             />
           );
         })}

@@ -15,13 +15,17 @@ function Cardschema(props) {
     date: props.date,
   });
 
+  useEffect(()=>{
+    console.log(state);
+  },[]);
   //handle Like and dislike function
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(state);
     history.push({
       pathname: "/fullblog",
-      // search: '?query=abc',
+     
       state,
     });
   };

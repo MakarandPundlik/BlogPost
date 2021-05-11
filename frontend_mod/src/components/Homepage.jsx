@@ -66,14 +66,19 @@ function Homepage(props) {
   return loading ? (
     <Loading />
   ) : (
-    <div>
+    <div  >
       <Pagination blogs={currentPost} />
-
+    <div className="d-flex my-3" style={{
+     
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
       <PaginationNav
         totalposts={blogs.length}
         postsperpage={postsperpage}
         paginate={paginate}
       />
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
 const userSchema = require('../models/user');
-const { addBlog,getBlogs,getMyblogs,deleteBlog,editBlog} = require('../middlewares/blogMiddleware');
+const { addBlog,getBlogs,getMyblogs,deleteBlog,editBlog,incrementViews} = require('../middlewares/blogMiddleware');
 const Router = express.Router();
 
 Router.use((req,res,next)=>{
@@ -34,4 +34,7 @@ Router.post("/api/login",login_post);
 
 //edit blog request handler
 Router.post("/api/editblog",editBlog);
+
+//incement views 
+Router.post("/api/incrementviews",incrementViews);
 module.exports = Router;

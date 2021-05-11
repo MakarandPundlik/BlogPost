@@ -50,12 +50,12 @@ caption {
 }
 
 .custom-navbar-light{
-  background-color: #ffffff;
+  background-color: #f3f3f3;
 }
 .custom-navbar-light .nav-link,
 .custom-navbar-light .navbar-brand
 {
-  color: #3fbbdd;
+  color: #008ac0;
 }
 
 .custom-navbar-dark{
@@ -64,18 +64,18 @@ caption {
 .custom-navbar-dark .nav-link,
 .custom-navbar-dark .navbar-brand
 {
-  color: #00a2e2;
+  color: #008ac0;
 }
 
 
 
 .dark-text{
-  color: #00a2e2;
+  color: #008ac0;
 
 }
 
 .bg-custom{
-  background-color: #01709c;
+  background-color: #008ac0;
 }
 
 .custom-btn,.custom-btn:hover{
@@ -89,3 +89,4 @@ caption {
   background-color:#ffffff;
 }
 /* #08425 */
+
