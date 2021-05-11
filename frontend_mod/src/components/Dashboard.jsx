@@ -164,7 +164,7 @@ function Dashboard(props) {
         >
           {user.username.charAt(0).toUpperCase()}
         </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{textDecoration:"none"}}>
           <li>
             <div className="dropdown-item" onClick={(e) => handleClick(e)}>
               Logout
@@ -248,7 +248,8 @@ function Dashboard(props) {
         </div>
       </div>
       <ProfileInfo name={user.username} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
-      <hr className="m-5"/>
+     
+      <hr style={{height:"0.15rem",border:"none",color:"#00b7ff",backgroundColor:"#00b7ff"}} className="m-5"/>
       {/* Call for the total blogs */}
 
       <div className="row">

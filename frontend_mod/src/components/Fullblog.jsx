@@ -38,12 +38,13 @@ const [state, setState] = useState({
   author: location.state.author,
   isAuthenticated: location.state.isAuthenticated,
   id: location.state.id,
-  date:location.state.date
+  date:location.state.date,
+  views:location.state.views
 })
 
 useEffect(()=>{
   //console.log(state);
-},[liked,disliked,likes,dislikes]);
+},[state]);
 
 
 
@@ -97,22 +98,17 @@ useEffect(()=>{
 
       </div>
       <div className="card-footer ">
-        <h5 className='text-right'>-{state.author}</h5>
-        <h5 className='text-left'>{state.date}</h5>
+        <h5 className="text-right">-{state.author}</h5>
+        <div className="d-flex">
+          <ion-icon name="eye-sharp" size="large"></ion-icon>
+          <h5 className="m-1">{state.views}</h5></div>
         
         <div className="text-left">
-          {/* {
-           ! liked?<ion-icon name="caret-up-circle-outline" size="large" onClick={()=>{isLiked(true); isDisliked(false);handleLikeDislikes()}}></ion-icon> :<ion-icon name="caret-up-circle-sharp" size="large" onClick={()=>{isLiked(false); isDisliked(false);handleLikeDislikes()}}></ion-icon> 
-          }
-         {
-           ! disliked?<ion-icon name="caret-down-circle-outline" size="large" onClick={()=>{isLiked(false); isDisliked(true);handleLikeDislikes()}}></ion-icon>: <ion-icon name="caret-down-circle-sharp" size="large" onClick={()=>{isLiked(false); isDisliked(false);handleLikeDislikes()}}></ion-icon>
-         } 
-         {
-           
-         } */}
+         {state.date}
           </div>
       </div>
-    </div></div>
+    </div>
+    </div>
   );
 }
 

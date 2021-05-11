@@ -88,5 +88,20 @@ caption {
   color: #008ac0;
   background-color:#ffffff;
 }
-/* #08425 */
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #008ac0;
+}
+
+hr {
+  border: none;
+  height: 10px;
+  /* Set the hr color */
+  color: #008ac0; /* old IE */
+  background-color: #00b7ff; /* Modern Browsers */
+}
+
+
 

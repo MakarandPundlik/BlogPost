@@ -57,7 +57,7 @@ function Login(props) {
             setLoading(true);
           } else {
             setErros({
-              title: "PLease check your credentials",
+              title: "Please check your credentials",
               myclass: "alert alert-danger alert-dismissible fade show",
             });
             setLoading(false);

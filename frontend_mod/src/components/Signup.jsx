@@ -100,7 +100,7 @@ function Signup(props) {
   return loading ? (
     <Loading />
   ) : (
-    <div className="my-5" >
+    <div style={{marginTop:"3.5rem"}} >
       <div className="alert">
         {errors.title && (
           <div className={errors.myclass} role="alert">

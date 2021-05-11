@@ -5,7 +5,7 @@ const Blogvalidator = (blog) =>{
     {
         msg='All fields are mandatory';
         flag=false;
-        myclass='alert alert-danger fade show';
+        myclass='alert alert-info fade show';
     }
     else {
         msg='Hola! Your blog has been added successfully.'

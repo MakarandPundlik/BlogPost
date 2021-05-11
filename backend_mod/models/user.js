@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const today = new Date();
 const userSchema = new mongoose.Schema({
     firstname:{
         type:String,
@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
         },
         date:{
             type:String,
-            required:true
+            default:`${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
         },
         views:{
             type:Number,

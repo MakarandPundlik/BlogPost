@@ -6,8 +6,8 @@ function ProfileInfo({ name, age, about,total,last_activity }) {
       <div className="card text-center mx-5 bg-custom" style={{ maxWidth: "35rem",color:"#ffffff" }}>
         <div className="card-header">Personal Info</div>
         <div className="card-body">
-          <h5 className="card-title">{name.toLocaleUpperCase()}</h5>
-          <p className="card-text">{about}</p>
+          <h5 className="card-title">Name :- {name.toLocaleUpperCase()}</h5>
+          <p className="card-text">About :- {about===undefined?"Not Applicable":about}</p>
         </div>
         
       </div>

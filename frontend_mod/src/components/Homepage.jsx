@@ -12,7 +12,7 @@ function Homepage(props) {
   const [blogs, setBlogs] = useState([]);
 
   const [currentpage, setCurrentpage] = useState(1);
-  const [postsperpage, setPostsperpage] = useState(10);
+  const [postsperpage, setPostsperpage] = useState(8);
 
   //pagination function
   const paginate = (pageNumber) => {

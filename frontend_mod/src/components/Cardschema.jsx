@@ -1,8 +1,11 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Blogvalidator from "../services/Blogvalidator";
 import Fullblog from "./Fullblog";
 import ImageArray from "./ImagesData";
+const API_URL = "http://localhost:2020";
+
 function Cardschema(props) {
   let history = useHistory();
   //to send state to fullblog component
@@ -13,6 +16,7 @@ function Cardschema(props) {
     isAuthenticated: props.isAuthenticated,
     id: props.id,
     date: props.date,
+    views:props.views
   });
 
   useEffect(()=>{
@@ -20,19 +24,33 @@ function Cardschema(props) {
   },[]);
   //handle Like and dislike function
 
-  const handleClick = (e) => {
+  const handleClick = async(e) => {
     e.preventDefault();
     console.log(state);
     history.push({
       pathname: "/fullblog",
-     
       state,
     });
+  await axios.post(`${API_URL}/api/incrementviews`,{
+    id:state.id,
+    views:state.views
+  } ,{
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  }).then((res)=>{
+
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
   };
 
   return (
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6 ">
-      <div className="card m-2 shadow-lg" style={{  color:"#008ac0" }}>
+      <div className="card m-2 shadow-lg " style={{  color:"#008ac0" }}>
        
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}

@@ -4,7 +4,7 @@ export const SignupValidator = (profile) => {
             title:'Errors',
             text: 'All fileds are mandatory',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
         }
 
     else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(profile.email))
@@ -12,21 +12,21 @@ export const SignupValidator = (profile) => {
             title:'Email',
             text: 'Please enter valid email id',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
         }
     else if (profile.password.length < 6)
         return {
             title:'Password',
             text: 'Password must be longer than 6 characters',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
         }
     else if (profile.password != profile.conpassword)
         return {
             title:'Password',
             text: 'Please re enter your password',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
         }
         else
         return {
@@ -43,14 +43,14 @@ export const LoginValidator = (profile) =>{
         title:'Errors',
             text: 'All fileds are mandatory',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
     }
     else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(profile.email))
         return {
             title:'Email',
             text: 'Please enter valid email id',
             status: false,
-            myclass:'alert alert-danger alert-dismissible fade show'
+            myclass:'alert alert-info alert-dismissible fade show'
         }
     else 
     return{

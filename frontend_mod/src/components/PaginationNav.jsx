@@ -11,7 +11,7 @@ function PaginationNav(props) {
       <ul className="pagination">
        
         {pageNumbers.map((number) => (
-          <li key={number} className="page-item">
+          <li key={number} className="page-item m-1">
             <a
               className="page-link bg-custom"
               style={{ color: "#fff", textDecoration: "none" }}
