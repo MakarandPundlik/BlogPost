@@ -2,8 +2,7 @@ import React from "react";
 
 function Homepage(props) {
   return (
-    <div className="container-fluid" style={{marginTop:"5%"}}>
-      
+    <div className="container-fluid" style={{ marginTop: "5%" }}>
       <div className="waveWrapper waveAnimation">
         <div className="waveWrapperInner bgTop">
           <div

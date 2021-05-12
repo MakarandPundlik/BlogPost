@@ -57,7 +57,19 @@ const userSchema = new mongoose.Schema({
         views:{
             type:Number,
             default:0
-        }
+        },
+        comments:[
+            {
+                data:{
+                    type:String,
+                    required:true
+                },
+                name:{
+                    type:String,
+                    required:true
+                }
+            }
+        ]
     }
    ]
 });

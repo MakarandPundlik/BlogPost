@@ -1,8 +1,6 @@
 .App {
   text-align: center;
-
 }
-
 
 /*For jsx files*/
 caption {
@@ -15,47 +13,44 @@ caption {
   background-color: #00a2e2;
 }
 
-.custom-navbar-light{
+.custom-navbar-light {
   background-color: #f3f3f3;
 }
 .custom-navbar-light .nav-link,
-.custom-navbar-light .navbar-brand
-{
+.custom-navbar-light .navbar-brand {
   color: #008ac0;
 }
 
-.custom-navbar-dark{
-  background-color: #242424; 
+.custom-navbar-dark {
+  background-color: #242424;
 }
 .custom-navbar-dark .nav-link,
-.custom-navbar-dark .navbar-brand
-{
+.custom-navbar-dark .navbar-brand {
   color: #008ac0;
 }
 
-
-
-.dark-text{
+.dark-text {
   color: #008ac0;
-
 }
 
-.bg-custom{
+.bg-custom {
   background-color: #008ac0;
 }
 
-.custom-btn,.custom-btn:hover{
+.custom-btn,
+.custom-btn:hover {
   background-color: #008ac0;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .modal-btn,
-.modal-btn:hover{
+.modal-btn:hover {
   color: #008ac0;
-  background-color:#ffffff;
+  background-color: #ffffff;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   color: #fff;
   text-decoration: none;
   background-color: #008ac0;
@@ -69,18 +64,17 @@ hr {
   background-color: #00b7ff; /* Modern Browsers */
 }
 
-
 /* background effect */
 
 @keyframes move_wave {
   0% {
-      transform: translateX(0) translateZ(0) scaleY(1)
+    transform: translateX(0) translateZ(0) scaleY(1);
   }
   50% {
-      transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    transform: translateX(-25%) translateZ(0) scaleY(0.55);
   }
   100% {
-      transform: translateX(-50%) translateZ(0) scaleY(1)
+    transform: translateX(-50%) translateZ(0) scaleY(1);
   }
 }
 .waveWrapper {
@@ -98,7 +92,7 @@ hr {
   overflow: hidden;
   height: 100%;
   bottom: -1px;
-  background-image: linear-gradient(to top, #008ac0 20%, #2e2e46 80%);
+  background-image: linear-gradient(to top, #008ac0 100%, #2e2e46 10%);
 }
 .bgTop {
   z-index: 15;
@@ -123,13 +117,12 @@ hr {
 }
 .waveTop {
   background-size: 50% 100px;
- 
 }
 .waveAnimation .waveTop {
-animation: move-wave 3s;
- -webkit-animation: move-wave 3s;
- -webkit-animation-delay: 1s;
- animation-delay: 1s;
+  animation: move-wave 3s;
+  -webkit-animation: move-wave 3s;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
 }
 .waveMiddle {
   background-size: 50% 120px;
