@@ -50,7 +50,7 @@ function Cardschema(props) {
 
   return (
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6 ">
-      <div className="card m-2 shadow-lg " style={{  color:"#008ac0" }}>
+      <div className="card shadow-lg " style={{  color:"#008ac0" }}>
        
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}

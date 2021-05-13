@@ -130,3 +130,11 @@ module.exports.incrementViews=async(req,res)=>{
     })
 }
 // db.users.find({awards: {$elemMatch: {award:'National Medal', year:1975}}})
+
+//add comment to the blog
+module.exports.addComment=(req,res)=>{
+    const{id,data,name} = req.body;
+    userSchema.findOneAndUpdate(
+        {blogArray:{$elemMatch:{_id:id}}},//find the blog first
+    )
+}

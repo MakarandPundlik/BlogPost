@@ -252,7 +252,7 @@ function Dashboard(props) {
       <hr style={{height:"0.15rem",border:"none",color:"#00b7ff",backgroundColor:"#00b7ff"}} className="m-5"/>
       {/* Call for the total blogs */}
 
-      <div className="row">
+      <div className="row g-5">
         {
           blogs.length>0? 
           <div className="h3 my-5">Here are your blogs.</div>
