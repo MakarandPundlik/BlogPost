@@ -50,7 +50,7 @@ function Cardschema(props) {
 
   return (
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6 ">
-      <div className="card shadow-lg " style={{  color:"#008ac0" }}>
+      <div className="card shadow-lg " style={{  color:"#4bcbeb" }}>
        
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}
@@ -65,7 +65,7 @@ function Cardschema(props) {
           {/* <div className="text-left">
             <div className="text-secondary">100 100</div>
           </div> */}
-          <button className="btn custom-btn m-1" onClick={(e) => handleClick(e)}>
+          <button className="btn btn-homepage m-1" onClick={(e) => handleClick(e)}>
             Read Blog
           </button>
         </div>

@@ -156,7 +156,7 @@ function Dashboard(props) {
       {/* Dropdown user menu */}
       <div className="dropdown m-3" style={{ textAlign: "right"}}>
         <button
-          className="btn custom-btn dropdown-toggle rounded-pill"
+          className="btn btn-homepage dropdown-toggle rounded-pill"
           type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"

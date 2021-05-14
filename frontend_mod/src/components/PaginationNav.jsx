@@ -13,7 +13,7 @@ function PaginationNav(props) {
         {pageNumbers.map((number) => (
           <li key={number} className="page-item m-1">
             <a
-              className="page-link bg-custom"
+              className="page-link custom-link"
               style={{ color: "#fff", textDecoration: "none" }}
               onClick={() => paginate(number)}
             >

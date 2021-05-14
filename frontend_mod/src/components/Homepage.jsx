@@ -1,58 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import landing_2 from "../images/landing_2.jpg";
 function Homepage(props) {
- 
-  const [btnclass,setBtnclass] = useState()
-  useEffect(async()=>{
-    await setBtnclass(localStorage.getItem("dark").toString()?"btn btn-homepage-dark":"btn btn-homepage-light");
-  },[btnclass,localStorage.getItem("dark")])
+  const [btnclass, setBtnclass] = useState();
+
   return (
-    <div
-      className="container-fluid"
-      style={{ background: "#00a2e2", height: "100vh" }}
-    >
+    <div className="container-fluid">
+      <div className="row" style={{ marginTop: "15%" }}>
+        <h2 class="card-title">BlogPost</h2>
+        <h3 class="card-text">
+         A website to tell your own story
+        </h3>
+      </div>
       <div className="row">
-        <div className="col-lg-6 col-md-6 col-xl-6 text-left mx-5" style={{marginTop:"20%"}}>
-          
-        <button type="button" className={btnclass}>Get Started</button>
+
+        <div className="text-center">
+          <Link to="/blogs">
+            {" "}
+            <button type="button" className="btn btn-homepage m-5">
+              Get Started
+            </button>
+          </Link>
+          <hr />
         </div>
       </div>
-      {/* <div className="waveWrapper waveAnimation">
-        <div className="waveWrapperInner bgTop">
-          <div
-            className="wave waveTop"
-            style={{
-              backgroundImage:
-                "url(" +
-                "http://front-end-noobs.com/jecko/img/wave-top.png" +
-                ")",
-            }}
-          ></div>
+      <div className="row">
+        <div className="text-center my-3">
+          <h4>Sign Up to write your own story...</h4>
+          <Link to="/signup">
+            {" "}
+            <button type="button" className="btn btn-homepage m-1">
+              Register
+            </button>
+          </Link>
         </div>
-
-        <div className="waveWrapperInner bgMiddle">
-          <div
-            className="wave waveMiddle"
-            style={{
-              backgroundImage:
-                "url(" +
-                "http://front-end-noobs.com/jecko/img/wave-mid.png" +
-                ")",
-            }}
-          ></div>
-        </div>
-        <div className="waveWrapperInner bgBottom">
-          <div
-            className="wave waveBottom"
-            style={{
-              backgroundImage:
-                "url(" +
-                "http://front-end-noobs.com/jecko/img/wave-bot.png" +
-                ")",
-            }}
-          ></div>
-        </div>
-      </div> */}
+      </div>
     </div>
   );
 }

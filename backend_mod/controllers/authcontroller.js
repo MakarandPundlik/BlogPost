@@ -101,7 +101,7 @@ module.exports.login_post = (req, res) => {
 
   //check for the existing email
   userSchema
-    .findOne({ email })
+    .findOneAndUpdate({ email })
     .then((user) => {
       if (!user) {
         errors.email = "User does not exists";

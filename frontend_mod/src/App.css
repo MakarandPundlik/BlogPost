@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  
 }
 
 /*For jsx files*/
@@ -10,8 +9,8 @@ caption {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #00a2e2;
-  background-color: #00a2e2;
+  border-color: #4bcbeb;
+  background-color: #4bcbeb;
 }
 
 .custom-navbar-light {
@@ -19,7 +18,7 @@ caption {
 }
 .custom-navbar-light .nav-link,
 .custom-navbar-light .navbar-brand {
-  color: #008ac0;
+  color: #4bcbeb;
 }
 
 .custom-navbar-dark {
@@ -27,26 +26,26 @@ caption {
 }
 .custom-navbar-dark .nav-link,
 .custom-navbar-dark .navbar-brand {
-  color: #008ac0;
+  color: #4bcbeb;
 }
 
 .dark-text {
-  color: #008ac0;
+  color: #4bcbeb;
 }
 
 .bg-custom {
-  background-color: #008ac0;
+  background-color: #4bcbeb;
 }
 
 .custom-btn,
 .custom-btn:hover {
-  background-color: #008ac0;
+  background-color: #4bcbeb;
   color: #ffffff;
 }
 
 .modal-btn,
 .modal-btn:hover {
-  color: #008ac0;
+  color: #4bcbeb;
   background-color: #ffffff;
 }
 
@@ -54,42 +53,41 @@ caption {
 .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #008ac0;
+  background-color: #4bcbeb;
 }
 
 hr {
   border: none;
   height: 10px;
   /* Set the hr color */
-  color: #008ac0; /* old IE */
+  color: #4bcbeb; /* old IE */
   background-color: #00b7ff; /* Modern Browsers */
 }
 
 /* homepage */
-.btn-homepage-light{
-  color: #ffffff;
-  
+
+.btn-homepage {
+  color: #4bcbeb;
   border-radius: 2rem;
   border-width: 0.1rem;
-  border-color: #ffffff;
+  border-color: #4bcbeb;
+  transition: 0.7s;
 }
-.btn-homepage-light:hover{
-  color: #00a2e2;
-  background-color: #ffffff;
+.btn-homepage:hover {
+  color: #ffffff;
+  background-color: #4bcbeb;
   border-radius: 2rem;
   border-width: 0.1rem;
+  border-color: #4bcbeb;
+  transition: 0.7s;
 }
 
-.btn-homepage-dark{
-  color: #000000;
-  
-  border-radius: 2rem;
-  border-width: 0.1rem;
-  border-color: #000000;
+/* pagination nav */
+.custom-link{
+  background-color: #4bcbeb;
+  transition: 0.7s;
 }
-.btn-homepage-dark:hover{
-  color: #00a2e2;
-  background-color: #000000;
-  border-radius: 2rem;
-  border-width: 0.1rem;
+.custom-link:hover{
+  background-color: #4bcbeb;
+  transition: 0.7s;
 }

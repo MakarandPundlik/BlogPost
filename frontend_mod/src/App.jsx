@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 function App() {
  
   return (
-    <div className="App" style={{color:"#008ac0"}}>
+    <div className="App" style={{color:"#4bcbeb"}}>
       
       <BrowserRouter>
         <Navbar />
