@@ -5,12 +5,7 @@ import fullblog from "../images/fullblog.jpg";
 import axios from "axios";
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
-  //state for comments
-  const [comment, setComment] = useState({
-    data: "",
-    name: "",
-  });
-
+  
   //setting up location sent from previous call
   const location = useLocation();
 
@@ -33,6 +28,38 @@ function Fullblog(props) {
     // console.log(state.comments);
   }, [state]);
 
+  //state for comments
+  const [comment, setComment] = useState({
+    data: "",
+    name: "",
+  });
+
+  //handle comment
+  const handleChange=(e)=>{
+    setComment({...comment,[e.target.id]:e.target.value})
+  }
+  //handle comment submit
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+    //console.log(comment);
+    await axios.post(`${API_URL}/api/addcomment`,{
+      id:state.id,
+      data:comment.data,
+      name:comment.name
+    },{
+      headers:{
+        "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Access-Control-Allow-Origin": "*",
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
   //handle edits
   const handleEdit = () => {
     console.log("please enter the edited blog");
@@ -50,7 +77,7 @@ function Fullblog(props) {
         {
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
+            "Accept": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
         }
@@ -72,7 +99,7 @@ function Fullblog(props) {
   ) : (
     <div style={{ marginTop: "10%" }}>
       <div className="card mx-auto m-5" style={{ maxWidth: "750px" }}>
-        <img src={fullblog} className="card-img-top" alt="..." />
+        <img src={fullblog} className="card-img-top" alt="blog-image" height="450rem"/>
         <div className="card-body">
           {location.state.isAuthenticated && (
             <div className="text-right">
@@ -95,7 +122,7 @@ function Fullblog(props) {
           <div className="d-flex justify-content-around my-3">
             <h5>Created On :- {state.date}</h5>
             <h5>Total Views :- {state.views}</h5>
-            <h5>Author :- {state.author}</h5>
+            <h5>Contributer :- {state.author}</h5>
           </div>
           <hr />
           <div className="input-group my-3">
@@ -103,23 +130,34 @@ function Fullblog(props) {
               type="text"
               className="form-control"
               placeholder="Comment here"
-              aria-label="Comment here"
+              id="data" 
+              onChange={(e)=>handleChange(e)}
+              aria-describedby="button-addon2"
+            />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Name"
+              id="name"
+              onChange={(e)=>handleChange(e)}
               aria-describedby="button-addon2"
             />
             <button
               className="btn btn-homepage"
               type="button"
               id="button-addon2"
+              onClick={(e)=>handleSubmit(e)}
             >
               Add Comment
             </button>
           </div>
+          <h4 className="text-left">Comments :-</h4>
           <ul className="list-group">
             {state.comments.map((comment) => {
               return (
-                <li className="list-group-item d-flex justify-content-around" key={comment._id} style={{color:"#4bcbeb"}}>
-                  <h6>{comment.data}</h6>
-                  <p>-{comment.name}</p>
+                <li className="list-group-item " key={comment._id} style={{color:"#4bcbeb"}}>
+                  <h5 className="text-left">{comment.data}</h5>
+                  <p className="text-right">-{comment.name}</p>
                 </li>
               );
             })}

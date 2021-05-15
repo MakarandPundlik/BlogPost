@@ -7,8 +7,8 @@ function Homepage(props) {
   return (
     <div className="container-fluid">
       <div className="row" style={{ marginTop: "15%" }}>
-        <h2 class="card-title my-5">BlogPost</h2>
-        <h3 class="card-text">
+        <h2 className="card-title" style={{marginBottom:"2%"}}>BlogPost</h2>
+        <h3 className="card-text">
          A website to tell your own story
         </h3>
       </div>
@@ -17,7 +17,7 @@ function Homepage(props) {
         <div className="text-center">
           <Link to="/blogs">
             {" "}
-            <button type="button" className="btn btn-homepage m-5">
+            <button type="button" className="btn btn-homepage m-3">
               Get Started
             </button>
           </Link>

@@ -143,7 +143,8 @@ module.exports.addComment=async(req,res)=>{
                     data
                 }
             }
-        }
+        },
+        {useFindAndModify:false}
     ).then((result)=>{
         //console.log(result);
         return res.json({msg:"comment has been added successfully..."});
