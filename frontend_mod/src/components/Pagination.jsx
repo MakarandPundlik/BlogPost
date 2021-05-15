@@ -19,6 +19,7 @@ function Pagination(props) {
               author={blog.author}
               views={blog.views}
               date={blog.date}
+              comments={blog.comments}
             />
           );
         })}

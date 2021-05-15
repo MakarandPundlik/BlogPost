@@ -132,9 +132,23 @@ module.exports.incrementViews=async(req,res)=>{
 // db.users.find({awards: {$elemMatch: {award:'National Medal', year:1975}}})
 
 //add comment to the blog
-module.exports.addComment=(req,res)=>{
+module.exports.addComment=async(req,res)=>{
     const{id,data,name} = req.body;
-    userSchema.findOneAndUpdate(
-        {blogArray:{$elemMatch:{_id:id}}},//find the blog first
-    )
+   await userSchema.findOneAndUpdate(
+        {"blogArray._id":id},//find the blog first
+        {
+            $push:{
+                "blogArray.$.comments":{
+                    name,
+                    data
+                }
+            }
+        }
+    ).then((result)=>{
+        //console.log(result);
+        return res.json({msg:"comment has been added successfully..."});
+    })
+    .catch((err)=>{
+         console.log(err);
+    })
 }

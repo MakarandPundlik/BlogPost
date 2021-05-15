@@ -16,11 +16,12 @@ function Cardschema(props) {
     isAuthenticated: props.isAuthenticated,
     id: props.id,
     date: props.date,
-    views:props.views
+    views:props.views,
+    comments:props.comments
   });
-
+ 
   useEffect(()=>{
-    console.log(state);
+    //console.log(state);
   },[]);
   //handle Like and dislike function
 
