@@ -44,6 +44,8 @@ module.exports.signup_post = (req, res) => {
                 return res.json({ errors });
               } else {
                 newUser.password = hash;
+                const today = new Date();
+                newUser.last_activity = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
                 newUser.save();
 
                 //send mail to user regarding login activity
@@ -115,6 +117,9 @@ module.exports.login_post = (req, res) => {
 
             return res.json({ errors });
           } else {
+             //save recent activity of user
+             const today = new Date();
+             user.last_activity = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
             //create accesstoken  for user
             const accesstoken = createAccessToken(user);
             //send mail to user regarding login activity
@@ -148,6 +153,8 @@ module.exports.login_post = (req, res) => {
               else console.log(err);
             });
 
+           
+         
             return res.json({
               msg: "user logged in successfully",
               accesstoken: accesstoken,

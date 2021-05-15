@@ -19,7 +19,7 @@ function ProfileInfo({ name, age, about,total,last_activity }) {
           <h5 className="card-title">Total views : {total}</h5>
           <p className="card-text"></p>
         </div>
-        <div className="card-footer  d-flex justify-content-center">
+        <div className="card-footer  d-flex justify-content-around">
           <ion-icon name="timer-outline" size="large"></ion-icon>
           <p className="m-1">Recent activity : {last_activity}</p>
         </div>

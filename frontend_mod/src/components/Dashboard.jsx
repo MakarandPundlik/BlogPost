@@ -192,7 +192,7 @@ function Dashboard(props) {
         
         >
           <div className="modal-dialog text-center" >
-            <div className="modal-content"  style={{color:"#ffffff",backgroundColor:"#008ac0"}}>
+            <div className="modal-content"  style={{color:"#ffffff",backgroundColor:"#4bcbeb"}}>
               <div className="modal-header">
                 <h5 className="modal-title text-center">Add Blog</h5>
               </div>
@@ -249,7 +249,7 @@ function Dashboard(props) {
       </div>
       <ProfileInfo name={user.username} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
      
-      <hr style={{height:"0.15rem",border:"none",color:"#00b7ff",backgroundColor:"#00b7ff"}} className="m-5"/>
+      <hr style={{height:"0.15rem",border:"none",color:"#4bcbeb",backgroundColor:"#4bcbeb"}} className="m-5"/>
       {/* Call for the total blogs */}
 
       <div className="row g-5">
@@ -276,7 +276,7 @@ function Dashboard(props) {
           })}
       </div>
       {!blogs.length && (
-        <div className="h3 text-secondary">
+        <div className="h3 my-5">
           You haven't written any blogs yet!
         </div>
       )}
