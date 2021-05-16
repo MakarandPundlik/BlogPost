@@ -73,33 +73,14 @@ function Login(props) {
     }
   };
 
-
-  const getDefaultTheme=()=> {
-    const selectedTheme = JSON.parse(localStorage.getItem('dark'))
-    return selectedTheme || false
-  }
-  const [darkTheme,setDarkTheme] = useState(getDefaultTheme());
-
-  useEffect(async()=>{
-    await localStorage.setItem('dark',JSON.stringify(darkTheme));
-   // document.body.style.backgroundColor = darkTheme?"#000000":"#ffffff"
-  },[darkTheme]);
-
-
   //classes fot theme
   const bglight = "card shadow-lg my-5 bg-light";
- 
 
-
-  
   return loading ? (
     <Loading />
   ) : (
-    <div className="row my-5" style={{textAlign:"center"}}>
-      <div
-        className={bglight}
-        style={{ width: "25rem", marginLeft: "37%" }}
-      >
+    <div className="row my-5" style={{ textAlign: "center" }}>
+      <div className={bglight} style={{ width: "25rem", marginLeft: "37%" }}>
         <div className="card-body">
           {errors.title && (
             <div className={errors.myclass} role="alert">
@@ -110,26 +91,40 @@ function Login(props) {
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="mb-3">
               <label className="form-label">Email address</label>
-             
-                
+              <div className="input-group">
+                <span class="input-group-text">
+                  <ion-icon
+                    name="mail-outline"
+                    style={{ color: "#4bcbeb", fontSize: "24px" }}
+                  ></ion-icon>
+                </span>
                 <input
                   type="email"
                   className="form-control"
+                  placeholder="test@yahoo.net"
                   id="email"
                   value={state.email}
                   onChange={(e) => handleChange(e)}
                 />
-        
+              </div>
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={state.password}
-                onChange={(e) => handleChange(e)}
-              />
+              <div className="input-group">
+                <span class="input-group-text">
+                  <ion-icon
+                    name="lock-closed-outline"
+                    style={{ color: "#4bcbeb", fontSize: "24px" }}
+                  ></ion-icon>
+                </span>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  value={state.password}
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
             </div>
 
             <button
