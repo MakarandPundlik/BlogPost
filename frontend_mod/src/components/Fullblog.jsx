@@ -153,7 +153,7 @@ function Fullblog(props) {
           </div>
           <h4 className="text-left">Comments :-</h4>
           <ul className="list-group">
-            {state.comments.map((comment) => {
+            {state.comments.filter((comment,index)=>index<3).map(comment => {
               return (
                 <li className="list-group-item " key={comment._id} style={{color:"#4bcbeb"}}>
                   <h5 className="text-left">{comment.data}</h5>
@@ -169,3 +169,10 @@ function Fullblog(props) {
 }
 
 export default Fullblog;
+
+// var film = this.props.data.filter((item, idx) => idx < 5).map(item => {
+//   return <FilmItem key={item.id} film={item} />
+// });
+
+// return film;
+

@@ -122,7 +122,7 @@ module.exports.incrementViews=async(req,res)=>{
         {useFindAndModify:false}
     )
     .then((result)=>{
-        console.log("Increment request routed...")
+        //console.log("Increment request routed...")
         return res.json({msg:"Views has been successfully updated",result})
     })
     .catch((err)=>{
