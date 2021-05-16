@@ -27,7 +27,7 @@ function Cardschema(props) {
 
   const handleClick = async(e) => {
     e.preventDefault();
-    console.log(state);
+   // console.log(state);
     history.push({
       pathname: "/fullblog",
       state,

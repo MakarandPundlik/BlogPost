@@ -3,6 +3,7 @@ import { Redirect, useLocation } from "react-router-dom";
 import ImageArray from "./ImagesData";
 import fullblog from "../images/fullblog.jpg";
 import axios from "axios";
+import EditProfile from './EditPofile';
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
   
@@ -153,7 +154,9 @@ function Fullblog(props) {
           </div>
           <h4 className="text-left">Comments :-</h4>
           <ul className="list-group">
-            {state.comments.filter((comment,index)=>index<3).map(comment => {
+            {
+            state.comments &&
+            state.comments.filter((comment,index)=>index<3).map(comment => {
               return (
                 <li className="list-group-item " key={comment._id} style={{color:"#4bcbeb"}}>
                   <h5 className="text-left">{comment.data}</h5>

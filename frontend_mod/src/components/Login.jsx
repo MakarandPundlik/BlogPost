@@ -79,8 +79,11 @@ function Login(props) {
   return loading ? (
     <Loading />
   ) : (
-    <div className="row my-5" style={{ textAlign: "center" }}>
-      <div className={bglight} style={{ width: "25rem", marginLeft: "37%" }}>
+    <div
+      className="row my-5 d-flex justify-content-center"
+      style={{ textAlign: "center" }}
+    >
+      <div className={bglight} style={{ width: "25rem" }}>
         <div className="card-body">
           {errors.title && (
             <div className={errors.myclass} role="alert">
@@ -92,7 +95,7 @@ function Login(props) {
             <div className="mb-3">
               <label className="form-label">Email address</label>
               <div className="input-group">
-                <span class="input-group-text">
+                <span className="input-group-text">
                   <ion-icon
                     name="mail-outline"
                     style={{ color: "#4bcbeb", fontSize: "24px" }}
@@ -101,7 +104,6 @@ function Login(props) {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="test@yahoo.net"
                   id="email"
                   value={state.email}
                   onChange={(e) => handleChange(e)}
@@ -111,7 +113,7 @@ function Login(props) {
             <div className="mb-3">
               <label className="form-label">Password</label>
               <div className="input-group">
-                <span class="input-group-text">
+                <span className="input-group-text">
                   <ion-icon
                     name="lock-closed-outline"
                     style={{ color: "#4bcbeb", fontSize: "24px" }}

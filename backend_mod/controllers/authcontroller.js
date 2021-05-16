@@ -100,10 +100,10 @@ module.exports.signup_post = (req, res) => {
 module.exports.login_post = (req, res) => {
   const { email, password } = req.body.profile;
   let errors = { email: "", password: "" };
-
+  //console.log(email,password);
   //check for the existing email
   userSchema
-    .findOneAndUpdate({ email })
+    .findOneAndUpdate({ email },{useFindAndModify:false})
     .then((user) => {
       if (!user) {
         errors.email = "User does not exists";

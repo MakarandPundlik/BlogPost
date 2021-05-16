@@ -108,175 +108,178 @@ function Signup(props) {
         )}
       </div>
       <div className="container my-1">
-        <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xl-6 my-3">
-            <div className="card shadow-lg" style={{ width: "27rem" }}>
-              <div className="card-body">
-                <h5 className="card-title">Sign Up</h5>
+        <div className="row d-flex justify-content-around">
+          <div className="card shadow-lg my-3" style={{ width: "27rem" }}>
+            <div className="card-body">
+              <h5 className="card-title">Sign Up</h5>
 
-                <form onSubmit={(e) => handleSubmit(e)}>
-                  <div className="mb-3">
-                    <label className="form-label">First Name</label>
-                    <div className="input-group">
-                      <span class="input-group-text">
-                        <ion-icon
-                          name="person-outline"
-                          style={{ color: "#4bcbeb", fontSize: "24px" }}
-                        ></ion-icon>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="firstname"
-                        value={state.firstname}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="mb-3">
+                  <label className="form-label">First Name</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <ion-icon
+                        name="person-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="firstname"
+                      value={state.firstname}
+                      onChange={(e) => handleChange(e)}
+                    />
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label">Last Name</label>
-                    <div className="input-group">
-                      <span class="input-group-text">
-                        <ion-icon
-                          name="person-outline"
-                          style={{ color: "#4bcbeb", fontSize: "24px" }}
-                        ></ion-icon>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="lastname"
-                        value={state.lastname}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Last Name</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <ion-icon
+                        name="person-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="lastname"
+                      value={state.lastname}
+                      onChange={(e) => handleChange(e)}
+                    />
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label">Email address</label>
-                    <div className="input-group">
-                      <span class="input-group-text">
-                        <ion-icon
-                          name="mail-outline"
-                          style={{ color: "#4bcbeb", fontSize: "24px" }}
-                        ></ion-icon>
-                      </span>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        value={state.email}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Email address</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <ion-icon
+                        name="mail-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      value={state.email}
+                      onChange={(e) => handleChange(e)}
+                    />
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <div className="input-group">
-                      <span class="input-group-text">
-                        <ion-icon
-                          name="lock-closed-outline"
-                          style={{ color: "#4bcbeb", fontSize: "24px" }}
-                        ></ion-icon>
-                      </span>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        value={state.password}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Password</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <ion-icon
+                        name="lock-closed-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      value={state.password}
+                      onChange={(e) => handleChange(e)}
+                    />
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label">Confirm Password</label>
-                    <div className="input-group">
-                      <span class="input-group-text">
-                        <ion-icon
-                          name="lock-closed-outline"
-                          style={{ color: "#4bcbeb", fontSize: "24px" }}
-                        ></ion-icon>
-                      </span>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="conpassword"
-                        value={state.conpassword}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Confirm Password</label>
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <ion-icon
+                        name="lock-closed-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="conpassword"
+                      value={state.conpassword}
+                      onChange={(e) => handleChange(e)}
+                    />
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12 col-xl-6 my-3">
-            <div className="card shadow-lg" style={{ width: "27rem" }}>
-              <div className="card-body">
-                <h5 className="card-title">Personal Info</h5>
 
-                <form onSubmit={(e) => handleSubmit(e)}>
-                  <div className="mb-3">
-                    <label className="form-label">Age</label>
+          <div className="card shadow-lg my-3" style={{ width: "27rem" }}>
+            <div className="card-body">
+              <h5 className="card-title">Personal Info</h5>
+
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="mb-3">
+                  <label className="form-label">Age</label>
+                  <input
+                    min={0}
+                    max={100}
+                    type="number"
+                    className="form-control"
+                    id="age"
+                    value={state.age}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+                <label className="form-label">Gender</label>
+                <div className="mb-3">
+                  <div className="custom-control custom-radio custom-control-inline">
                     <input
-                      min={0}
-                      max={100}
-                      type="number"
-                      className="form-control"
-                      id="age"
-                      value={state.age}
-                      onChange={(e) => handleChange(e)}
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="male"
+                      className="custom-control-input"
+                      onChange={(e) => handleGenderChange(e)}
                     />
+                    <label className="custom-control-label" htmlFor="male">
+                      <ion-icon
+                        name="male-outline"
+                        style={{ color: "#4bcbeb", fontSize: "28px" }}
+                      ></ion-icon>
+                    </label>
                   </div>
-                  <label className="form-label">Gender</label>
-                  <div className="mb-3">
-                    <div className="custom-control custom-radio custom-control-inline">
-                      <input
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        className="custom-control-input"
-                        onChange={(e) => handleGenderChange(e)}
-                      />
-                      <label className="custom-control-label" htmlFor="male">
-                      <ion-icon name="male-outline" style={{ color: "#4bcbeb", fontSize: "28px"}}></ion-icon>
-                      </label>
-                    </div>
-                    <div className="custom-control custom-radio custom-control-inline">
-                      <input
-                        type="radio"
-                        id="female"
-                        name="gender"
-                        value="female"
-                        className="custom-control-input"
-                        onChange={(e) => handleGenderChange(e)}
-                      />
-                      <label className="custom-control-label" htmlFor="female">
-                      <ion-icon name="female-outline" style={{ color: "#4bcbeb", fontSize: "28px" }}></ion-icon>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">About</label>
-                    <textarea
-                      type="textarea"
-                      className="form-control"
-                      id="about"
-                      value={state.about}
-                      onChange={(e) => handleChange(e)}
+                  <div className="custom-control custom-radio custom-control-inline">
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                      className="custom-control-input"
+                      onChange={(e) => handleGenderChange(e)}
                     />
+                    <label className="custom-control-label" htmlFor="female">
+                      <ion-icon
+                        name="female-outline"
+                        style={{ color: "#4bcbeb", fontSize: "28px" }}
+                      ></ion-icon>
+                    </label>
                   </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    className="btn custom-btn"
-                    onClick={(e) => handleSubmit(e)}
-                  >
-                    Submit
-                  </button>
-                </form>
-              </div>
+                <div className="mb-3">
+                  <label className="form-label">About</label>
+                  <textarea
+                    type="textarea"
+                    className="form-control"
+                    id="about"
+                    value={state.about}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn custom-btn"
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  Submit
+                </button>
+              </form>
             </div>
           </div>
         </div>

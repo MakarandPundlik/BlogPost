@@ -4,7 +4,7 @@ function Pagination(props) {
   const  blogs  = props.blogs;
   const dark = "dark-text my-5";
   return (
-    <div className="row g-5" style={{ marginTop: "7%" }}>
+    <div className="row g-5 d-flex justify-content-around" style={{ marginTop: "7%" }}>
       {/* <Carousel/> */}
       <h3 className={dark}>Here are some blogs from BlogPost...</h3>
 

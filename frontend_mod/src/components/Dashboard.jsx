@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import Cardschema from "./Cardschema";
 import Blogvalidator from "../services/Blogvalidator";
 import Loading from "./Loading";
@@ -8,6 +8,7 @@ import ProfilePhoto from "./ProfilePhoto";
 import ProfileInfo from "./ProfileInfo";
 const API_URL = "http://localhost:2020";
 function Dashboard(props) {
+
   //for blog
   const [state, setState] = useState({
     title: "",
@@ -68,7 +69,7 @@ function Dashboard(props) {
             isAuthenticated: true,
             last_activity:res.data.last_activity
           });
-          console.log(user);
+          //console.log(user);
           setBlogs(Blogs);
         }
       })
@@ -144,6 +145,8 @@ function Dashboard(props) {
 
     props.history.push("/login");
   };
+
+  
   return redirect ? (
     <Redirect to="/login"></Redirect>
   ) : loading ? (
@@ -178,6 +181,15 @@ function Dashboard(props) {
             >
               {" "}
               Add Blog
+            </div>
+          </li>
+          <li>
+            <div
+              className="dropdown-item"
+              onClick={(e)=>props.history.push("/editprofile")}
+            >
+              {" "}
+             Edit Profile
             </div>
           </li>
         </ul>

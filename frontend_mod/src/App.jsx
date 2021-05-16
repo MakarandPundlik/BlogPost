@@ -9,6 +9,7 @@ import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
 import Fullblog from './components/Fullblog';
 import { useEffect, useState } from 'react';
+import EditPofile from './components/EditPofile';
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Navbar />
         <Switch>
         <Route exact path="/" component={Homepage}></Route>
+        <Route exact path="/editprofile" component={EditPofile}></Route>
         <Route exact path="/blogs" component={Blogs}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={Signup}></Route>
