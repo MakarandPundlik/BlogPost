@@ -3,6 +3,7 @@ const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');
 const isAuthenticated =require('../middlewares/auth');
 const userSchema = require('../models/user');
+const {editProfile} = require('../middlewares/userMiddleware');
 const { addBlog,getBlogs,getMyblogs,deleteBlog,editBlog,incrementViews,addComment} = require('../middlewares/blogMiddleware');
 const Router = express.Router();
 
@@ -40,5 +41,8 @@ Router.post("/api/incrementviews",incrementViews);
 
 //add comments
 Router.post("/api/addcomment",addComment);
+
+//edit profile
+Router.post("/api/editprofile",editProfile);
 
 module.exports = Router;
