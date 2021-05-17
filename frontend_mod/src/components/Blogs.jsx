@@ -54,6 +54,8 @@ function Blogs(props) {
   useEffect(() => {
     setLoading(false);
     //console.log(blogs)
+
+    
   }, [blogs]);
 
   //classes for heading

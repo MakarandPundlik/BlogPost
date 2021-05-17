@@ -25,7 +25,7 @@ module.exports.getMyblogs=(req,res)=>{
        // console.log(user.blogArray);
         const blogArray = user.blogArray;
         const today = new Date();
-       return res.json({blogArray,isAuthenticated:true,username:user.firstname+" "+user.lastname,about:user.about,age:user.age,gender:user.gender,last_activity:user.last_activity});
+       return res.json({blogArray,isAuthenticated:true,firstname:user.firstname,lastname:user.lastname,about:user.about,age:user.age,gender:user.gender,last_activity:user.last_activity,email:user.email});
     })
     .catch((err)=>{
         console.log(err);
@@ -39,8 +39,7 @@ module.exports.addBlog = (req, res) => {
     const newblog = {
         title,
         data,
-        author,
-        date:new Date().toString()
+        author
     }
     const email = getuserEmail(req.body.accesstoken);
 

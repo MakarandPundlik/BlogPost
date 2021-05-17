@@ -6,8 +6,11 @@ import Blogvalidator from "../services/Blogvalidator";
 import Loading from "./Loading";
 import ProfilePhoto from "./ProfilePhoto";
 import ProfileInfo from "./ProfileInfo";
+import EditPofile from "./EditPofile";
 const API_URL = "http://localhost:2020";
 function Dashboard(props) {
+  //history for editprofile
+  let history = useHistory();
 
   //for blog
   const [state, setState] = useState({
@@ -31,13 +34,15 @@ function Dashboard(props) {
 
   //user's profile
   const [user, setUser] = useState({
-    username: "",
+    firstname: "",
+    lastname:"",
     total: 0,
     about: "",
     age: 0,
     gender: "",
     isAuthenticated: false,
-    last_activity:0
+    last_activity:0,
+    email:""
   });
   useEffect(async () => {
     if (!localStorage.getItem("accesstoken")) setRedirect(true);
@@ -64,10 +69,12 @@ function Dashboard(props) {
             age: res.data.age,
             gender: res.data.gender,
             about: res.data.about,
-            username: res.data.username,
+            firstname:res.data.firstname,
+            lastname:res.data.lastname,
             total: res.data.blogArray.length,
             isAuthenticated: true,
-            last_activity:res.data.last_activity
+            last_activity:res.data.last_activity,
+            email:res.data.email
           });
           //console.log(user);
           setBlogs(Blogs);
@@ -112,7 +119,7 @@ function Dashboard(props) {
             blog: {
               title: state.title,
               data: state.data,
-              author: user.username,
+              author: user.firstname+" "+user.lastname,
             },
           },
           {
@@ -130,6 +137,10 @@ function Dashboard(props) {
         .catch((err) => {
           console.log(err);
         });
+
+        //regresh window to see updated blogs
+        window.location = window.location;
+        window.location.readload();
     }
     //set back the original state
     setState({
@@ -146,6 +157,14 @@ function Dashboard(props) {
     props.history.push("/login");
   };
 
+  //push edit profile
+  const pushEditProfile=(e)=>{
+    console.log(user);
+    history.push({
+      pathname:"/editprofile",
+      user
+    })
+  }
   
   return redirect ? (
     <Redirect to="/login"></Redirect>
@@ -165,7 +184,7 @@ function Dashboard(props) {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {user.username.charAt(0).toUpperCase()}
+          {user.firstname.charAt(0).toUpperCase()}
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{textDecoration:"none"}}>
           <li>
@@ -186,7 +205,7 @@ function Dashboard(props) {
           <li>
             <div
               className="dropdown-item"
-              onClick={(e)=>props.history.push("/editprofile")}
+              onClick={(e)=>pushEditProfile(e)}
             >
               {" "}
              Edit Profile
@@ -259,7 +278,7 @@ function Dashboard(props) {
           </div>
         </div>
       </div>
-      <ProfileInfo name={user.username} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
+      <ProfileInfo name={user.firstname+" "+user.lastname} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
      
       <hr style={{height:"0.15rem",border:"none",color:"#4bcbeb",backgroundColor:"#4bcbeb"}} className="m-5"/>
       {/* Call for the total blogs */}

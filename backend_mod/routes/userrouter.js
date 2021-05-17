@@ -45,6 +45,5 @@ Router.post("/api/addcomment",addComment);
 //edit profile
 Router.post("/api/editprofile",editProfile);
 
-//get profile info
-Router.post("/api/getuserprofile",getUserProfile);
+
 module.exports = Router;
