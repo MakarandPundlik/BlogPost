@@ -39,4 +39,21 @@ module.exports.editProfile = async (req, res) => {
     });
 };
 
+//report generation
+module.exports.getReport = (req, res) => {
+  const { accesstoken } = req.body;
+  const email = getuserEmail(accesstoken);
 
+  userSchema
+    .aggregate([
+      {$match:{"email":email}},
+      {$project:{"_id":0,"blogArray.title":1,"blogArray.date":1,"blogArray.views":1}}
+    ])
+    .then((user) => {
+      //console.log(user);
+      res.json({ msg: "Report generated",user });
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+};

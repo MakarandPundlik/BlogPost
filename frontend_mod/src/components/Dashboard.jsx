@@ -211,6 +211,15 @@ function Dashboard(props) {
              Edit Profile
             </div>
           </li>
+          <li>
+            <div
+              className="dropdown-item"
+              onClick={()=>props.history.push("/report")}
+            >
+              {" "}
+            Report
+            </div>
+          </li>
         </ul>
 
         {/* Blog form*/}
