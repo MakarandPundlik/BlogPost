@@ -159,7 +159,7 @@ function Dashboard(props) {
 
   //push edit profile
   const pushEditProfile=(e)=>{
-    console.log(user);
+    //console.log(user);
     history.push({
       pathname:"/editprofile",
       user

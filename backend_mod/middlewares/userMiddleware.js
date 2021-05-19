@@ -24,7 +24,6 @@ module.exports.editProfile = async (req, res) => {
           firstname: firstname,
           lastname: lastname,
           email: email,
-          password: password,
           age: age,
           gender: gender,
         },

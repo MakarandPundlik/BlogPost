@@ -215,6 +215,14 @@ function Signup(props) {
               <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-3">
                   <label className="form-label">Age</label>
+                  <div className="input-group">
+                  <span className="input-group-text">
+                      <ion-icon
+                        name="calendar-number-outline"
+                        style={{ color: "#4bcbeb", fontSize: "24px" }}
+                      ></ion-icon>
+                    </span>
+                  
                   <input
                     min={0}
                     max={100}
@@ -224,6 +232,7 @@ function Signup(props) {
                     value={state.age}
                     onChange={(e) => handleChange(e)}
                   />
+                </div>
                 </div>
                 <label className="form-label">Gender</label>
                 <div className="mb-3">
