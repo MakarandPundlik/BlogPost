@@ -13,31 +13,6 @@ const getuserEmail = (accesstoken) => {
   return email;
 };
 
-module.exports.editProfile = async (req, res) => {
-  const { firstname, lastname, email, age, gender } = req.body;
-
-  await userSchema
-    .findOneAndUpdate(
-      { email },
-      {
-        $set: {
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          age: age,
-          gender: gender,
-        },
-      },
-      { useFindAndModify: false }
-    )
-    .then((result) => {
-      console.log(result);
-      return res.json({ msg: "Profile has been edited successfully..." });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
 
 //report generation
 module.exports.getReport = (req, res) => {
@@ -51,7 +26,8 @@ module.exports.getReport = (req, res) => {
     ])
     .then((user) => {
       //console.log(user);
-      res.json({ msg: "Report generated",user });
+      const blogArray = user[0].blogArray;
+      res.json({ msg: "Report generated",blogArray });
     })
     .catch((err)=>{
       console.log(err);

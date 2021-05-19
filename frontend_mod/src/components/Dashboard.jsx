@@ -6,7 +6,7 @@ import Blogvalidator from "../services/Blogvalidator";
 import Loading from "./Loading";
 import ProfilePhoto from "./ProfilePhoto";
 import ProfileInfo from "./ProfileInfo";
-import EditPofile from "./EditPofile";
+
 const API_URL = "http://localhost:2020";
 function Dashboard(props) {
   //history for editprofile
@@ -157,15 +157,7 @@ function Dashboard(props) {
     props.history.push("/login");
   };
 
-  //push edit profile
-  const pushEditProfile=(e)=>{
-    //console.log(user);
-    history.push({
-      pathname:"/editprofile",
-      user
-    })
-  }
-  
+ 
   return redirect ? (
     <Redirect to="/login"></Redirect>
   ) : loading ? (
@@ -202,15 +194,7 @@ function Dashboard(props) {
               Add Blog
             </div>
           </li>
-          <li>
-            <div
-              className="dropdown-item"
-              onClick={(e)=>pushEditProfile(e)}
-            >
-              {" "}
-             Edit Profile
-            </div>
-          </li>
+          
           <li>
             <div
               className="dropdown-item"
@@ -287,7 +271,7 @@ function Dashboard(props) {
           </div>
         </div>
       </div>
-      <ProfileInfo name={user.firstname+" "+user.lastname} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity}/>             
+      <ProfileInfo name={user.firstname+" "+user.lastname} age={user.age} about={user.about} total={user.total} last_activity={user.last_activity} gender={user.gender}/>             
      
       <hr style={{height:"0.15rem",border:"none",color:"#4bcbeb",backgroundColor:"#4bcbeb"}} className="m-5"/>
       {/* Call for the total blogs */}
@@ -311,6 +295,7 @@ function Dashboard(props) {
                 date={blog.date}
                 isAuthenticated={user.isAuthenticated}
                 id={blog._id}
+                views={blog.views}
               />
             );
           })}

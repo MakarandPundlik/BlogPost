@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LoginValidator } from "../services/Validator";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Loading from "./Loading";
 const API_URL = "http://localhost:2020";
 
@@ -137,6 +137,9 @@ function Login(props) {
               Submit
             </button>
           </form>
+         <div className="my-3">
+         Don't have an account?<Link to="/signup" className="link"> Register</Link>
+         </div>
         </div>
       </div>
     </div>

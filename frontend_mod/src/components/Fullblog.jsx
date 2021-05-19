@@ -3,7 +3,7 @@ import { Redirect, useLocation } from "react-router-dom";
 import ImageArray from "./ImagesData";
 import fullblog from "../images/fullblog.jpg";
 import axios from "axios";
-import EditProfile from './EditPofile';
+
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
   

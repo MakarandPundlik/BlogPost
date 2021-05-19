@@ -34,7 +34,7 @@ function Cardschema(props) {
     });
   await axios.post(`${API_URL}/api/incrementviews`,{
     id:state.id,
-    views:state.views
+    views:state.views===null?0:state.views
   } ,{
     headers: {
       "Content-Type": "application/json",

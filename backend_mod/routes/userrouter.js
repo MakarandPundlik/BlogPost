@@ -42,8 +42,7 @@ Router.post("/api/incrementviews",incrementViews);
 //add comments
 Router.post("/api/addcomment",addComment);
 
-//edit profile
-Router.post("/api/editprofile",editProfile);
+
 
 //generate report
 Router.post("/api/getreport",getReport);

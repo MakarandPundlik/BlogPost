@@ -114,10 +114,10 @@ module.exports.editBlog=(req,res)=>{
 //write a function to increase views of blogs by fetching blog using blog id
 module.exports.incrementViews=async(req,res)=>{
     let {id,views} = req.body;
-    views = parseInt(views)+1;
+    const newviews = views===NaN?0:parseInt(views);
    await userSchema.findOneAndUpdate(
         {blogArray:{$elemMatch:{_id:id}}},
-        {$set:{"blogArray.$.views":views}},
+        {$set:{"blogArray.$.views":newviews}},
         {useFindAndModify:false}
     )
     .then((result)=>{

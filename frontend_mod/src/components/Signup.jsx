@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
 import Loading from "./Loading";
 import { SignupValidator } from "../services/Validator";
 import axios from "axios";
@@ -289,7 +290,11 @@ function Signup(props) {
                   Submit
                 </button>
               </form>
+              <div className="my-5">
+              Already have an account?<Link to="/login" className="link"> Login</Link>
+                </div>
             </div>
+           
           </div>
         </div>
       </div>

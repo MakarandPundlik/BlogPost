@@ -7,13 +7,12 @@ function Homepage(props) {
   return (
     <div className="container-fluid">
       <div className="row" style={{ marginTop: "15%" }}>
-        <h2 className="card-title" style={{marginBottom:"2%"}}>BlogPost</h2>
-        <h3 className="card-text">
-         A website to tell your own story
-        </h3>
+        <h2 className="card-title" style={{ marginBottom: "2%" }}>
+          BlogPost
+        </h2>
+        <h3 className="card-text">Welcome to the BlogPost family</h3>
       </div>
       <div className="row">
-
         <div className="text-center">
           <Link to="/blogs">
             {" "}
@@ -24,7 +23,24 @@ function Homepage(props) {
           <hr />
         </div>
       </div>
-      <div className="row">
+      <div className="flex-row m-3">
+      <div class="progress blue">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
+            </div>
+        
+           
+        <h3 className="text-center my-4">
+        Take Your Writing to the Max
+        </h3>
+      </div>
+      <hr />
+      {/* <div className="row">
         <div className="text-center my-3">
           <h4>Sign Up to write your own blogs...</h4>
           <Link to="/signup">
@@ -34,7 +50,7 @@ function Homepage(props) {
             </button>
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
