@@ -16,43 +16,47 @@ function Cardschema(props) {
     isAuthenticated: props.isAuthenticated,
     id: props.id,
     date: props.date,
-    views:props.views,
-    comments:props.comments
+    views: props.views,
+    comments: props.comments,
   });
- 
-  useEffect(()=>{
+
+  useEffect(() => {
     //console.log(state);
-  },[]);
+  }, []);
   //handle Like and dislike function
 
-  const handleClick = async(e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-   // console.log(state);
+    // console.log(state);
     history.push({
       pathname: "/fullblog",
       state,
     });
-  await axios.post(`${API_URL}/api/incrementviews`,{
-    id:state.id,
-    views:state.views===null?0:state.views
-  } ,{
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  }).then((res)=>{
-
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
+    console.log(state);
+    await axios
+      .post(
+        `${API_URL}/api/incrementviews`,
+        {
+          id: state.id,
+          views: state.views,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="col-md-4 col-lg-4 col-xl-3 col-sm-6 ">
-      <div className="card shadow-lg " style={{  color:"#4bcbeb" }}>
-       
+      <div className="card shadow-lg " style={{ color: "#4bcbeb" }}>
         <img
           src={ImageArray[Math.floor(Math.random() * ImageArray.length)]}
           className="card-img-top"
@@ -66,7 +70,10 @@ function Cardschema(props) {
           {/* <div className="text-left">
             <div className="text-secondary">100 100</div>
           </div> */}
-          <button className="btn btn-homepage m-1" onClick={(e) => handleClick(e)}>
+          <button
+            className="btn btn-homepage m-1"
+            onClick={(e) => handleClick(e)}
+          >
             Read Blog
           </button>
         </div>

@@ -6,7 +6,6 @@ import axios from "axios";
 
 const API_URL = "http://localhost:2020";
 function Fullblog(props) {
-  
   //setting up location sent from previous call
   const location = useLocation();
 
@@ -36,31 +35,40 @@ function Fullblog(props) {
   });
 
   //handle comment
-  const handleChange=(e)=>{
-    setComment({...comment,[e.target.id]:e.target.value})
-  }
+  const handleChange = (e) => {
+    setComment({ ...comment, [e.target.id]: e.target.value });
+  };
   //handle comment submit
-  const handleSubmit = async(e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(comment);
-    await axios.post(`${API_URL}/api/addcomment`,{
-      id:state.id,
-      data:comment.data,
-      name:comment.name
-    },{
-      headers:{
-        "Content-Type": "application/json",
-            "Accept": "application/json",
+    await axios
+      .post(
+        `${API_URL}/api/addcomment`,
+        {
+          id: state.id,
+          data: comment.data,
+          name: comment.name,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
             "Access-Control-Allow-Origin": "*",
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res);
+        setComment({
+          data: "",
+          name: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   //handle edits
   const handleEdit = () => {
     console.log("please enter the edited blog");
@@ -78,7 +86,7 @@ function Fullblog(props) {
         {
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
+            Accept: "application/json",
             "Access-Control-Allow-Origin": "*",
           },
         }
@@ -100,7 +108,12 @@ function Fullblog(props) {
   ) : (
     <div style={{ marginTop: "10%" }}>
       <div className="card mx-auto m-5" style={{ maxWidth: "750px" }}>
-        <img src={fullblog} className="card-img-top" alt="blog-image" height="450rem"/>
+        <img
+          src={fullblog}
+          className="card-img-top"
+          alt="blog-image"
+          height="450rem"
+        />
         <div className="card-body">
           {location.state.isAuthenticated && (
             <div className="text-right">
@@ -131,8 +144,9 @@ function Fullblog(props) {
               type="text"
               className="form-control"
               placeholder="Comment here"
-              id="data" 
-              onChange={(e)=>handleChange(e)}
+              id="data"
+              onChange={(e) => handleChange(e)}
+              value={comment.data}
               aria-describedby="button-addon2"
             />
             <input
@@ -140,30 +154,36 @@ function Fullblog(props) {
               className="form-control"
               placeholder="Name"
               id="name"
-              onChange={(e)=>handleChange(e)}
+              onChange={(e) => handleChange(e)}
               aria-describedby="button-addon2"
+              value={comment.name}
             />
             <button
               className="btn btn-homepage"
               type="button"
               id="button-addon2"
-              onClick={(e)=>handleSubmit(e)}
+              onClick={(e) => handleSubmit(e)}
             >
               Add Comment
             </button>
           </div>
           <h4 className="text-left">Comments :-</h4>
           <ul className="list-group">
-            {
-            state.comments &&
-            state.comments.filter((comment,index)=>index<3).map(comment => {
-              return (
-                <li className="list-group-item " key={comment._id} style={{color:"#4bcbeb"}}>
-                  <h5 className="text-left">{comment.data}</h5>
-                  <p className="text-right">-{comment.name}</p>
-                </li>
-              );
-            })}
+            {state.comments &&
+              state.comments
+                .filter((comment, index) => index < 3)
+                .map((comment) => {
+                  return (
+                    <li
+                      className="list-group-item "
+                      key={comment._id}
+                      style={{ color: "#4bcbeb" }}
+                    >
+                      <h5 className="text-left">{comment.data}</h5>
+                      <p className="text-right">-{comment.name}</p>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
@@ -178,4 +198,3 @@ export default Fullblog;
 // });
 
 // return film;
-

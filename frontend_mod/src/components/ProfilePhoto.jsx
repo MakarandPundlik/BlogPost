@@ -15,7 +15,7 @@ function ProfilePhoto({ gender }) {
    
       
       
-        <div className="m-5" style={{ textAlign: "left" }}>
+        <div>
           {
             gender==="female"?
             <img

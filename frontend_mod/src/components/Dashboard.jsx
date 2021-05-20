@@ -166,9 +166,9 @@ function Dashboard(props) {
     <div style={{marginTop:"10%"}}>
       {/* Display the profile card */}
 
-      <ProfilePhoto gender={user.gender} />
+    
       {/* Dropdown user menu */}
-      <div className="dropdown m-3" style={{ textAlign: "right"}}>
+      <div className="dropdown d-flex justify-content-end m-3">
         <button
           className="btn btn-homepage dropdown-toggle rounded-pill"
           type="button"
@@ -279,7 +279,7 @@ function Dashboard(props) {
       <div className="row g-5">
         {
           blogs.length>0? 
-          <div className="h3 my-5">Here are your blogs.</div>
+          <div className="h3 my-3">Here are your blogs</div>
           :null
         }
         {

@@ -39,7 +39,7 @@ function Homepage(props) {
         Take Your Writing to the Max
         </h3>
       </div>
-      <hr />
+    
       {/* <div className="row">
         <div className="text-center my-3">
           <h4>Sign Up to write your own blogs...</h4>
