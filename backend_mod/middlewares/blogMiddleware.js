@@ -79,6 +79,7 @@ module.exports.getBlogs = (req, res) => {
       return res.json({ size: result.length, result });
     })
     .catch((err) => console.log(err));
+    
 };
 
 //delete particular blog

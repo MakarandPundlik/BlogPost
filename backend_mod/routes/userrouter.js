@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const {signup_post,login_post} = require('../controllers/authcontroller');
 const logout_get = require('../middlewares/logout');

@@ -7,8 +7,10 @@ const nodemailer = require("nodemailer");
 
 //signup handler
 module.exports.signup_post = (req, res) => {
-  const { firstname, lastname, email, password,about,age,gender } = req.body.profile;
-
+  const { firstname, lastname, email, password, about, age, gender } =
+    req.body.profile;
+    console.log(process.env.email);
+    console.log(process.env.password);
   //common error object
   let errors = { email: "", password: "" };
   //check for the existing user
@@ -27,7 +29,7 @@ module.exports.signup_post = (req, res) => {
           password,
           about,
           age,
-          gender
+          gender,
         });
 
         //hash passwords before saving to the database
@@ -45,7 +47,9 @@ module.exports.signup_post = (req, res) => {
               } else {
                 newUser.password = hash;
                 const today = new Date();
-                newUser.last_activity = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+                newUser.last_activity = `${today.getDate()}/${
+                  today.getMonth() + 1
+                }/${today.getFullYear()}`;
                 newUser.save();
 
                 //send mail to user regarding login activity
@@ -63,8 +67,8 @@ module.exports.signup_post = (req, res) => {
                   port: 465,
                   secure: true,
                   auth: {
-                    user: "",
-                    pass: "",
+                    user: process.env.email,
+                    pass: process.env.password,
                   },
                 });
 
@@ -74,6 +78,7 @@ module.exports.signup_post = (req, res) => {
                 });
 
                 contactEmail.sendMail(mail, (err) => {
+                  console.log(process.env.email,process.env.password)
                   if (!err)
                     console.log(
                       `An email has been sent successfully to ${email}`
@@ -100,10 +105,11 @@ module.exports.signup_post = (req, res) => {
 module.exports.login_post = (req, res) => {
   const { email, password } = req.body.profile;
   let errors = { email: "", password: "" };
-  //console.log(email,password);
+ console.log(process.env.email);
+    console.log(process.env.password);
   //check for the existing email
   userSchema
-    .findOneAndUpdate({ email },{useFindAndModify:false})
+    .findOneAndUpdate({ email }, { useFindAndModify: false })
     .then((user) => {
       if (!user) {
         errors.email = "User does not exists";
@@ -117,9 +123,11 @@ module.exports.login_post = (req, res) => {
 
             return res.json({ errors });
           } else {
-             //save recent activity of user
-             const today = new Date();
-             user.last_activity = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+            //save recent activity of user
+            const today = new Date();
+            user.last_activity = `${today.getDate()}/${
+              today.getMonth() + 1
+            }/${today.getFullYear()}`;
             //create accesstoken  for user
             const accesstoken = createAccessToken(user);
             //send mail to user regarding login activity
@@ -137,8 +145,8 @@ module.exports.login_post = (req, res) => {
               port: 465,
               secure: true,
               auth: {
-                 user: "",
-                pass: "",
+                user: process.env.email,
+                pass: process.env.password,
               },
             });
 
@@ -148,18 +156,17 @@ module.exports.login_post = (req, res) => {
             });
 
             contactEmail.sendMail(mail, (err) => {
+              console.log(process.env.email,process.env.password)
               if (!err)
                 console.log(`An email has been sent successfully to ${email}`);
               else console.log(err);
             });
 
-           
-         
             return res.json({
               msg: "user logged in successfully",
               accesstoken: accesstoken,
               username: user.firstname,
-              about:user.about
+              about: user.about,
             });
           }
         });

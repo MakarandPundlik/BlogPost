@@ -57,8 +57,9 @@ caption {
 }
 
 hr {
+  margin: 2% 2%;
   border: none;
-  height: 10px;
+  height: 3px !important;
   /* Set the hr color */
   color: #4bcbeb; /* old IE */
   background-color: #00b7ff; /* Modern Browsers */

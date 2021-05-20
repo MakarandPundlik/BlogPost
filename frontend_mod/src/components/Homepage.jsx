@@ -31,7 +31,7 @@ function Homepage(props) {
                 <span class="progress-right">
                     <span class="progress-bar"></span>
                 </span>
-                <div class="progress-value">90%</div>
+                <div class="progress-value">MAX</div>
             </div>
         
            
