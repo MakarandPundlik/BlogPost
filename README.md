@@ -1,4 +1,4 @@
-# Blog
+# BlogPost
 MERN app for reading,writing and surffing different types of blogs
 
 Technologies used 
